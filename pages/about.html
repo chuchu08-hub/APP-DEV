@@ -3,51 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - EyeQ</title>
+    <title>EyeQ - About Us</title>
     <link rel="stylesheet" href="aboutStyle.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo"><img src="images/eye-q-logo.png" alt="EyeQ Logo"></div>
-            <nav>
-                <ul>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="#">Eye Conditions</a></li>
-                    <li><a href="#">Eye Tests</a></li>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Articles</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <main>
-        <div class="container">
-            <h1>About us</h1>
-            <p>At EyeQ, we offer online tests designed to help you assess whether you may have a vision deficiency. Our platform provides a set of interactive questions that can help you identify potential issues with your eyesight.</p>
-            <p>Please note, the results from the test are not a diagnosis, but a preliminary tool to help you determine if you should seek professional eye care. We recommend following up with an optometrist or healthcare provider for a full evaluation.</p>
-        </div>
-        <div class="wave-background">
-            <img src="Left.png" alt="wave1" class="wave-top">
-            <img src="Right.png" alt="wave2" class="wave-bottom">
-        </div>
-    </main>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var body = document.body;
 
-    <footer>
-        <div class="container">
-            <div class="copyright">
-                © EyeQ 2025 all rights reserved.
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Terms</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </footer>
+        // Create header
+        var header = document.createElement("header");
+        var headerContainer = document.createElement("div");
+        headerContainer.classList.add("container");
+
+        var logo = document.createElement("div");
+        logo.classList.add("logo");
+        var logoImg = document.createElement("img");
+        logoImg.src = "images/eye-q-logo.png";
+        logoImg.alt = "EyeQ Logo";
+        logo.appendChild(logoImg);
+
+        var nav = document.createElement("nav");
+        var ul = document.createElement("ul");
+
+        var menuItems = ["About", "Eye Conditions", "Eye Tests", "FAQs", "Articles"];
+        var links = {
+            "About": "about.html",
+            "Eye Conditions": "conditions.html",
+            "Eye Tests": "tests.html",
+            "FAQs": "faqs.html",
+            "Articles": "articles.html"
+        };
+
+        menuItems.forEach(function(item) {
+            var li = document.createElement("li");
+            var a = document.createElement("a");
+            a.href = links[item] || "#";
+            a.textContent = item;
+            li.appendChild(a);
+            ul.appendChild(li);
+        });
+
+        nav.appendChild(ul);
+        headerContainer.appendChild(logo);
+        headerContainer.appendChild(nav);
+        header.appendChild(headerContainer);
+        body.appendChild(header);
+
+        // Create main content
+        var main = document.createElement("main");
+        var mainContainer = document.createElement("div");
+        mainContainer.classList.add("container");
+
+        var h1 = document.createElement("h1");
+        h1.textContent = "About us";
+        mainContainer.appendChild(h1);
+
+        var p1 = document.createElement("p");
+        p1.textContent = "At EyeQ, we offer online tests designed to help you assess whether you may have a vision deficiency. Our platform provides a set of interactive questions that can help you identify potential issues with your eyesight.";
+        mainContainer.appendChild(p1);
+
+        var p2 = document.createElement("p");
+        p2.textContent = "Please note, the results from the test are not a diagnosis, but a preliminary tool to help you determine if you should seek professional eye care. We recommend following up with an optometrist or healthcare provider for a full evaluation.";
+        mainContainer.appendChild(p2);
+
+        main.appendChild(mainContainer);
+        body.appendChild(main);
+
+        // Footer
+        var footer = document.createElement("footer");
+        var footerContainer = document.createElement("div");
+        footerContainer.classList.add("container");
+
+        var copyright = document.createElement("div");
+        copyright.classList.add("copyright");
+        copyright.textContent = "© EyeQ 2025 all rights reserved.";
+
+        var footerNav = document.createElement("nav");
+        var footerUl = document.createElement("ul");
+        var footerItems = ["Privacy", "Terms", "Contact"];
+        footerItems.forEach(function(item) {
+            var li = document.createElement("li");
+            var a = document.createElement("a");
+            a.href = "#";
+            a.textContent = item;
+            li.appendChild(a);
+            footerUl.appendChild(li);
+        });
+
+        footerNav.appendChild(footerUl);
+        footerContainer.appendChild(copyright);
+        footerContainer.appendChild(footerNav);
+        footer.appendChild(footerContainer);
+        body.appendChild(footer);
+    });
+</script>
+
 </body>
 </html>

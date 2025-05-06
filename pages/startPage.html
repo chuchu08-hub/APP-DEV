@@ -16,7 +16,7 @@
             <div class="text-content">
                 <h1>Online <br>Eye Test</h1>
                 <p>Fast. Easy. Convenient. Test your eyesight on the go.</p>
-                <button class="play-button" id="playButton" onclick="window.location.href='disclaimer.html';">
+                <button class="play-button" id="playButton">
                     <svg class="play-icon" viewBox="0 0 24 24">
                         <path d="M8 5v14l11-7z"/>
                     </svg>
@@ -24,13 +24,30 @@
                         <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
                     </svg>
                 </button>
-                
             </div>
             <div class="image-content">
                 <img src="images/eye-magnifying-glass.png" alt="Eye with Magnifying Glass">
             </div>
         </main>
     </div>
-    <script src="script.js"></script>
+    <script>
+        // JavaScript for controlling play/pause functionality and redirecting
+        var playButton = document.getElementById("playButton");
+        var playIcon = playButton.querySelector(".play-icon");
+        var pauseIcon = playButton.querySelector(".pause-icon");
+
+        playButton.addEventListener("click", function() {
+            // Toggle play/pause icons visibility
+            if (playIcon.style.display !== "none") {
+                playIcon.style.display = "none";
+                pauseIcon.style.display = "inline";
+            } else {
+                playIcon.style.display = "inline";
+                pauseIcon.style.display = "none";
+            }
+            // Redirect to the disclaimer page
+            window.location.href = 'disclaimer.html';
+        });
+    </script>
 </body>
 </html>
