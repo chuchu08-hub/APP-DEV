@@ -1,0 +1,156 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9; /* Light gray background for the whole page */
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex; /* Enable Flexbox for the body */
+    flex-direction: column; /* Stack body children vertically */
+    min-height: 100vh; /* Ensure body is at least viewport height */
+}
+
+html {
+    height: auto;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background-color: #fff;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo img {
+    height: 40px; /* Adjust as needed */
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+header nav ul li {
+    margin-left: 30px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: #007bff; /* Example hover color */
+}
+
+main {
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden; /* To contain the wave background */
+    display: flex; /* To allow stacking context for z-index */
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center content horizontally */
+    background-color: #fff; /* White background for the main content area */
+    flex-grow: 1; /* Allow main to take up available vertical space */
+    margin-bottom: 0; /* Remove default/explicit bottom margin */
+}
+
+main .container {
+    max-width: 800px;
+    text-align: left; /* Align text within the container */
+    z-index: 1; /* Ensure text is above the waves */
+}
+
+main h1 {
+    font-size: 2.5rem;
+    color: #222;
+    margin-bottom: 30px;
+}
+
+main p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.wave-background {
+    position: absolute;
+    top: 0; /* Start waves from the top of the main section */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none; /* To prevent interaction with the waves */
+}
+
+.wave-background img {
+    position: absolute;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.7; /* Adjust opacity as needed */
+}
+
+.wave-background .wave-top {
+    top: 0;
+    /* Adjust vertical position and scale to match your image */
+    transform: translateY(-50px) scaleX(-1) scaleY(1.2); /* Example adjustments */
+}
+
+.wave-background .wave-bottom {
+    bottom: 0;
+    /* Adjust vertical position and scale to match your image */
+    transform: translateY(50px) scaleX(1.1) scaleY(1); /* Example adjustments */
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    margin-top: auto; /* Push the footer to the bottom */
+    margin-bottom: 0; /* Remove default/explicit bottom margin */
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+footer nav ul li {
+    margin-left: 20px;
+}
+
+footer nav ul li a {
+    text-decoration: none;
+    color: #eee;
+    transition: color 0.3s ease;
+}
+
+footer nav ul li a:hover {
+    color: #fff;
+}
