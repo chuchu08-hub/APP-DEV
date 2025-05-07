@@ -134,24 +134,38 @@
         copyright.classList.add("copyright");
         copyright.textContent = "© EyeQ 2025 all rights reserved. |" ;
 
+        var footer = document.createElement("footer");
+        var footerContainer = document.createElement("div");
+        footerContainer.classList.add("container");
+
+        var copyright = document.createElement("div");
+        copyright.classList.add("copyright");
+        copyright.textContent = "© EyeQ 2025 all rights reserved. |" ;
+
         var footerNav = document.createElement("nav");
         var footerUl = document.createElement("ul");
-        var footerItems = ["Privacy |", "Terms |", "Contact"];
+        var footerItems = [
+        { text: "Privacy |", link: "privacy.html" },
+        { text: "Terms |", link: "terms.html" },
+        { text: "Contact", link: "contact.html" }
+        ];
+
         footerItems.forEach(function(item) {
-            var li = document.createElement("li");
-            var a = document.createElement("a");
-            a.href = "#";
-            a.textContent = item;
-            li.appendChild(a);
-            footerUl.appendChild(li);
+        var li = document.createElement("li");
+        var a = document.createElement("a");
+        a.href = item.link; 
+        a.textContent = item.text;
+        li.appendChild(a);
+        footerUl.appendChild(li);
         });
 
         footerNav.appendChild(footerUl);
+        footerContainer.appendChild(footerNav);
         footerContainer.appendChild(copyright);
         footerContainer.appendChild(footerNav);
         footer.appendChild(footerContainer);
         body.appendChild(footer);
-    });
+        });
 </script>
 
 </body>

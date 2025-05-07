@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EyeQ - Terms and Conditions</title>
+    <title>EyeQ - Contact Us
+    </title>
     <link rel="stylesheet" href="styles/aboutStyle.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -64,79 +65,58 @@
         mainContainer.classList.add("container");
 
         var h1 = document.createElement("h1");
-        h1.textContent = "Terms and Conditions";
+        h1.textContent = "Contact Us";
         mainContainer.appendChild(h1);
 
         var p1 = document.createElement("p");
-        p1.textContent = "Welcome to EyeQ. Please read these Terms and Conditions (“Terms”) carefully before using our app. By using our services, you agree to be bound by these Terms.";
+        p1.textContent = "If you have any questions, concerns, or need assistance with your order, please feel free to reach out to our customer support team. We're here to help!";
         mainContainer.appendChild(p1);
 
         var h2 = document.createElement("h2");
-        h2.textContent = "Acceptance of Terms";
-        h2.style.color = "#551691"; 
-        mainContainer.appendChild(h2);
-
-
-        var p2 = document.createElement("p");
-        p2.textContent = "By accessing or using EyeQ, you agree to these Terms and our Privacy Policy. If you do not agree, please do not use the app.";
-        mainContainer.appendChild(p2);
-
-        var h2 = document.createElement("h2");
-        h2.textContent = "Services Provided";
-        h2.style.color = "#551691"; 
-        mainContainer.appendChild(h2);
-
-        var p2 = document.createElement("p");
-        p2.textContent = "EyeQ provides an online eye screening tool designed for informational and educational purposes only. It is not a substitute for professional eye care or medical advice.";
-        mainContainer.appendChild(p2);
-
-        var h2 = document.createElement("h2");
-        h2.textContent = "Eligibility";
-        h2.style.color = "#551691"; 
-        mainContainer.appendChild(h2);
-
-        var p2 = document.createElement("p");
-        p2.textContent = "You must be at least 18 years old or have parental/guardian consent to use this app.";
-        mainContainer.appendChild(p2);
-
-        var h2 = document.createElement("h2");
-        h2.textContent = "User Responsibility";
+        h2.textContent = "Email Support";
         h2.style.color = "#551691"; 
         mainContainer.appendChild(h2);
 
         var p2 = document.createElement("p");
         p2.innerHTML = 
-               "<li>Results from the online eye test are not a diagnosis and do not replace an in-person consultation with a licensed eye care professional.</li>" +
-               "<li>EyeQ is not liable for any decisions made based on test results.</li>" +
-               "<li>We do not guarantee the accuracy or completeness of any content or service.</li>" +        
+        ' <a href="mailto:support@eyeq.com" style="color: blue;">support@eyeq.com</a> <br>' +
+        'For general inquiries, technical issues, or feedback.';
         mainContainer.appendChild(p2);
 
+
+
         var h2 = document.createElement("h2");
-        h2.textContent = "User Feedback & Improvements";
+        h2.textContent = "Phone Support";
         h2.style.color = "#551691"; 
         mainContainer.appendChild(h2);
 
         var p2 = document.createElement("p");
         p2.innerHTML = 
-               "<li>Users can submit feedback or suggestions to improve EyeQ.</li>" +
-               "<li>Feedback should be relevant to improving vision tests, user experience, or accessibility.</li>" +
-               "<li>EyeQ welcomes reports about technical issues, navigation problems, or content accuracy to make the app better.</li>"      
+        '<a href="tel:+639684567890" style="color: blue;">+63 (968) 456-7890</a> <br>' +
+        'For urgent matters, call us during business hours.';
         mainContainer.appendChild(p2);
 
         var h2 = document.createElement("h2");
-        h2.textContent = "Intellectual Property";
+        h2.textContent = "Feedback & Suggestions";
         h2.style.color = "#551691"; 
         mainContainer.appendChild(h2);
 
         var p2 = document.createElement("p");
-        p2.textContent = "All content, branding, and functionality in the app are the property of EyeQ and are protected by copyright and other laws.";
+        p2.innerHTML = 
+        'We’re always looking to improve. Send your thoughts to <a href="mailto:feedback@eyeq.com" style="color: blue;">feedback@eyeq.com</a> or use the feedback form in the app.';
         mainContainer.appendChild(p2);
+
+
+        var p2 = document.createElement("p");
+        p2.innerHTML = "<br>Our team is available Monday to Friday from 9 AM to 6 PM (PHT). We strive to respond to all inquiries within 24 hours on business days.";
+        mainContainer.appendChild(p2);
+
 
 
         main.appendChild(mainContainer);
         body.appendChild(main);
 
-
+        
         var footer = document.createElement("footer");
         var footerContainer = document.createElement("div");
         footerContainer.classList.add("container");
@@ -168,7 +148,7 @@
         footerContainer.appendChild(footerNav);
         footer.appendChild(footerContainer);
         body.appendChild(footer);
-    });
+        });
 </script>
 
 </body>
