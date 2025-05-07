@@ -32,7 +32,8 @@ header .container {
 }
 
 header .logo img {
-    height: 40px;
+    width: 60px; /* Adjust as needed */
+    height: auto; /* Keeps aspect ratio */
 }
 
 header nav ul {
@@ -188,11 +189,6 @@ footer {
     margin-top: auto; /* Push footer to the bottom */
 }
 
-footer .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
 footer nav ul {
     list-style: none;
@@ -217,7 +213,24 @@ footer nav ul li a:hover {
 
 .copyright {
     opacity: 0.7;
+    padding-right: 0px; /* Adjust as needed */
+    margin-left: 400px;
+    text-align: left;
 }
+
+footer .container {
+    display: flex;
+    justify-content: flex-start; /* Moves everything inside to the right */
+    align-items: center;
+    padding: 10px 20px;
+}
+
+h1 {
+    font-size: 3rem; /* Adjust as needed */
+    color: #551691; /* Correct way to set text color */
+    font-style: italic;
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
