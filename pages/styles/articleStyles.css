@@ -36,7 +36,6 @@ header .logo img {
     height: auto; 
 }
 
-
 header nav ul {
     list-style: none;
     padding: 0;
@@ -191,7 +190,6 @@ footer {
 }
 
 
-
 footer nav ul {
     list-style: none;
     padding: 0;
@@ -225,6 +223,12 @@ footer .container {
     justify-content: flex-start; 
     align-items: center;
     padding: 10px 20px;
+}
+
+h1 {
+    font-size: 2.5rem; 
+    color: #551691; 
+    font-style: italic;
 }
 
 @media (max-width: 768px) {
