@@ -237,6 +237,16 @@ h1 {
     font-style: italic;
 }
 
+h2 {
+    color: #551691;
+}
+
+.custom-h2 {
+    color: #551691;
+}
+
+
+
 
 @media (max-width: 768px) {
     .hero .container {

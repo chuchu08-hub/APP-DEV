@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EyeQ - About Us</title>
+    <title>EyeQ - Privacy Policy</title>
     <link rel="stylesheet" href="aboutStyle.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -64,16 +64,63 @@
         mainContainer.classList.add("container");
 
         var h1 = document.createElement("h1");
-        h1.textContent = "About us";
+        h1.textContent = "Privacy Policy";
         mainContainer.appendChild(h1);
 
         var p1 = document.createElement("p");
-        p1.textContent = "At EyeQ, we offer online tests designed to help you assess whether you may have a vision deficiency. Our platform provides a set of interactive questions that can help you identify potential issues with your eyesight.";
+        p1.textContent = "EyeQ is committed to protecting your privacy. This Privacy Policy outlines what information we do (and do not) collect and how we handle it.";
         mainContainer.appendChild(p1);
 
+        var h2 = document.createElement("h2");
+        h2.textContent = "No Personal Data Collection";
+        h2.style.color = "#551691"; 
+        mainContainer.appendChild(h2);
+
+
         var p2 = document.createElement("p");
-        p2.textContent = "Please note, the results from the test are not a diagnosis, but a preliminary tool to help you determine if you should seek professional eye care. We recommend following up with an optometrist or healthcare provider for a full evaluation.";
+        p2.textContent = "EyeQ does not collect, store, or share any personal information. You are not required to create an account, log in, or provide any personal details to use the app.";
         mainContainer.appendChild(p2);
+
+        var h2 = document.createElement("h2");
+        h2.textContent = "Purpose of the App";
+        h2.style.color = "#551691"; 
+        mainContainer.appendChild(h2);
+
+        var p2 = document.createElement("p");
+        p2.innerHTML = "The EyeQ app offers self-assessment tools including:<ul>" +
+               "<li>Color Blindness Test (based on the Ishihara method)</li>" +
+               "<li>Near Vision Test</li>" +
+               "<li>Distance Vision Test</li>" +
+               "</ul>These tools are intended for informational and awareness purposes only and are not a substitute for professional medical advice, diagnosis, or treatment.";
+        mainContainer.appendChild(p2);
+
+        var h2 = document.createElement("h2");
+        h2.textContent = "Accessibility Features";
+        h2.style.color = "#551691"; 
+        mainContainer.appendChild(h2);
+
+        var p2 = document.createElement("p");
+        p2.textContent = "To improve inclusivity, EyeQ allows users to adjust brightness and contrast settings. These settings are stored temporarily on the device and reset after use.";
+        mainContainer.appendChild(p2);
+
+        var h2 = document.createElement("h2");
+        h2.textContent = "No Third-Party Services";
+        h2.style.color = "#551691"; 
+        mainContainer.appendChild(h2);
+
+        var p2 = document.createElement("p");
+        p2.textContent = "EyeQ does not use advertising networks, analytics tools, or any third-party integrations that track user behavior.";
+        mainContainer.appendChild(p2);
+
+        var h2 = document.createElement("h2");
+        h2.textContent = "Children’s Privacy";
+        h2.style.color = "#551691"; 
+        mainContainer.appendChild(h2);
+
+        var p2 = document.createElement("p");
+        p2.textContent = "Although the app is targeted for users aged 18–45, no personal information is collected from any user, including minors.";
+        mainContainer.appendChild(p2);
+
 
         main.appendChild(mainContainer);
         body.appendChild(main);
