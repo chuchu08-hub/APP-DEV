@@ -74,6 +74,13 @@ header nav ul li a:hover {
     align-items: center;
 }
 
+.hero-image-container img {
+    height: 300px; 
+    width: 2000px; 
+    max-height: 100%; 
+}
+
+
 .hero-text {
     flex: 1;
     padding-right: 40px;
@@ -102,6 +109,13 @@ header nav ul li a:hover {
     max-width: 80%;
     height: auto;
 }
+
+h2 {
+    color: #551691; /* Deep purple */
+    font-size: 3rem;
+    font-style: italic;
+}
+
 
 .arrow-navigation {
     position: absolute;
@@ -147,13 +161,20 @@ header nav ul li a:hover {
 }
 
 .test-card {
+    text-decoration: none; /* Removes underline */
+    color: inherit; /* Keeps text color unchanged */
+    display: block;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 30px;
     text-align: center;
+    transition: transform 0.2s ease-in-out;
 }
 
+.test-card:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+}
 .test-card h3 {
     font-size: 1.5rem;
     color: #555;
@@ -173,6 +194,8 @@ header nav ul li a:hover {
     color: white;
     padding: 60px 0;
     text-align: center;
+    margin-top: 40px; /* Adjust as needed for more spacing */
+    
 }
 
 .cta-banner p {
@@ -226,6 +249,13 @@ footer .container {
     align-items: center;
     padding: 10px 20px;
 }
+
+.tests-section h2 {
+    color: #551691; /* Deep purple */
+    font-size: 3rem;
+    font-style: italic;
+}
+
 
 @media (max-width: 768px) {
     .hero .container {

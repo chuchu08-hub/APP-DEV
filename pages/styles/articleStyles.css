@@ -231,6 +231,59 @@ h1 {
     font-style: italic;
 }
 
+.article-card img {
+    max-width: 300px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.zoomed {
+    transform: scale(2);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(2);
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+.overlay.active {
+    display: block;
+}
+
+.close-btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: gainsboro;
+    color: #333;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: 1001;
+    display: none;
+}
+
+.close-btn.active {
+    display: block;
+}
+
 @media (max-width: 768px) {
     .hero .container {
         flex-direction: column;

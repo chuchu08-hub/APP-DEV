@@ -6,7 +6,6 @@
     <title>Articles</title>
     <link rel="stylesheet" href="styles/articleStyles.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-
 </head>
 <body>
     
@@ -28,33 +27,37 @@
             </nav>
         </div>
     </header>
+
     <center>
-    <main class="container">
-        <h1 class="page-title">Eye Conditions and Diseases</h1>
-        <p class="intro-text">Concerned about an eye infection or a serious condition? Read articles about the symptoms, diagnosis, and treatments for eye infections, eye diseases, and eye conditions.</p>
-        
-        <section class="related-articles">
-            <h2>Related Articles</h2>
-            <div class="article-grid">
-                <div class="article-card">
-                    <img src="images/cataract.jpg" width="300" height="200"alt="Cataract">
-                    <h3>What are cataracts?</h3>
-                    <p>A cataract is when your eye's natural lens becomes cloudy. Proteins in your lens break down and cause things to look blurry, hazy or less colorful... <a href="https://www.aao.org/eye-health/diseases/what-are-cataracts" class="read-more">Read More</a></p>
+        <main class="container">
+            <h1 class="page-title">Eye Conditions and Diseases</h1>
+            <p class="intro-text">Concerned about an eye infection or a serious condition? Read articles about the symptoms, diagnosis, and treatments for eye infections, eye diseases, and eye conditions.</p>
+
+            <section class="related-articles">
+                <h2>Related Articles</h2>
+                <div class="article-grid">
+                    <div class="article-card">
+                        <img src="images/cataract.jpg" width="300" height="200" alt="Cataract">
+                        <h3>What are cataracts?</h3>
+                        <p>A cataract is when your eye's natural lens becomes cloudy. Proteins in your lens break down and cause things to look blurry, hazy, or less colorful... 
+                        <a href="https://www.aao.org/eye-health/diseases/what-are-cataracts" class="read-more">Read More</a></p>
+                    </div>
+                    <div class="article-card">
+                        <img src="images/nevus.jpg" width="300" height="200" alt="Nevus">
+                        <h3>Nevi—tiny flecks of pigment making their mark on your eye.</h3>
+                        <p>A nevus is a common, colored growth on or in your eye. Sometimes called a freckle of the eye, it is similar to a mole on your skin. A nevus is usually not harmful... 
+                        <a href="https://www.aao.org/eye-health/diseases/what-is-nevus" class="read-more">Read More</a></p>
+                    </div>
+                    <div class="article-card">
+                        <img src="images/glaucoma.jpg" width="300" height="200" alt="Glaucoma">
+                        <h3>What are the types of glaucoma?</h3>
+                        <p>Glaucoma is a group of eye diseases that can cause vision loss and blindness by damaging the optic nerve, the bundle of nerve fibers that connects the... 
+                        <a href="https://www.uchealth.org/services/eye-care/glaucoma/" class="read-more">Read More</a></p>
+                    </div>
                 </div>
-                <div class="article-card">
-                    <img src="images/nevus.jpg" width="300" height="200"alt="Nevus">
-                    <h3>Nevi-tiny flecks of pigment making their mark on your eye.</h3>
-                    <p>A nevus is a common, colored growth on or in your eye. Sometimes called a freckle of the eye, it is similar to a mole on your skin. A nevus is usually not harmful... <a href="https://www.aao.org/eye-health/diseases/what-is-nevus" class="read-more">Read More</a></p>
-                </div>
-                <div class="article-card">
-                    <img src="images/glaucoma.jpg" width="300" height="200"alt="Glaucoma">
-                    <h3>What are the types of glaucoma?</h3>
-                    <p>Glaucoma is a group of eye diseases that can cause vision loss and blindness by damaging the optic nerve, the bundle of nerve fibers that connects the... <a href="https://www.uchealth.org/services/eye-care/glaucoma/" class="read-more">Read More</a></p>
-                </div>
-            </div>
-        </section>
-    </main>
-        </center>
+            </section>
+        </main>
+    </center>
 
     <footer>
         <div class="container">
@@ -70,5 +73,38 @@
             </nav>
         </div>
     </footer>
+
+    <!-- Overlay for zoom effect -->
+    <div class="overlay"></div>
+
+    <!-- Close button -->
+    <button class="close-btn">Close</button>
+
+    <!-- JavaScript for Image Zoom -->
+    <script>
+        const overlay = document.querySelector(".overlay");
+        const closeButton = document.querySelector(".close-btn");
+
+        document.querySelectorAll(".article-card img").forEach(img => {
+            img.addEventListener("click", function() {
+                this.classList.toggle("zoomed");
+                overlay.classList.toggle("active");
+                closeButton.classList.toggle("active");
+            });
+        });
+
+        overlay.addEventListener("click", () => {
+            document.querySelector(".zoomed")?.classList.remove("zoomed");
+            overlay.classList.remove("active");
+            closeButton.classList.remove("active");
+        });
+
+        closeButton.addEventListener("click", () => {
+            document.querySelector(".zoomed")?.classList.remove("zoomed");
+            overlay.classList.remove("active");
+            closeButton.classList.remove("active");
+        });
+    </script>
+
 </body>
 </html>
