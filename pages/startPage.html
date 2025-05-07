@@ -31,13 +31,13 @@
         </main>
     </div>
     <script>
-        // JavaScript for controlling play/pause functionality and redirecting
+        
         var playButton = document.getElementById("playButton");
         var playIcon = playButton.querySelector(".play-icon");
         var pauseIcon = playButton.querySelector(".pause-icon");
 
         playButton.addEventListener("click", function() {
-            // Toggle play/pause icons visibility
+            
             if (playIcon.style.display !== "none") {
                 playIcon.style.display = "none";
                 pauseIcon.style.display = "inline";
@@ -45,7 +45,7 @@
                 playIcon.style.display = "inline";
                 pauseIcon.style.display = "none";
             }
-            // Redirect to the disclaimer page
+            
             window.location.href = 'disclaimer.html';
         });
     </script>
