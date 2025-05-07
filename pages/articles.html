@@ -4,11 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Articles</title>
-    <link rel="stylesheet" href="styles/home1Style.css">
+    <link rel="stylesheet" href="styles/articleStyles.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
 </head>
 <body>
+    <style>
+    .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .blue-button {
+        background-color: #4299e1;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        font-size: 14px;
+        flex: 1 0 auto;
+        min-width: 100px;
+        text-align: center;
+    }
+    .blue-button:hover {
+        background-color: #3182ce;
+    }
+    </style>
+    
     <header>
         <div class="container">
             <div class="logo">
@@ -38,28 +64,29 @@
             <button class="blue-button">All Eye Conditions</button>
             <button class="blue-button">Symptoms</button>
         </div>
-        </center>
+        
         <section class="related-articles">
             <h2>Related Articles</h2>
             <div class="article-grid">
                 <div class="article-card">
-                    <img src="cataract.jpg" alt="Cataract">
+                    <img src="images/cataract.jpg" width="300" height="200"alt="Cataract">
                     <h3>What are cataracts?</h3>
-                    <p>A cataract is when your eye's natural lens becomes cloudy. Proteins in your lens break down and cause things to look blurry, hazy or less colorful... <a href="#" class="read-more">Read More</a></p>
+                    <p>A cataract is when your eye's natural lens becomes cloudy. Proteins in your lens break down and cause things to look blurry, hazy or less colorful... <a href="https://www.aao.org/eye-health/diseases/what-are-cataracts" class="read-more">Read More</a></p>
                 </div>
                 <div class="article-card">
-                    <img src="nevus.jpg" alt="Nevus">
+                    <img src="images/nevus.jpg" width="300" height="200"alt="Nevus">
                     <h3>Nevi-tiny flecks of pigment making their mark on your eye.</h3>
-                    <p>A nevus is a common, colored growth on or in your eye. Sometimes called a freckle of the eye, it is similar to a mole on your skin. A nevus is usually not harmful... <a href="#" class="read-more">Read More</a></p>
+                    <p>A nevus is a common, colored growth on or in your eye. Sometimes called a freckle of the eye, it is similar to a mole on your skin. A nevus is usually not harmful... <a href="https://www.aao.org/eye-health/diseases/what-is-nevus" class="read-more">Read More</a></p>
                 </div>
                 <div class="article-card">
-                    <img src="glaucoma.jpg" alt="Glaucoma">
+                    <img src="images/glaucoma.jpg" width="300" height="200"alt="Glaucoma">
                     <h3>What are the types of glaucoma?</h3>
-                    <p>Glaucoma is a group of eye diseases that can cause vision loss and blindness by damaging the optic nerve, the bundle of nerve fibers that connects the... <a href="#" class="read-more">Read More</a></p>
+                    <p>Glaucoma is a group of eye diseases that can cause vision loss and blindness by damaging the optic nerve, the bundle of nerve fibers that connects the... <a href="https://www.uchealth.org/services/eye-care/glaucoma/" class="read-more">Read More</a></p>
                 </div>
             </div>
         </section>
     </main>
+        </center>
 
     <footer>
         <div class="container">
@@ -68,8 +95,8 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Terms</a></li>
+                    <li><a href="privacy.html">Privacy</a></li>
+                    <li><a href="terms.html">Terms</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
             </nav>
