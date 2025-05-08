@@ -8,87 +8,184 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="home1.html">
-                    <img src="images/eye-q-logo.png" alt="EyeQ Logo">
-                </a>
-            </div>
-            
-            <nav>
-                <ul>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="eyeConditions.html">Eye Conditions</a></li>
-                    <li><a href="eyeTest.html">Eye Tests</a></li>
-                    <li><a href="FAQS.html">FAQs</a></li>
-                    <li><a href="articles.html">Articles</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-text">
-                <h1>TAKE AN ONLINE <br>VISION TEST</h1>
-                <p>Helping you check, protect, and understand your vision—anytime, anywhere.</p>
-            </div>
-            <div class="hero-image">
-                <img src="images/eye-illustration.png" alt="Online Vision Test Illustration">
-            </div>
-        </div>
-        <div class="arrow-navigation">
-            <button aria-label="Previous Slide">&larr;</button>
-            <button aria-label="Next Slide">&rarr;</button>
-        </div>
-    </section>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const body = document.body;
 
-    <section class="tests-section">
-        <div class="container">
-            <h2>Tests we offer:</h2>
-            <div class="tests-grid">
-                <a href="colorBlindTest.html" class="test-card"> <!-- Link to Color Blind Test -->
-                    <h3>Color Blind Test</h3>
-                    <img src="images/colorblindtest.jpg" alt="Color Blind Test">
-                    <p>Quickly assess your ability to perceive different colors.</p>
-                </a>
-                <a href="distanceVisionTest.html" class="test-card"> <!-- Link to Distance Vision Test -->
-                    <h3>Distance Vision Test</h3>
-                    <img src="images/distancevision.jpg" alt="Distance Vision Test">
-                    <p>Check your sharpness of vision for far-away objects.</p>
-                </a>
-                <a href="nearVisionTest.html" class="test-card"> <!-- Link to Near Vision Test -->
-                    <h3>Near Vision Test</h3>
-                    <img src="images/nearvision.jpg" alt="Near Vision Test">
-                    <p>Evaluate your ability to see clearly up close.</p>
-                </a>
-            </div>
-        </div>
-    </section>
-    
+    // Header
+    const header = document.createElement("header");
+    const headerContainer = document.createElement("div");
+    headerContainer.classList.add("container");
 
-    <section class="cta-banner">
-        <div class="container">
-            <p>To see is to believe—start with clearer vision today.</p>
-        </div>
-    </section>
+    const logo = document.createElement("div");
+    logo.classList.add("logo");
+    const logoLink = document.createElement("a");
+    logoLink.href = "home1.html";
+    const logoImg = document.createElement("img");
+    logoImg.src = "images/eye-q-logo.png";
+    logoImg.alt = "EyeQ Logo";
+    logoLink.appendChild(logoImg);
+    logo.appendChild(logoLink);
 
-    <footer>
-        <div class="container">
-            <div class="copyright">
-                © EyeQ 2025 all rights reserved. |
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="privacy.html">Privacy |</a></li>
-                    <li><a href="terms.html">Terms |</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </footer>
-    
+    const nav = document.createElement("nav");
+    const ul = document.createElement("ul");
+    const menuItems = [
+        { text: "About", link: "about.html" },
+        { text: "Eye Conditions", link: "eyeConditions.html" },
+        { text: "Eye Tests", link: "eyeTest.html" },
+        { text: "FAQs", link: "FAQS.html" },
+        { text: "Articles", link: "articles.html" }
+    ];
 
-    </body>
+    menuItems.forEach(item => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = item.link;
+        a.textContent = item.text;
+        li.appendChild(a);
+        ul.appendChild(li);
+    });
+
+    nav.appendChild(ul);
+    headerContainer.appendChild(logo);
+    headerContainer.appendChild(nav);
+    header.appendChild(headerContainer);
+    body.appendChild(header);
+
+    // Hero Section
+    const hero = document.createElement("section");
+    hero.classList.add("hero");
+
+    const heroContainer = document.createElement("div");
+    heroContainer.classList.add("container");
+
+    const heroText = document.createElement("div");
+    heroText.classList.add("hero-text");
+    const h1 = document.createElement("h1");
+    h1.innerHTML = "TAKE AN ONLINE <br>VISION TEST";
+    const p = document.createElement("p");
+    p.textContent = "Helping you check, protect, and understand your vision—anytime, anywhere.";
+
+    heroText.appendChild(h1);
+    heroText.appendChild(p);
+
+    const heroImage = document.createElement("div");
+    heroImage.classList.add("hero-image");
+    const heroImg = document.createElement("img");
+    heroImg.src = "images/eye-illustration.png";
+    heroImg.alt = "Online Vision Test Illustration";
+    heroImage.appendChild(heroImg);
+
+    heroContainer.appendChild(heroText);
+    heroContainer.appendChild(heroImage);
+    hero.appendChild(heroContainer);
+
+    // Navigation Arrows
+    const arrowNavigation = document.createElement("div");
+    arrowNavigation.classList.add("arrow-navigation");
+    const prevBtn = document.createElement("button");
+    prevBtn.setAttribute("aria-label", "Previous Slide");
+    prevBtn.innerHTML = "&larr;";
+    const nextBtn = document.createElement("button");
+    nextBtn.setAttribute("aria-label", "Next Slide");
+    nextBtn.innerHTML = "&rarr;";
+    arrowNavigation.appendChild(prevBtn);
+    arrowNavigation.appendChild(nextBtn);
+    hero.appendChild(arrowNavigation);
+    body.appendChild(hero);
+
+    // Tests Section
+    const testsSection = document.createElement("section");
+    testsSection.classList.add("tests-section");
+
+    const testsContainer = document.createElement("div");
+    testsContainer.classList.add("container");
+
+    const h2 = document.createElement("h2");
+    h2.textContent = "Tests we offer:";
+    testsContainer.appendChild(h2);
+
+    const testsGrid = document.createElement("div");
+    testsGrid.classList.add("tests-grid");
+
+    const testCards = [
+        { title: "Color Blind Test", img: "images/colorblindtest.jpg", link: "colorBlindTest.html", desc: "Quickly assess your ability to perceive different colors." },
+        { title: "Distance Vision Test", img: "images/distancevision.jpg", link: "distanceVisionTest.html", desc: "Check your sharpness of vision for far-away objects." },
+        { title: "Near Vision Test", img: "images/nearvision.jpg", link: "nearVisionTest.html", desc: "Evaluate your ability to see clearly up close." }
+    ];
+
+    testCards.forEach(test => {
+        const card = document.createElement("a");
+        card.href = test.link;
+        card.classList.add("test-card");
+
+        const cardTitle = document.createElement("h3");
+        cardTitle.textContent = test.title;
+        const cardImg = document.createElement("img");
+        cardImg.src = test.img;
+        cardImg.alt = test.title;
+        const cardDesc = document.createElement("p");
+        cardDesc.textContent = test.desc;
+
+        card.appendChild(cardTitle);
+        card.appendChild(cardImg);
+        card.appendChild(cardDesc);
+        testsGrid.appendChild(card);
+    });
+
+    testsContainer.appendChild(testsGrid);
+    testsSection.appendChild(testsContainer);
+    body.appendChild(testsSection);
+
+    // CTA Banner
+    const ctaBanner = document.createElement("section");
+    ctaBanner.classList.add("cta-banner");
+
+    const ctaContainer = document.createElement("div");
+    ctaContainer.classList.add("container");
+
+    const ctaText = document.createElement("p");
+    ctaText.textContent = "To see is to believe—start with clearer vision today.";
+
+    ctaContainer.appendChild(ctaText);
+    ctaBanner.appendChild(ctaContainer);
+    body.appendChild(ctaBanner);
+
+    // Footer
+    const footer = document.createElement("footer");
+    const footerContainer = document.createElement("div");
+    footerContainer.classList.add("container");
+
+    const copyright = document.createElement("div");
+    copyright.classList.add("copyright");
+    copyright.textContent = "© EyeQ 2025 all rights reserved. |";
+
+    const footerNav = document.createElement("nav");
+    const footerUl = document.createElement("ul");
+
+    const footerItems = [
+        { text: "Privacy |", link: "privacy.html" },
+        { text: "Terms |", link: "terms.html" },
+        { text: "Contact", link: "contact.html" }
+    ];
+
+    footerItems.forEach(item => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = item.link;
+        a.textContent = item.text;
+        li.appendChild(a);
+        footerUl.appendChild(li);
+    });
+
+    footerNav.appendChild(footerUl);
+    footerContainer.appendChild(copyright);
+    footerContainer.appendChild(footerNav);
+    footer.appendChild(footerContainer);
+    body.appendChild(footer);
+});
+</script>
+
+</body>
 </html>
