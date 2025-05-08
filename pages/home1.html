@@ -54,47 +54,79 @@ document.addEventListener("DOMContentLoaded", function() {
     header.appendChild(headerContainer);
     body.appendChild(header);
 
-    // Hero Section
-    const hero = document.createElement("section");
-    hero.classList.add("hero");
+  
 
-    const heroContainer = document.createElement("div");
-    heroContainer.classList.add("container");
 
-    const heroText = document.createElement("div");
-    heroText.classList.add("hero-text");
-    const h1 = document.createElement("h1");
-    h1.innerHTML = "TAKE AN ONLINE <br>VISION TEST";
-    const p = document.createElement("p");
-    p.textContent = "Helping you check, protect, and understand your vision—anytime, anywhere.";
 
-    heroText.appendChild(h1);
-    heroText.appendChild(p);
 
-    const heroImage = document.createElement("div");
-    heroImage.classList.add("hero-image");
-    const heroImg = document.createElement("img");
-    heroImg.src = "images/eye-illustration.png";
-    heroImg.alt = "Online Vision Test Illustration";
-    heroImage.appendChild(heroImg);
+const bannerContainer = document.createElement("div");
+bannerContainer.classList.add("hero-banner");
 
-    heroContainer.appendChild(heroText);
-    heroContainer.appendChild(heroImage);
-    hero.appendChild(heroContainer);
 
-    // Navigation Arrows
-    const arrowNavigation = document.createElement("div");
-    arrowNavigation.classList.add("arrow-navigation");
-    const prevBtn = document.createElement("button");
-    prevBtn.setAttribute("aria-label", "Previous Slide");
-    prevBtn.innerHTML = "&larr;";
-    const nextBtn = document.createElement("button");
-    nextBtn.setAttribute("aria-label", "Next Slide");
-    nextBtn.innerHTML = "&rarr;";
-    arrowNavigation.appendChild(prevBtn);
-    arrowNavigation.appendChild(nextBtn);
-    hero.appendChild(arrowNavigation);
-    body.appendChild(hero);
+const bannerImage = document.createElement("img");
+
+
+const imageSources = [
+    "images/banner1.png", 
+    "images/banner2.png", 
+    "images/banner3.png" 
+];
+
+
+let currentIndex = 0;
+
+
+bannerImage.src = imageSources[currentIndex];
+bannerImage.alt = "Website Banner"; 
+
+bannerContainer.appendChild(bannerImage);
+
+
+
+body.appendChild(bannerContainer);
+
+
+
+let slideshowInterval; 
+const intervalDuration = 2000; 
+
+
+function showNextSlide() {
+    currentIndex++;
+
+    if (currentIndex >= imageSources.length) {
+        currentIndex = 0;
+    }
+  
+    bannerImage.src = imageSources[currentIndex];
+}
+
+
+function startSlideshow() {
+    
+    clearInterval(slideshowInterval);
+    slideshowInterval = setInterval(showNextSlide, intervalDuration);
+}
+
+
+function pauseSlideshow() {
+    clearInterval(slideshowInterval);
+}
+
+
+startSlideshow();
+
+
+
+
+bannerContainer.addEventListener("mouseenter", () => {
+    pauseSlideshow(); 
+});
+
+
+bannerContainer.addEventListener("mouseleave", () => {
+    startSlideshow(); 
+});
 
     // Tests Section
     const testsSection = document.createElement("section");
