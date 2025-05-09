@@ -236,6 +236,42 @@ h1 {
 }
 
 
+
+ 
+  .instructions {
+    background-color: #c62828;
+    color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  .chart-text {
+    margin: 20px 0;
+  }
+  .line {
+    margin: 8px 0;
+  }
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  .buttons button {
+    flex: 1 1 30%;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .result {
+    background-color: #2196f3;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  
+
 @media (max-width: 768px) {
     .hero .container {
         flex-direction: column;
