@@ -1,176 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EyeQ - Terms and Conditions</title>
-    <link rel="icon" type="image/png" href="images/eye-q-logo.png"> 
+    <link rel="icon" type="image/png" href="images/eye-q-logo.png">
     <link rel="stylesheet" href="styles/aboutStyle.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var body = document.body;
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var body = document.body;
 
-        var header = document.createElement("header");
-        var headerContainer = document.createElement("div");
-        headerContainer.classList.add("container");
+            var header = document.createElement("header");
+            var headerContainer = document.createElement("div");
+            headerContainer.classList.add("container");
 
-        var logo = document.createElement("div");
-        logo.classList.add("logo");
+            var logo = document.createElement("div");
+            logo.classList.add("logo");
 
-        var logoLink = document.createElement("a");
-        logoLink.href = "home1.html";
+            var logoLink = document.createElement("a");
+            logoLink.href = "home1.html";
 
-        var logoImg = document.createElement("img");
-        logoImg.src = "images/eye-q-logo.png";
-        logoImg.alt = "EyeQ Logo";
+            var logoImg = document.createElement("img");
+            logoImg.src = "images/eye-q-logo.png";
+            logoImg.alt = "EyeQ Logo";
 
-        logoLink.appendChild(logoImg);
-        logo.appendChild(logoLink);
+            logoLink.appendChild(logoImg);
+            logo.appendChild(logoLink);
 
 
-        var nav = document.createElement("nav");
-        var ul = document.createElement("ul");
+            var nav = document.createElement("nav");
+            var ul = document.createElement("ul");
 
-        var menuItems = ["About", "Eye Conditions", "Eye Tests", "FAQs", "Articles"];
-        var links = {
-            "About": "about.html",
-            "Eye Conditions": "eyeConditions.html",
-            "Eye Tests": "eyeTest.html",
-            "FAQs": "FAQS.html",
-            "Articles": "articles.html"
-        };
+            var menuItems = ["About", "Eye Conditions", "Eye Tests", "FAQs", "Articles"];
+            var links = {
+                "About": "about.html",
+                "Eye Conditions": "eyeConditions.html",
+                "Eye Tests": "eyeTest.html",
+                "FAQs": "FAQS.html",
+                "Articles": "articles.html"
+            };
 
-        menuItems.forEach(function(item) {
-            var li = document.createElement("li");
-            var a = document.createElement("a");
-            a.href = links[item] || "#";
-            a.textContent = item;
-            li.appendChild(a);
-            ul.appendChild(li);
+            menuItems.forEach(function (item) {
+                var li = document.createElement("li");
+                var a = document.createElement("a");
+                a.href = links[item] || "#";
+                a.textContent = item;
+                li.appendChild(a);
+                ul.appendChild(li);
+            });
+
+            nav.appendChild(ul);
+            headerContainer.appendChild(logo);
+            headerContainer.appendChild(nav);
+            header.appendChild(headerContainer);
+            body.appendChild(header);
+
+
+            var main = document.createElement("main");
+            var mainContainer = document.createElement("div");
+            mainContainer.classList.add("container");
+
+            var h1 = document.createElement("h1");
+            h1.textContent = "Terms and Conditions";
+            mainContainer.appendChild(h1);
+
+            var p1 = document.createElement("p");
+            p1.textContent = "Welcome to EyeQ. Please read these Terms and Conditions (“Terms”) carefully before using our app. By using our services, you agree to be bound by these Terms.";
+            mainContainer.appendChild(p1);
+
+            var h2 = document.createElement("h2");
+            h2.textContent = "Acceptance of Terms";
+            h2.style.color = "#551691";
+            mainContainer.appendChild(h2);
+
+
+            var p2 = document.createElement("p");
+            p2.textContent = "By accessing or using EyeQ, you agree to these Terms and our Privacy Policy. If you do not agree, please do not use the app.";
+            mainContainer.appendChild(p2);
+
+            var h2 = document.createElement("h2");
+            h2.textContent = "Services Provided";
+            h2.style.color = "#551691";
+            mainContainer.appendChild(h2);
+
+            var p2 = document.createElement("p");
+            p2.textContent = "EyeQ provides an online eye screening tool designed for informational and educational purposes only. It is not a substitute for professional eye care or medical advice.";
+            mainContainer.appendChild(p2);
+
+            var h2 = document.createElement("h2");
+            h2.textContent = "Eligibility";
+            h2.style.color = "#551691";
+            mainContainer.appendChild(h2);
+
+            var p2 = document.createElement("p");
+            p2.textContent = "You must be at least 18 years old or have parental/guardian consent to use this app.";
+            mainContainer.appendChild(p2);
+
+            var h2 = document.createElement("h2");
+            h2.textContent = "User Responsibility";
+            h2.style.color = "#551691";
+            mainContainer.appendChild(h2);
+
+            var p2 = document.createElement("p");
+            p2.innerHTML =
+                "<li>Results from the online eye test are not a diagnosis and do not replace an in-person consultation with a licensed eye care professional.</li>" +
+                "<li>EyeQ is not liable for any decisions made based on test results.</li>" +
+                "<li>We do not guarantee the accuracy or completeness of any content or service.</li>" +
+                mainContainer.appendChild(p2);
+
+            var h2 = document.createElement("h2");
+            h2.textContent = "User Feedback & Improvements";
+            h2.style.color = "#551691";
+            mainContainer.appendChild(h2);
+
+            var p2 = document.createElement("p");
+            p2.innerHTML =
+                "<li>Users can submit feedback or suggestions to improve EyeQ.</li>" +
+                "<li>Feedback should be relevant to improving vision tests, user experience, or accessibility.</li>" +
+                "<li>EyeQ welcomes reports about technical issues, navigation problems, or content accuracy to make the app better.</li>"
+            mainContainer.appendChild(p2);
+
+            var h2 = document.createElement("h2");
+            h2.textContent = "Intellectual Property";
+            h2.style.color = "#551691";
+            mainContainer.appendChild(h2);
+
+            var p2 = document.createElement("p");
+            p2.textContent = "All content, branding, and functionality in the app are the property of EyeQ and are protected by copyright and other laws.";
+            mainContainer.appendChild(p2);
+
+
+            main.appendChild(mainContainer);
+            body.appendChild(main);
+
+
+            var footer = document.createElement("footer");
+            var footerContainer = document.createElement("div");
+            footerContainer.classList.add("container");
+
+            var copyright = document.createElement("div");
+            copyright.classList.add("copyright");
+            copyright.textContent = "© EyeQ 2025 all rights reserved. |";
+
+            var footerNav = document.createElement("nav");
+            var footerUl = document.createElement("ul");
+            var footerItems = [
+                { text: "Privacy |", link: "privacy.html" },
+                { text: "Terms |", link: "terms.html" },
+                { text: "Contact", link: "contact.html" }
+            ];
+
+            footerItems.forEach(function (item) {
+                var li = document.createElement("li");
+                var a = document.createElement("a");
+                a.href = item.link;
+                a.textContent = item.text;
+                li.appendChild(a);
+                footerUl.appendChild(li);
+            });
+
+            footerNav.appendChild(footerUl);
+            footerContainer.appendChild(footerNav);
+            footerContainer.appendChild(copyright);
+            footerContainer.appendChild(footerNav);
+            footer.appendChild(footerContainer);
+            body.appendChild(footer);
         });
-
-        nav.appendChild(ul);
-        headerContainer.appendChild(logo);
-        headerContainer.appendChild(nav);
-        header.appendChild(headerContainer);
-        body.appendChild(header);
-
-        
-        var main = document.createElement("main");
-        var mainContainer = document.createElement("div");
-        mainContainer.classList.add("container");
-
-        var h1 = document.createElement("h1");
-        h1.textContent = "Terms and Conditions";
-        mainContainer.appendChild(h1);
-
-        var p1 = document.createElement("p");
-        p1.textContent = "Welcome to EyeQ. Please read these Terms and Conditions (“Terms”) carefully before using our app. By using our services, you agree to be bound by these Terms.";
-        mainContainer.appendChild(p1);
-
-        var h2 = document.createElement("h2");
-        h2.textContent = "Acceptance of Terms";
-        h2.style.color = "#551691"; 
-        mainContainer.appendChild(h2);
-
-
-        var p2 = document.createElement("p");
-        p2.textContent = "By accessing or using EyeQ, you agree to these Terms and our Privacy Policy. If you do not agree, please do not use the app.";
-        mainContainer.appendChild(p2);
-
-        var h2 = document.createElement("h2");
-        h2.textContent = "Services Provided";
-        h2.style.color = "#551691"; 
-        mainContainer.appendChild(h2);
-
-        var p2 = document.createElement("p");
-        p2.textContent = "EyeQ provides an online eye screening tool designed for informational and educational purposes only. It is not a substitute for professional eye care or medical advice.";
-        mainContainer.appendChild(p2);
-
-        var h2 = document.createElement("h2");
-        h2.textContent = "Eligibility";
-        h2.style.color = "#551691"; 
-        mainContainer.appendChild(h2);
-
-        var p2 = document.createElement("p");
-        p2.textContent = "You must be at least 18 years old or have parental/guardian consent to use this app.";
-        mainContainer.appendChild(p2);
-
-        var h2 = document.createElement("h2");
-        h2.textContent = "User Responsibility";
-        h2.style.color = "#551691"; 
-        mainContainer.appendChild(h2);
-
-        var p2 = document.createElement("p");
-        p2.innerHTML = 
-               "<li>Results from the online eye test are not a diagnosis and do not replace an in-person consultation with a licensed eye care professional.</li>" +
-               "<li>EyeQ is not liable for any decisions made based on test results.</li>" +
-               "<li>We do not guarantee the accuracy or completeness of any content or service.</li>" +        
-        mainContainer.appendChild(p2);
-
-        var h2 = document.createElement("h2");
-        h2.textContent = "User Feedback & Improvements";
-        h2.style.color = "#551691"; 
-        mainContainer.appendChild(h2);
-
-        var p2 = document.createElement("p");
-        p2.innerHTML = 
-               "<li>Users can submit feedback or suggestions to improve EyeQ.</li>" +
-               "<li>Feedback should be relevant to improving vision tests, user experience, or accessibility.</li>" +
-               "<li>EyeQ welcomes reports about technical issues, navigation problems, or content accuracy to make the app better.</li>"      
-        mainContainer.appendChild(p2);
-
-        var h2 = document.createElement("h2");
-        h2.textContent = "Intellectual Property";
-        h2.style.color = "#551691"; 
-        mainContainer.appendChild(h2);
-
-        var p2 = document.createElement("p");
-        p2.textContent = "All content, branding, and functionality in the app are the property of EyeQ and are protected by copyright and other laws.";
-        mainContainer.appendChild(p2);
-
-
-        main.appendChild(mainContainer);
-        body.appendChild(main);
-
-
-        var footer = document.createElement("footer");
-        var footerContainer = document.createElement("div");
-        footerContainer.classList.add("container");
-
-        var copyright = document.createElement("div");
-        copyright.classList.add("copyright");
-        copyright.textContent = "© EyeQ 2025 all rights reserved. |" ;
-
-        var footerNav = document.createElement("nav");
-        var footerUl = document.createElement("ul");
-        var footerItems = [
-        { text: "Privacy |", link: "privacy.html" },
-        { text: "Terms |", link: "terms.html" },
-        { text: "Contact", link: "contact.html" }
-        ];
-
-        footerItems.forEach(function(item) {
-        var li = document.createElement("li");
-        var a = document.createElement("a");
-        a.href = item.link; 
-        a.textContent = item.text;
-        li.appendChild(a);
-        footerUl.appendChild(li);
-        });
-
-        footerNav.appendChild(footerUl);
-        footerContainer.appendChild(footerNav);
-        footerContainer.appendChild(copyright);
-        footerContainer.appendChild(footerNav);
-        footer.appendChild(footerContainer);
-        body.appendChild(footer);
-    });
-</script>
+    </script>
 
 </body>
+
 </html>

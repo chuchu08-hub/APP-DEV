@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EyeQ - Articles</title>
-    <link rel="icon" type="image/png" href="images/eye-q-logo.png"> 
+    <link rel="icon" type="image/png" href="images/eye-q-logo.png">
     <link rel="stylesheet" href="styles/articleStyles.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    
+
     <header>
         <div class="container">
             <div class="logo">
@@ -32,7 +34,8 @@
     <center>
         <main class="container">
             <h1 class="page-title">Eye Conditions and Diseases</h1>
-            <p class="intro-text">Concerned about an eye infection or a serious condition? Read articles about the symptoms, diagnosis, and treatments for eye infections, eye diseases, and eye conditions.</p>
+            <p class="intro-text">Concerned about an eye infection or a serious condition? Read articles about the
+                symptoms, diagnosis, and treatments for eye infections, eye diseases, and eye conditions.</p>
 
             <section class="related-articles">
                 <h2>Related Articles</h2>
@@ -40,20 +43,29 @@
                     <div class="article-card">
                         <img src="images/cataract.jpg" width="300" height="200" alt="Cataract">
                         <h3>What are cataracts?</h3>
-                        <p>A cataract is when your eye's natural lens becomes cloudy. Proteins in your lens break down and cause things to look blurry, hazy, or less colorful... 
-                        <a href="https://www.aao.org/eye-health/diseases/what-are-cataracts" class="read-more">Read More</a></p>
+                        <p>A cataract is when your eye's natural lens becomes cloudy. Proteins in your lens break down
+                            and cause things to look blurry, hazy, or less colorful...
+                            <a href="https://www.aao.org/eye-health/diseases/what-are-cataracts" class="read-more">Read
+                                More</a>
+                        </p>
                     </div>
                     <div class="article-card">
                         <img src="images/nevus.jpg" width="300" height="200" alt="Nevus">
                         <h3>Nevi—tiny flecks of pigment making their mark on your eye.</h3>
-                        <p>A nevus is a common, colored growth on or in your eye. Sometimes called a freckle of the eye, it is similar to a mole on your skin. A nevus is usually not harmful... 
-                        <a href="https://www.aao.org/eye-health/diseases/what-is-nevus" class="read-more">Read More</a></p>
+                        <p>A nevus is a common, colored growth on or in your eye. Sometimes called a freckle of the eye,
+                            it is similar to a mole on your skin. A nevus is usually not harmful...
+                            <a href="https://www.aao.org/eye-health/diseases/what-is-nevus" class="read-more">Read
+                                More</a>
+                        </p>
                     </div>
                     <div class="article-card">
                         <img src="images/glaucoma.jpg" width="300" height="200" alt="Glaucoma">
                         <h3>What are the types of glaucoma?</h3>
-                        <p>Glaucoma is a group of eye diseases that can cause vision loss and blindness by damaging the optic nerve, the bundle of nerve fibers that connects the... 
-                        <a href="https://www.uchealth.org/services/eye-care/glaucoma/" class="read-more">Read More</a></p>
+                        <p>Glaucoma is a group of eye diseases that can cause vision loss and blindness by damaging the
+                            optic nerve, the bundle of nerve fibers that connects the...
+                            <a href="https://www.uchealth.org/services/eye-care/glaucoma/" class="read-more">Read
+                                More</a>
+                        </p>
                     </div>
                 </div>
             </section>
@@ -75,7 +87,7 @@
         </div>
     </footer>
 
-    
+
     <div class="overlay"></div>
 
     <button class="close-btn">Close</button>
@@ -85,7 +97,7 @@
         const closeButton = document.querySelector(".close-btn");
 
         document.querySelectorAll(".article-card img").forEach(img => {
-            img.addEventListener("click", function() {
+            img.addEventListener("click", function () {
                 this.classList.toggle("zoomed");
                 overlay.classList.toggle("active");
                 closeButton.classList.toggle("active");
@@ -106,4 +118,5 @@
     </script>
 
 </body>
+
 </html>

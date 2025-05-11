@@ -1,108 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EyeQ - Near Vision Test</title>
-    <link rel="icon" type="image/png" href="images/eye-q-logo.png"> 
-    <link rel="stylesheet" href="styles/aboutStyle.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EyeQ - Near Vision Test</title>
+  <link rel="icon" type="image/png" href="images/eye-q-logo.png">
+  <link rel="stylesheet" href="styles/aboutStyle.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
 
-    
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var body = document.body;
 
-        
-        var header = document.createElement("header");
-        var headerContainer = document.createElement("div");
-        headerContainer.classList.add("container");
-
-        var logo = document.createElement("div");
-        logo.classList.add("logo");
-
-        var logoLink = document.createElement("a");
-        logoLink.href = "home1.html";
-
-        var logoImg = document.createElement("img");
-        logoImg.src = "images/eye-q-logo.png";
-        logoImg.alt = "EyeQ Logo";
-
-        logoLink.appendChild(logoImg);
-        logo.appendChild(logoLink);
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var body = document.body;
 
 
-        var nav = document.createElement("nav");
-        var ul = document.createElement("ul");
+      var header = document.createElement("header");
+      var headerContainer = document.createElement("div");
+      headerContainer.classList.add("container");
 
-        var menuItems = ["About", "Eye Conditions", "Eye Tests", "FAQs", "Articles"];
-        var links = {
-            "About": "about.html",
-            "Eye Conditions": "eyeConditions.html",
-            "Eye Tests": "eyeTest.html",
-            "FAQs": "FAQS.html",
-            "Articles": "articles.html"
-        };
+      var logo = document.createElement("div");
+      logo.classList.add("logo");
 
-        menuItems.forEach(function(item) {
-            var li = document.createElement("li");
-            var a = document.createElement("a");
-            a.href = links[item] || "#";
-            a.textContent = item;
-            li.appendChild(a);
-            ul.appendChild(li);
-        });
+      var logoLink = document.createElement("a");
+      logoLink.href = "home1.html";
 
-        nav.appendChild(ul);
-        headerContainer.appendChild(logo);
-        headerContainer.appendChild(nav);
-        header.appendChild(headerContainer);
-        body.appendChild(header);
+      var logoImg = document.createElement("img");
+      logoImg.src = "images/eye-q-logo.png";
+      logoImg.alt = "EyeQ Logo";
 
-        
-        var main = document.createElement("main");
-        var mainContainer = document.createElement("div");
-        mainContainer.classList.add("container");
-
-        var h1 = document.createElement("h1");
-        h1.textContent = "Near Vision Test";
-        mainContainer.appendChild(h1);
+      logoLink.appendChild(logoImg);
+      logo.appendChild(logoLink);
 
 
-        main.appendChild(mainContainer);
-        body.appendChild(main);
+      var nav = document.createElement("nav");
+      var ul = document.createElement("ul");
+
+      var menuItems = ["About", "Eye Conditions", "Eye Tests", "FAQs", "Articles"];
+      var links = {
+        "About": "about.html",
+        "Eye Conditions": "eyeConditions.html",
+        "Eye Tests": "eyeTest.html",
+        "FAQs": "FAQS.html",
+        "Articles": "articles.html"
+      };
+
+      menuItems.forEach(function (item) {
+        var li = document.createElement("li");
+        var a = document.createElement("a");
+        a.href = links[item] || "#";
+        a.textContent = item;
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+
+      nav.appendChild(ul);
+      headerContainer.appendChild(logo);
+      headerContainer.appendChild(nav);
+      header.appendChild(headerContainer);
+      body.appendChild(header);
 
 
-        document.body.style.margin = "0";
-document.body.style.fontFamily = "Arial, sans-serif";
+      var main = document.createElement("main");
+      var mainContainer = document.createElement("div");
+      mainContainer.classList.add("container");
 
-// Container
-const container = document.createElement("div");
-container.style.maxWidth = "600px";
-container.style.margin = "20px auto";
-container.style.padding = "20px";
-container.style.boxShadow = "0 0 10px rgba(0,0,0,0.1)";
-container.style.borderRadius = "10px";
-container.style.backgroundColor = "#fdfdfd";
-document.body.appendChild(container);
+      var h1 = document.createElement("h1");
+      h1.textContent = "Near Vision Test";
+      mainContainer.appendChild(h1);
 
-// Title
-const title = document.createElement("h2");
-title.textContent = "Near Vision Test (Jaeger Eye Chart)";
-title.style.textAlign = "center";
-container.appendChild(title);
 
-// Instructions Box
-const instructions = document.createElement("div");
-instructions.style.backgroundColor = "#d9534f";
-instructions.style.color = "#fff";
-instructions.style.padding = "10px 15px";
-instructions.style.borderRadius = "5px";
-instructions.style.marginBottom = "20px";
-instructions.innerHTML = `
+      main.appendChild(mainContainer);
+      body.appendChild(main);
+
+
+      document.body.style.margin = "0";
+      document.body.style.fontFamily = "Arial, sans-serif";
+
+      // Container
+      const container = document.createElement("div");
+      container.style.maxWidth = "600px";
+      container.style.margin = "20px auto";
+      container.style.padding = "20px";
+      container.style.boxShadow = "0 0 10px rgba(0,0,0,0.1)";
+      container.style.borderRadius = "10px";
+      container.style.backgroundColor = "#fdfdfd";
+      document.body.appendChild(container);
+
+      // Title
+      const title = document.createElement("h2");
+      title.textContent = "Near Vision Test (Jaeger Eye Chart)";
+      title.style.textAlign = "center";
+      container.appendChild(title);
+
+      // Instructions Box
+      const instructions = document.createElement("div");
+      instructions.style.backgroundColor = "#d9534f";
+      instructions.style.color = "#fff";
+      instructions.style.padding = "10px 15px";
+      instructions.style.borderRadius = "5px";
+      instructions.style.marginBottom = "20px";
+      instructions.innerHTML = `
   <strong>Instructions:</strong>
   <ul>
     <li>Ensure proper room lighting and screen brightness to 100%.</li>
@@ -110,106 +112,107 @@ instructions.innerHTML = `
     <li>Read the smallest line the patient can comfortably see.</li>
     <li>Test one eye at a time (cover the other eye).</li>
   </ul>`;
-container.appendChild(instructions);
+      container.appendChild(instructions);
 
-// Chart Section
-const chart = document.createElement("div");
-chart.style.border = "1px solid #ccc";
-chart.style.padding = "20px";
-chart.style.marginBottom = "20px";
-chart.style.borderRadius = "10px";
-chart.style.textAlign = "center";
-container.appendChild(chart);
+      // Chart Section
+      const chart = document.createElement("div");
+      chart.style.border = "1px solid #ccc";
+      chart.style.padding = "20px";
+      chart.style.marginBottom = "20px";
+      chart.style.borderRadius = "10px";
+      chart.style.textAlign = "center";
+      container.appendChild(chart);
 
-// Jaeger lines (larger to smaller)
-const sampleText = "The two boys fell asleep under a large tree.";
-for (let i = 1; i <= 11; i++) {
-  const line = document.createElement("div");
-  line.textContent = `Line ${i}: ${sampleText}`;
-  line.style.fontSize = `${24 - i * 1.5}px`;
-  line.style.margin = "5px 0";
-  chart.appendChild(line);
-}
+      // Jaeger lines (larger to smaller)
+      const sampleText = "The two boys fell asleep under a large tree.";
+      for (let i = 1; i <= 11; i++) {
+        const line = document.createElement("div");
+        line.textContent = `Line ${i}: ${sampleText}`;
+        line.style.fontSize = `${24 - i * 1.5}px`;
+        line.style.margin = "5px 0";
+        chart.appendChild(line);
+      }
 
-// Button Selector
-const selectTitle = document.createElement("p");
-selectTitle.textContent = "Select lowest line that patient can read correctly:";
-selectTitle.style.fontWeight = "bold";
-container.appendChild(selectTitle);
+      // Button Selector
+      const selectTitle = document.createElement("p");
+      selectTitle.textContent = "Select lowest line that patient can read correctly:";
+      selectTitle.style.fontWeight = "bold";
+      container.appendChild(selectTitle);
 
-// Button Group
-const buttonGroup = document.createElement("div");
-buttonGroup.style.display = "flex";
-buttonGroup.style.flexWrap = "wrap";
-buttonGroup.style.gap = "10px";
-buttonGroup.style.marginBottom = "20px";
-container.appendChild(buttonGroup);
+      // Button Group
+      const buttonGroup = document.createElement("div");
+      buttonGroup.style.display = "flex";
+      buttonGroup.style.flexWrap = "wrap";
+      buttonGroup.style.gap = "10px";
+      buttonGroup.style.marginBottom = "20px";
+      container.appendChild(buttonGroup);
 
-// Result Box
-const resultBox = document.createElement("div");
-resultBox.style.backgroundColor = "#007bff";
-resultBox.style.color = "#fff";
-resultBox.style.padding = "15px";
-resultBox.style.borderRadius = "5px";
-resultBox.style.textAlign = "center";
-resultBox.style.fontWeight = "bold";
-resultBox.textContent = "Result: Please select a line.";
-container.appendChild(resultBox);
+      // Result Box
+      const resultBox = document.createElement("div");
+      resultBox.style.backgroundColor = "#007bff";
+      resultBox.style.color = "#fff";
+      resultBox.style.padding = "15px";
+      resultBox.style.borderRadius = "5px";
+      resultBox.style.textAlign = "center";
+      resultBox.style.fontWeight = "bold";
+      resultBox.textContent = "Result: Please select a line.";
+      container.appendChild(resultBox);
 
-// Create Buttons
-for (let i = 1; i <= 11; i++) {
-  const btn = document.createElement("button");
-  btn.textContent = `Line ${i}`;
-  btn.style.padding = "10px 15px";
-  btn.style.border = "none";
-  btn.style.borderRadius = "5px";
-  btn.style.backgroundColor = "#f0f0f0";
-  btn.style.cursor = "pointer";
-  btn.onmouseover = () => btn.style.backgroundColor = "#ddd";
-  btn.onmouseout = () => btn.style.backgroundColor = "#f0f0f0";
+      // Create Buttons
+      for (let i = 1; i <= 11; i++) {
+        const btn = document.createElement("button");
+        btn.textContent = `Line ${i}`;
+        btn.style.padding = "10px 15px";
+        btn.style.border = "none";
+        btn.style.borderRadius = "5px";
+        btn.style.backgroundColor = "#f0f0f0";
+        btn.style.cursor = "pointer";
+        btn.onmouseover = () => btn.style.backgroundColor = "#ddd";
+        btn.onmouseout = () => btn.style.backgroundColor = "#f0f0f0";
 
-  btn.addEventListener("click", () => {
-    resultBox.textContent = `Result: Patient can read Line ${i}`;
-    resultBox.style.backgroundColor = "#28a745"; // green for success
-  });
+        btn.addEventListener("click", () => {
+          resultBox.textContent = `Result: Patient can read Line ${i}`;
+          resultBox.style.backgroundColor = "#28a745"; // green for success
+        });
 
-  buttonGroup.appendChild(btn);
+        buttonGroup.appendChild(btn);
 
-}
-        var footer = document.createElement("footer");
-        var footerContainer = document.createElement("div");
-        footerContainer.classList.add("container");
+      }
+      var footer = document.createElement("footer");
+      var footerContainer = document.createElement("div");
+      footerContainer.classList.add("container");
 
-        var copyright = document.createElement("div");
-        copyright.classList.add("copyright");
-        copyright.textContent = "© EyeQ 2025 all rights reserved. |" ;
+      var copyright = document.createElement("div");
+      copyright.classList.add("copyright");
+      copyright.textContent = "© EyeQ 2025 all rights reserved. |";
 
-        var footerNav = document.createElement("nav");
-        var footerUl = document.createElement("ul");
-        var footerItems = [
-    { text: "Privacy |", link: "privacy.html" },
-    { text: "Terms |", link: "terms.html" },
-    { text: "Contact", link: "contact.html" }
-    ];
+      var footerNav = document.createElement("nav");
+      var footerUl = document.createElement("ul");
+      var footerItems = [
+        { text: "Privacy |", link: "privacy.html" },
+        { text: "Terms |", link: "terms.html" },
+        { text: "Contact", link: "contact.html" }
+      ];
 
-    footerItems.forEach(function(item) {
-    var li = document.createElement("li");
-    var a = document.createElement("a");
-    a.href = item.link; 
-    a.textContent = item.text;
-    li.appendChild(a);
-    footerUl.appendChild(li);
+      footerItems.forEach(function (item) {
+        var li = document.createElement("li");
+        var a = document.createElement("a");
+        a.href = item.link;
+        a.textContent = item.text;
+        li.appendChild(a);
+        footerUl.appendChild(li);
+      });
+
+      footerNav.appendChild(footerUl);
+      footerContainer.appendChild(copyright);
+      footerContainer.appendChild(footerNav);
+      footer.appendChild(footerContainer);
+      body.appendChild(footer);
     });
 
-        footerNav.appendChild(footerUl);
-        footerContainer.appendChild(copyright);
-        footerContainer.appendChild(footerNav);
-        footer.appendChild(footerContainer);
-        body.appendChild(footer);
-    });
 
-    
-</script>
+  </script>
 
 </body>
+
 </html>
