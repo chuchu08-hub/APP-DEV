@@ -4,40 +4,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EyeQ - Lantern Test</title>
+    <title>EyeQ - Lantern Color Recall Test</title>
     <link rel="icon" type="image/png" href="images/eye-q-logo.png">
     <link rel="stylesheet" href="styles/aboutStyle.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .lantern-game-area,
+    .game-board,
+    .game-light,
+    .is-showing-sequence,
+    .lantern-display-area,
+    .answer-controls,
+    .light-pair,
+    .test-light {
+        display: none !important;
+    }
+
+    .test-display-area {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 150px;
+        margin-bottom: 20px;
+    }
+
+    .display-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .display-light {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        border: 4px solid #555;
+        background-color: #ccc;
+        box-sizing: border-box;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #333;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+    }
+
+    .display-light .light-number {
+        z-index: 1;
+    }
+
+    .display-light.is-red {
+        background-color: #ff0000;
+        border-color: #ff0000;
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+
+    .display-light.is-green {
+        background-color: #00ff00;
+        border-color: #00ff00;
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    }
+
+    .display-light.is-yellow {
+        background-color: #ffff00;
+        border-color: #ffff00;
+        box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+    }
+
+    .display-light.is-off {
+        background-color: #ccc;
+        border-color: #555;
+        box-shadow: none;
+    }
+
+    #dynamic-input-area {
+        text-align: center;
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+
+    #dynamic-input-area .input-group {
+        margin-bottom: 15px;
+        font-size: 1.1em;
+    }
+
+    #dynamic-input-area .input-group span {
+        margin-right: 10px;
+        font-weight: bold;
+    }
+
+    #dynamic-input-area .color-button {
+        padding: 8px 15px;
+        margin: 0 5px;
+        font-size: 0.9em;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #eee;
+        transition: background-color 0.1s ease, border-color 0.1s ease;
+    }
+
+    #dynamic-input-area .color-button.is-selected {
+        background-color: #a0d0ff;
+        border-color: #007bff;
+        font-weight: bold;
+    }
+
+    #dynamic-input-area .color-button.is-selected[data-color="red"] {
+        background-color: #ffcccc;
+        border-color: #ff0000;
+    }
+
+    #dynamic-input-area .color-button.is-selected[data-color="green"] {
+        background-color: #ccffcc;
+        border-color: #00ff00;
+    }
+
+    #dynamic-input-area .color-button.is-selected[data-color="yellow"] {
+        background-color: #ffffcc;
+        border-color: #ffff00;
+    }
+
+    #dynamic-input-area .color-button.is-selected[data-color="invalid"] {
+        background-color: #eee;
+        border-color: #555;
+        font-weight: bold;
+    }
+
+    .test-controls {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .test-button {
+        padding: 10px 20px;
+        font-size: 1.1em;
+        cursor: pointer;
+    }
+
+    .test-progress {
+        text-align: center;
+        font-size: 1.1em;
+        margin-top: 10px;
+    }
+
+    .message-area {
+        text-align: center;
+        font-size: 1.2em;
+        min-height: 1.5em;
+        margin-bottom: 10px;
+    }
+
+     .message-area ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 10px;
+     }
+
+     .message-area li {
+        margin-bottom: 5px;
+        font-size: 0.9em;
+     }
+
+
+    .test-results {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .retake-button {
+        padding: 10px 20px;
+        font-size: 1em;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+
+    .test-results ul {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+        margin-top: 20px;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .test-results li {
+        margin-bottom: 8px;
+        padding-bottom: 8px;
+        border-bottom: 1px dashed #ccc;
+        font-size: 0.95em;
+    }
+
+    .test-results li:last-child {
+        border-bottom: none;
+    }
+</style>
 
 <body>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             var body = document.body;
-
-
             var header = document.createElement("header");
             var headerContainer = document.createElement("div");
             headerContainer.classList.add("container");
-
             var logo = document.createElement("div");
             logo.classList.add("logo");
-
             var logoLink = document.createElement("a");
             logoLink.href = "home1.html";
-
             var logoImg = document.createElement("img");
             logoImg.src = "images/eye-q-logo.png";
             logoImg.alt = "EyeQ Logo";
-
             logoLink.appendChild(logoImg);
             logo.appendChild(logoLink);
-
-
             var nav = document.createElement("nav");
             var ul = document.createElement("ul");
-
             var menuItems = ["About", "Eye Conditions", "Eye Tests", "FAQs", "Articles"];
             var links = {
                 "About": "about.html",
@@ -46,7 +241,6 @@
                 "FAQs": "FAQS.html",
                 "Articles": "articles.html"
             };
-
             menuItems.forEach(function (item) {
                 var li = document.createElement("li");
                 var a = document.createElement("a");
@@ -55,43 +249,320 @@
                 li.appendChild(a);
                 ul.appendChild(li);
             });
-
             nav.appendChild(ul);
             headerContainer.appendChild(logo);
             headerContainer.appendChild(nav);
             header.appendChild(headerContainer);
             body.appendChild(header);
-
-
             var main = document.createElement("main");
             var mainContainer = document.createElement("div");
             mainContainer.classList.add("container");
-
             var h1 = document.createElement("h1");
-            h1.textContent = "Lantern Test";
+            h1.textContent = "Lantern Color Recall Test";
             mainContainer.appendChild(h1);
+            const testDescription = document.createElement("p");
+            testDescription.classList.add("test-instructions");
+            testDescription.textContent = "The test consists of 10 groups of colored lights (2 to 4 lights per group) shown for three seconds. Observe the colors and their positions.";
+            const startPrompt = document.createElement("p");
+            startPrompt.textContent = "Click Start Test to begin.";
+             const messageArea = document.createElement("div");
+            messageArea.classList.add("message-area");
+            messageArea.textContent = "";
+            const testDisplayArea = document.createElement("div");
+            testDisplayArea.classList.add("test-display-area");
+            const displayRow = document.createElement("div");
+            displayRow.classList.add("display-row");
+            testDisplayArea.appendChild(displayRow);
 
-            
+            const dynamicInputArea = document.createElement("div");
+            dynamicInputArea.id = "dynamic-input-area";
+            dynamicInputArea.style.display = "none";
 
+
+            const testProgress = document.createElement("p");
+            testProgress.classList.add("test-progress");
+            testProgress.innerHTML = 'Group <span id="current-group">0</span> of <span id="total-groups">10</span>';
+            const currentGroupSpan = testProgress.querySelector('#current-group');
+            const totalGroupsSpan = testProgress.querySelector('#total-groups');
+            const testControls = document.createElement("div");
+            testControls.classList.add("test-controls");
+            const actionButton = document.createElement("button");
+            actionButton.id = "action-button";
+            actionButton.classList.add("test-button");
+            actionButton.textContent = "Start Test";
+            testControls.appendChild(actionButton);
+            const testResultsDiv = document.createElement("div");
+            testResultsDiv.id = "test-results";
+            testResultsDiv.classList.add("test-results");
+            testResultsDiv.style.display = "none";
+            testResultsDiv.innerHTML = `
+                <h3>Test Complete!</h3>
+                <p>Your score: <span id="final-score"></span> correct out of <span id="total-possible-score"></span>.</p>
+                <button onclick="location.reload()" class="retake-button">Retake Test</button>
+            `;
+            const finalScoreSpan = testResultsDiv.querySelector('#final-score');
+            const totalPossibleScoreSpan = testResultsDiv.querySelector('#total-possible-score');
+            mainContainer.appendChild(testDescription);
+            mainContainer.appendChild(startPrompt);
+            mainContainer.appendChild(messageArea);
+            mainContainer.appendChild(testDisplayArea);
+            mainContainer.appendChild(dynamicInputArea);
+            mainContainer.appendChild(testProgress);
+            mainContainer.appendChild(testControls);
+            mainContainer.appendChild(testResultsDiv);
             main.appendChild(mainContainer);
             body.appendChild(main);
 
+            function generateTestGroups(numGroups, minLights, maxLights) {
+                const colors = ['red', 'green', 'yellow'];
+                const groups = [];
+                for (let i = 0; i < numGroups; i++) {
+                    const numberOfLights = Math.floor(Math.random() * (maxLights - minLights + 1)) + minLights;
+                    const groupColors = [];
+                    for (let j = 0; j < numberOfLights; j++) {
+                        groupColors.push(colors[Math.floor(Math.random() * colors.length)]);
+                    }
+                    groups.push(groupColors);
+                }
+                return groups;
+            }
+            const totalGroups = 10;
+            const minLightsPerGroup = 2;
+            const maxLightsPerGroup = 4;
+            const testGroups = generateTestGroups(totalGroups, minLightsPerGroup, maxLightsPerGroup);
+            let currentGroupIndex = 0;
+            const displayDuration = 3000;
+            let isShowingGroup = false;
+            let isInputPhase = false;
+            let userInputColors = [];
+            let totalScore = 0;
+            let incorrectAnswers = [];
+
+            if (totalGroupsSpan) totalGroupsSpan.textContent = totalGroups;
+            if (currentGroupSpan) currentGroupSpan.textContent = 0;
+            let displayLights = [];
+
+            function resetLights() {
+                displayRow.innerHTML = '';
+                displayLights = [];
+            }
+
+            function handleDynamicColorButtonClick(event) {
+                const clickedButton = event.target;
+                const selectedColor = clickedButton.dataset.color;
+                const lightIndex = parseInt(clickedButton.dataset.lightIndex, 10);
+                const parentInputGroup = clickedButton.parentElement;
+                parentInputGroup.querySelectorAll('.color-button').forEach(btn => {
+                    btn.classList.remove('is-selected');
+                });
+                clickedButton.classList.add('is-selected');
+                userInputColors[lightIndex] = (selectedColor === 'invalid') ? null : selectedColor;
+            }
+
+            function displayGroup(index) {
+                if (index >= totalGroups) {
+                    endTest();
+                    return;
+                }
+                isShowingGroup = true;
+                isInputPhase = false;
+                messageArea.textContent = "Watch carefully...";
+                const groupColors = testGroups[index];
+                if (currentGroupSpan) currentGroupSpan.textContent = index + 1;
+                actionButton.style.display = 'none';
+                dynamicInputArea.style.display = 'none';
+                resetLights();
+                testDisplayArea.style.display = 'flex';
+                groupColors.forEach((color, lightIndex) => {
+                    const light = document.createElement("div");
+                    light.classList.add("display-light");
+                    light.dataset.index = lightIndex;
+
+                    const numberSpan = document.createElement("span");
+                    numberSpan.classList.add("light-number");
+                    numberSpan.textContent = lightIndex + 1;
+                    light.appendChild(numberSpan);
+
+                    light.classList.add(`is-${color}`);
+                    displayRow.appendChild(light);
+                    displayLights.push(light);
+                });
+                setTimeout(() => {
+                    testDisplayArea.style.display = 'none';
+                    isShowingGroup = false;
+                    isInputPhase = true;
+                    dynamicInputArea.innerHTML = '';
+                    userInputColors = Array(groupColors.length).fill(null);
+                    groupColors.forEach((color, lightIndex) => {
+                        const inputGroup = document.createElement("div");
+                        inputGroup.classList.add("input-group");
+                        const label = document.createElement("span");
+                        label.textContent = `Light ${lightIndex + 1}:`;
+                        inputGroup.appendChild(label);
+                        const colors = ['red', 'green', 'yellow', 'invalid'];
+                        colors.forEach(colorOption => {
+                            const button = document.createElement("button");
+                            button.classList.add("color-button");
+                            button.dataset.color = colorOption;
+                            button.dataset.lightIndex = lightIndex;
+                            button.textContent = (colorOption === 'invalid') ? 'Invalid Input' : colorOption.charAt(0).toUpperCase() + colorOption.slice(1);
+                            inputGroup.appendChild(button);
+                            button.addEventListener('click', handleDynamicColorButtonClick);
+                        });
+                        dynamicInputArea.appendChild(inputGroup);
+                    });
+                    dynamicInputArea.style.display = 'block';
+                    actionButton.style.display = 'block';
+                    actionButton.textContent = 'Submit Group';
+                    messageArea.textContent = "Select the colors you saw for each light.";
+                }, displayDuration);
+            }
+
+            function handleActionButtonClick() {
+                if (isShowingGroup) {
+                    return;
+                }
+                if (actionButton.textContent === 'Start Test') {
+                    testDescription.style.display = 'none';
+                    startPrompt.style.display = 'none';
+                    displayGroup(currentGroupIndex);
+                    currentGroupIndex++;
+                } else if (actionButton.textContent === 'Submit Group') {
+                    if (!isInputPhase) {
+                        return;
+                    }
+                    isInputPhase = false;
+                    actionButton.style.display = 'none';
+                    dynamicInputArea.style.display = 'none';
+                    messageArea.textContent = "Checking answers...";
+                    let groupScore = 0;
+                    const actualColors = testGroups[currentGroupIndex - 1];
+                    const currentGroupNumber = currentGroupIndex;
+                    const currentGroupActualColors = testGroups[currentGroupIndex - 1];
+                    const currentGroupIncorrectAnswers = [];
+
+                    testDisplayArea.style.display = 'flex';
+                    displayLights.forEach((light, index) => {
+                        light.classList.remove('is-user-selected', 'is-off');
+                        if (userInputColors[index] !== null && userInputColors[index] === actualColors[index]) {
+                            groupScore++;
+                            light.style.border = '4px solid lightgreen';
+                            light.style.boxShadow = '0 0 10px 5px rgba(0, 255, 0, 0.7)';
+                        } else {
+                             incorrectAnswers.push({
+                                 group: currentGroupNumber,
+                                 lightIndex: index + 1,
+                                 actual: actualColors[index],
+                                 user: userInputColors[index]
+                             });
+                             currentGroupIncorrectAnswers.push({
+                                 lightIndex: index + 1,
+                                 actual: actualColors[index],
+                                 user: userInputColors[index]
+                             });
+
+                            light.style.border = '4px solid pink';
+                            light.style.boxShadow = '0 0 10px 5px rgba(255, 0, 0, 0.7)';
+                        }
+                    });
+                    totalScore += groupScore;
+
+                    testDisplayArea.style.display = 'flex';
+
+                    messageArea.textContent = `Group ${currentGroupNumber} Score: ${groupScore}/${currentGroupActualColors.length}. Total Score: ${totalScore}.`;
+
+                    if (currentGroupIncorrectAnswers.length > 0) {
+                         const errorsList = currentGroupIncorrectAnswers.map(error => {
+                             const userDisplay = (error.user === null) ? 'None' : `${error.user}`;
+                             return `Light ${error.lightIndex}: You answered, "${userDisplay}", the answer is "${error.actual}"`;
+                         }).join('<br>');
+
+                         messageArea.innerHTML += `<br>Incorrect<br>${errorsList}`;
+                    } else {
+                        messageArea.innerHTML += `<br>All correct in this group!`;
+                    }
+
+
+                    if (currentGroupIndex < totalGroups) {
+                        actionButton.textContent = 'Next Group';
+                        actionButton.style.display = 'block';
+                    } else {
+                        endTest();
+                    }
+
+
+                } else if (actionButton.textContent === 'Next Group') {
+                    messageArea.textContent = "";
+                    actionButton.style.display = 'none';
+                    dynamicInputArea.style.display = 'none';
+                    displayGroup(currentGroupIndex);
+                    currentGroupIndex++;
+                }
+            }
+
+            function endTest() {
+                testDescription.style.display = 'none';
+                startPrompt.style.display = 'none';
+                messageArea.style.display = 'none';
+                testDisplayArea.style.display = 'none';
+                dynamicInputArea.style.display = 'none';
+                testProgress.style.display = 'none';
+                testControls.style.display = 'none';
+                testResultsDiv.style.display = 'block';
+                let totalPossibleScore = 0;
+                testGroups.forEach(group => {
+                    totalPossibleScore += group.length;
+                });
+                if (finalScoreSpan) finalScoreSpan.textContent = totalScore;
+                if (totalPossibleScoreSpan) totalPossibleScoreSpan.textContent = totalPossibleScore;
+
+                 if (incorrectAnswers.length > 0) {
+                    const incorrectAnswersTitle = document.createElement('h4');
+                    incorrectAnswersTitle.textContent = 'Incorrect Answers (All Groups):';
+                    testResultsDiv.appendChild(incorrectAnswersTitle);
+
+                    const incorrectAnswersList = document.createElement('ul');
+                    incorrectAnswers.forEach(error => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `Group ${error.group}, Light ${error.lightIndex}: It should be "${error.actual}"`;
+                        incorrectAnswersList.appendChild(listItem);
+                    });
+                    testResultsDiv.appendChild(incorrectAnswersList);
+                } else {
+                     const noErrorsMessage = document.createElement('p');
+                     noErrorsMessage.textContent = 'Great job! No incorrect answers.';
+                     testResultsDiv.appendChild(noErrorsMessage);
+                }
+
+
+                resetLights();
+                testDisplayArea.style.display = 'none';
+            }
+            actionButton.addEventListener('click', handleActionButtonClick);
+            testDisplayArea.style.display = 'none';
+            dynamicInputArea.style.display = 'none';
             var footer = document.createElement("footer");
             var footerContainer = document.createElement("div");
             footerContainer.classList.add("container");
-
             var copyright = document.createElement("div");
             copyright.classList.add("copyright");
             copyright.textContent = "© EyeQ 2025 all rights reserved. |";
-
             var footerNav = document.createElement("nav");
             var footerUl = document.createElement("ul");
             var footerItems = [
-                { text: "Privacy |", link: "privacy.html" },
-                { text: "Terms |", link: "terms.html" },
-                { text: "Contact", link: "contact.html" }
+                {
+                    text: "Privacy |",
+                    link: "privacy.html"
+                },
+                {
+                    text: "Terms |",
+                    link: "terms.html"
+                },
+                {
+                    text: "Contact",
+                    link: "contact.html"
+                }
             ];
-
             footerItems.forEach(function (item) {
                 var li = document.createElement("li");
                 var a = document.createElement("a");
@@ -100,7 +571,6 @@
                 li.appendChild(a);
                 footerUl.appendChild(li);
             });
-
             footerNav.appendChild(footerUl);
             footerContainer.appendChild(copyright);
             footerContainer.appendChild(footerNav);
@@ -108,7 +578,6 @@
             body.appendChild(footer);
         });
     </script>
-
 </body>
 
 </html>
