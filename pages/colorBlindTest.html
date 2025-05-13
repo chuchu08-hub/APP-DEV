@@ -23,23 +23,81 @@
         .test-container {
             text-align: center;
             margin-top: 30px;
+            margin-bottom: 40px; 
         }
 
         img {
             max-width: 300px;
             margin-bottom: 20px;
         }
+
+        .test-wrapper {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.result-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.excellent {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.good {
+    background-color: #FFD700; /* Gold */
+    color: black;
+}
+
+.moderate {
+    background-color: #FF8C00; /* Orange */
+    color: white;
+}
+
+.low {
+    background-color: #FF0000; /* Red */
+    color: white;
+}
+
+.intro-container {
+    text-align: center;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #e3f2fd; /* Light blue background */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
     </style>
 </head>
 
 <body>
 
-    <noscript>Please enable JavaScript to use this page.</noscript>
+
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            
             var body = document.body;
+            var mainContainer = document.querySelector(".container");
 
+            
             // Header
             var header = document.createElement("header");
             var headerContainer = document.createElement("div");
@@ -68,6 +126,8 @@
                 "Eye Tests": "eyeTest.html",
                 "FAQs": "FAQS.html",
                 "Articles": "articles.html"
+
+            
             };
 
             menuItems.forEach(function (item) {
@@ -94,9 +154,14 @@
             h1.textContent = "Color Blindness Test";
             mainContainer.appendChild(h1);
 
+
+            
+
             main.appendChild(mainContainer);
             body.appendChild(main); // 
 
+
+            
 
             const questions = [
                 { image: 'images/ishihara12.jpg', answer: '12', options: ['12', '8', '6', 'Nothing'] },
@@ -130,38 +195,78 @@
             const testContainer = document.createElement("div");
             testContainer.classList.add("test-container");
             mainContainer.appendChild(testContainer);
+function getFeedback(score) {
+    if (score >= 13) {
+        return { text: "Excellent! You likely have normal color vision.", class: "excellent" };
+    } else if (score >= 9) {
+        return { text: "You might have mild color vision deficiency. Consider consulting an eye specialist.", class: "good" };
+    } else if (score >= 5) {
+        return { text: "Signs of moderate color vision deficiency detected. Further testing recommended.", class: "moderate" };
+    } else {
+        return { text: "You may have significant color vision deficiency. A professional test could provide clarity.", class: "low" };
+    }
+}
 
-            function renderQuestion(container) {
-                if (current >= selectedQuestions.length) {
-                    container.innerHTML = `
-            <h2>Test Completed</h2>
-            <p>Your score: ${score}/15</p>
-            <button onclick="location.reload()">Retake Test</button>
-            `;
-                    return;
-                }
+const testWrapper = document.createElement("div");
+testWrapper.classList.add("test-wrapper"); // New container
+testContainer.appendChild(testWrapper); // Nest the existing test inside
 
-                const q = selectedQuestions[current];
-                const shuffled = q.options.filter(opt => opt !== "Nothing").sort(() => 0.5 - Math.random());
-                shuffled.push("Nothing");
+function renderQuestion(container) {
+    if (current >= selectedQuestions.length) {
+        const feedback = getFeedback(score);
+        container.innerHTML = `
+            <div class="result-container ${feedback.class}">
+                <h2>Test Completed</h2>
+                <p>Your score: ${score}/15</p>
+                <p><strong>Feedback:</strong> ${feedback.text}</p>
+                <button onclick="location.reload()">Retake Test</button>
+            </div>
+        `;
+        return;
+    }
 
-                container.innerHTML = `
-    <p><strong>Question ${current + 1} of ${selectedQuestions.length}</strong></p>
-    <img src="${q.image}" alt="Ishihara Plate">
-    <div>
-        ${shuffled.map(opt => `<button class="option-btn">${opt}</button>`).join("")}
-    </div>
-`;
+    const q = selectedQuestions[current];
+    const shuffled = q.options.filter(opt => opt !== "Nothing").sort(() => 0.5 - Math.random());
+    shuffled.push("Nothing");
+
+    
+
+    container.innerHTML = `
+        <div class="test-wrapper">
+            <p><strong>Question ${current + 1} of ${selectedQuestions.length}</strong></p>
+            <img src="${q.image}" alt="Ishihara Plate">
+            <div>
+                ${shuffled.map(opt => `<button class="option-btn">${opt}</button>`).join("")}
+            </div>
+        </div>
+    `;
+
+    container.querySelectorAll(".option-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            if (btn.textContent === q.answer) score++;
+            current++;
+            renderQuestion(container);
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const startBtn = document.getElementById("start-test-btn");
+    const intro = document.getElementById("intro-section");
+    const test = document.getElementById("test-section");
+
+    startBtn.addEventListener("click", function () {
+        intro.style.display = "none";
+        test.style.display = "block";
+
+        // If your test setup is inside a function like startLanternTest(), call it here
+        // Example:
+        // startLanternTest();
+    });
+});
+
+}
 
 
-                container.querySelectorAll(".option-btn").forEach(btn => {
-                    btn.addEventListener("click", () => {
-                        if (btn.textContent === q.answer) score++;
-                        current++;
-                        renderQuestion(container);
-                    });
-                });
-            }
 
 
             renderQuestion(testContainer);
