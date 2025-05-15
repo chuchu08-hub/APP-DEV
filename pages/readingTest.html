@@ -8,6 +8,84 @@
     <link rel="icon" type="image/png" href="images/eye-q-logo.png">
     <link rel="stylesheet" href="styles/aboutStyle.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background: #f9f9f9;
+          margin: 0;
+          padding: 20px;
+          text-align: center;
+        }
+    
+        .container {
+          padding: 20px;
+        }
+    
+        .test-box {
+          background-color: #e0f0ff;
+          padding: 20px;
+          margin: 20px auto;
+          width: 80%;
+          max-width: 500px;
+          border-radius: 10px;
+          position: relative;
+        }
+    
+        .font-size {
+          position: absolute;
+          top: -10px;
+          left: -10px;
+          background: white;
+          border: 1px solid #ccc;
+          padding: 5px 10px;
+          border-radius: 5px;
+          font-weight: bold;
+        }
+    
+        .test-text {
+          font-size: 18px;
+          margin-bottom: 20px;
+        }
+    
+        .buttons button {
+          font-size: 20px;
+          margin: 0 10px;
+          padding: 10px 20px;
+          border: none;
+          cursor: pointer;
+          border-radius: 5px;
+        }
+    
+        .buttons button:first-child {
+          background-color: #4caf50;
+          color: white;
+        }
+    
+        .buttons button:last-child {
+          background-color: #f44336;
+          color: white;
+        }
+    
+        h2 {
+          margin-top: 0;
+        }
+    
+        .instruction {
+          font-size: 14px;
+          color: #555;
+          margin-top: -10px;
+        }
+    
+        .result {
+          font-size: 24px;
+          font-weight: bold;
+        }
+    
+        .note {
+          font-size: 13px;
+          color: #777;
+        }
+      </style>
 </head>
 
 <body>
@@ -72,9 +150,112 @@
             mainContainer.appendChild(h1);
 
             
-
+    
             main.appendChild(mainContainer);
             body.appendChild(main);
+
+
+            const visionLevels = [
+      { diopter: "+5", text: "Crisp, clear, and effortless — the words appear as though they’re printed just for your eyes." },
+      { diopter: "+4.5", text: "Reading up close feels smoother, as if the letters are aligning perfectly with your focus." },
+      { diopter: "+4", text: "Text looks balanced and natural, helping your eyes relax into the details." },
+      { diopter: "+3.5", text: "Fine print begins to feel less intimidating, bringing comfort to short-distance reading." },
+      { diopter: "+3", text: "Small adjustments in clarity make a big difference — notice how your eyes respond now." },
+      { diopter: "+2.5", text: "This one’s at a tighter setting. May simulate a borderline reading task: effortless or strained?" }
+    ];
+
+    let current = 0;
+    let lastClearDiopter = null;
+
+    const container = document.createElement('div');
+    container.className = 'container';
+    document.body.appendChild(container);
+
+    const title = document.createElement('h2');
+    title.textContent = 'Near Vision Test (Text Samples)';
+    container.appendChild(title);
+
+    const instructions = document.createElement('p');
+    instructions.className = 'instruction';
+    instructions.textContent = 'Assess your visual reading clarity from a distance reading the text samples below and clicking on ✅ if it is still readable, ❌ if it is not.';
+    container.appendChild(instructions);
+
+    const testBox = document.createElement('div');
+    testBox.className = 'test-box';
+    container.appendChild(testBox);
+
+    const fontSizeLabel = document.createElement('div');
+    fontSizeLabel.className = 'font-size';
+    testBox.appendChild(fontSizeLabel);
+
+    const testText = document.createElement('p');
+    testText.className = 'test-text';
+    testBox.appendChild(testText);
+
+    const buttons = document.createElement('div');
+    buttons.className = 'buttons';
+
+    const yesButton = document.createElement('button');
+    yesButton.textContent = '✅';
+    yesButton.onclick = () => {
+      lastClearDiopter = visionLevels[current].diopter;
+      nextStep();
+    };
+
+    const noButton = document.createElement('button');
+    noButton.textContent = '❌';
+    noButton.onclick = () => {
+      showResult();
+    };
+
+    buttons.appendChild(yesButton);
+    buttons.appendChild(noButton);
+    testBox.appendChild(buttons);
+
+    function showStep(index) {
+      const level = visionLevels[index];
+      fontSizeLabel.textContent = level.diopter;
+      testText.textContent = level.text;
+    }
+
+    function nextStep() {
+      current++;
+      if (current < visionLevels.length) {
+        showStep(current);
+      } else {
+        showResult(); // End of test
+      }
+    }
+
+    function showResult() {
+      container.innerHTML = '';
+      const resultTitle = document.createElement('h2');
+      resultTitle.textContent = 'Near Vision Test (Text Samples)';
+      container.appendChild(resultTitle);
+
+      const resultInfo = document.createElement('p');
+      resultInfo.textContent = 'See your results.';
+      container.appendChild(resultInfo);
+
+      const resultBox = document.createElement('div');
+      resultBox.className = 'test-box';
+
+      const result = document.createElement('p');
+      result.className = 'result';
+      result.textContent = `Your diopter: ${lastClearDiopter || '--'}`;
+      resultBox.appendChild(result);
+
+      const note = document.createElement('p');
+      note.className = 'note';
+      note.textContent = 'Consult a professional to verify your vision needs.';
+      resultBox.appendChild(note);
+
+      container.appendChild(resultBox);
+    }
+
+    // Start
+    showStep(current);
+
 
             var footer = document.createElement("footer");
             var footerContainer = document.createElement("div");
