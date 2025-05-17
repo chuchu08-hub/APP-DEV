@@ -156,15 +156,17 @@
 
 
             const visionLevels = [
-      { diopter: "+5", text: "Crisp, clear, and effortless — the words appear as though they’re printed just for your eyes." },
-      { diopter: "+4.5", text: "Reading up close feels smoother, as if the letters are aligning perfectly with your focus." },
-      { diopter: "+4", text: "Text looks balanced and natural, helping your eyes relax into the details." },
-      { diopter: "+3.5", text: "Fine print begins to feel less intimidating, bringing comfort to short-distance reading." },
-      { diopter: "+3", text: "Small adjustments in clarity make a big difference — notice how your eyes respond now." },
-      { diopter: "+2.5", text: "This one’s at a tighter setting. May simulate a borderline reading task: effortless or strained?" }
+      { diopter: "+5", text: "Crisp, clear, and effortless — the words appear as though they’re printed just for your eyes."},
+      { diopter: "+4.5", text: "Reading up close feels smoother, as if the letters are aligning perfectly with your focus."},
+      { diopter: "+4", text: "Text looks balanced and natural, helping your eyes relax into the details."},
+      { diopter: "+3.5", text: "Fine print begins to feel less intimidating, bringing comfort to short-distance reading."},
+      { diopter: "+3", text: "Small adjustments in clarity make a big difference — notice how your eyes respond now."},
+      { diopter: "+2.5", text: "This one’s at a tighter setting. May simulate a borderline reading task: effortless or strained?"}
     ];
 
     let current = 0;
+    let startFont = 24;      // first sentence size
+    const stepDown  = 3; 
     let lastClearDiopter = null;
 
     const container = document.createElement('div');
@@ -216,6 +218,8 @@
       const level = visionLevels[index];
       fontSizeLabel.textContent = level.diopter;
       testText.textContent = level.text;
+      const size = startFont - index * stepDown;
+      testText.style.fontSize = `${size}px`;
     }
 
     function nextStep() {
