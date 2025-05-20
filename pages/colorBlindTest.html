@@ -53,27 +53,62 @@
             font-size: 18px;
             font-weight: bold;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            color: #333;
         }
 
-        .excellent {
+        .score-feedback {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .score-highlight {
+            padding: 4px 8px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .score-highlight.excellent {
             background-color: #4CAF50;
             color: white;
         }
 
-        .good {
+        .score-highlight.good {
             background-color: #FFD700;
             color: black;
         }
 
-        .moderate {
+        .score-highlight.moderate {
             background-color: #FF8C00;
             color: white;
         }
 
-        .low {
+        .score-highlight.low {
             background-color: #FF0000;
             color: white;
         }
+
+        /* Styles for the buttons (Start Test and Retake Test) */
+        .action-button { /* New class for common button styles */
+            padding: 15px 30px; /* Make it bigger */
+            font-size: 20px; /* Larger font size */
+            background-color: #007bff; /* Blue color */
+            color: white;
+            border: none;
+            border-radius: 8px; /* Slightly more rounded */
+            cursor: pointer;
+            margin-top: 20px; /* Space from content above */
+            transition: background-color 0.3s ease;
+        }
+
+        .action-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
 
         .intro-container {
             text-align: center;
@@ -166,7 +201,7 @@
                 <p style="font-size: smaller;">Answer honestly for the most accurate results.</p>
 
 
-                <button id="start-test-btn">Start Test</button>
+                <button id="start-test-btn" class="action-button">Start Test</button>
             `;
             mainContainer.appendChild(introSection);
 
@@ -220,11 +255,13 @@
                 if (current >= selectedQuestions.length) {
                     const feedback = getFeedback(score);
                     testSection.innerHTML = `
-                        <div class="result-container ${feedback.class}">
+                        <div class="result-container">
                             <h2>Test Completed</h2>
-                            <p>Your score: ${score}/15</p>
-                            <p><strong>Feedback:</strong> ${feedback.text}</p>
-                            <button onclick="location.reload()">Retake Test</button>
+                            <div class="score-feedback">
+                                <p><span class="score-highlight ${feedback.class}">Your score: ${score}/15</span></p>
+                                <p><strong>Feedback:</strong> ${feedback.text}</p>
+                            </div>
+                            <button class="action-button" onclick="location.reload()">Retake Test</button>
                         </div>
                     `;
                     return;
