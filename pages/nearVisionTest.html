@@ -81,7 +81,7 @@
       document.body.style.margin = "0";
       document.body.style.fontFamily = "Arial, sans-serif";
 
-      // Container
+      
       const container = document.createElement("div");
       container.style.maxWidth = "600px";
       container.style.margin = "20px auto";
@@ -91,13 +91,13 @@
       container.style.backgroundColor = "#fdfdfd";
       document.body.appendChild(container);
 
-      // Title
+      
       const title = document.createElement("h2");
       title.textContent = "Near Vision Test (Jaeger Eye Chart)";
       title.style.textAlign = "center";
       container.appendChild(title);
 
-      // Instructions Box
+     
       const instructions = document.createElement("div");
       instructions.style.backgroundColor = "#d9534f";
       instructions.style.color = "#fff";
@@ -114,7 +114,7 @@
   </ul>`;
       container.appendChild(instructions);
 
-      // Chart Section
+      
       const chart = document.createElement("div");
       chart.style.border = "1px solid #ccc";
       chart.style.padding = "20px";
@@ -123,7 +123,7 @@
       chart.style.textAlign = "center";
       container.appendChild(chart);
 
-      // Jaeger lines (larger to smaller)
+      
       const sampleText = "The two boys fell asleep under a large tree.";
       for (let i = 1; i <= 11; i++) {
         const line = document.createElement("div");
@@ -133,13 +133,13 @@
         chart.appendChild(line);
       }
 
-      // Button Selector
+      
       const selectTitle = document.createElement("p");
       selectTitle.textContent = "Select lowest line that patient can read correctly:";
       selectTitle.style.fontWeight = "bold";
       container.appendChild(selectTitle);
 
-      // Button Group
+      
       const buttonGroup = document.createElement("div");
       buttonGroup.style.display = "flex";
       buttonGroup.style.flexWrap = "wrap";
@@ -147,7 +147,7 @@
       buttonGroup.style.marginBottom = "20px";
       container.appendChild(buttonGroup);
 
-      // Result Box
+     
       const resultBox = document.createElement("div");
       resultBox.style.backgroundColor = "#007bff";
       resultBox.style.color = "#fff";
@@ -158,7 +158,7 @@
       resultBox.textContent = "Result: Please select a line.";
       container.appendChild(resultBox);
 
-      // Create Buttons
+      
       for (let i = 1; i <= 11; i++) {
         const btn = document.createElement("button");
         btn.textContent = `Line ${i}`;
@@ -172,7 +172,7 @@
 
         btn.addEventListener("click", () => {
           resultBox.textContent = `Result: Patient can read Line ${i}`;
-          resultBox.style.backgroundColor = "#28a745"; // green for success
+          resultBox.style.backgroundColor = "#28a745"; 
         });
 
         buttonGroup.appendChild(btn);

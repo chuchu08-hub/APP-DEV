@@ -131,7 +131,7 @@
       <section class="snellen-chart" id="chart"></section>
 
       <div class="selector-box" id="selector">
-        <!-- Buttons will be injected here -->
+        
       </div>
     </div>
 
@@ -160,7 +160,7 @@
     const resultText = document.getElementById("resultText");
 
     lines.forEach((line, index) => {
-      // Chart Line
+      
       const lineDiv = document.createElement("div");
       lineDiv.className = "line";
       const size = 4 - index * 0.25;
@@ -168,7 +168,7 @@
       lineDiv.innerHTML = `${line.replace(/ /g, "&nbsp;&nbsp;&nbsp;&nbsp;")}<span>${index + 1}</span>`;
       chart.appendChild(lineDiv);
 
-      // Selector Button
+     
       const button = document.createElement("button");
       button.className = "line-button";
       button.textContent = `Line ${index + 1}`;
