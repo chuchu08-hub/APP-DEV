@@ -262,7 +262,7 @@
             mainContainer.appendChild(h1);
             const testDescription = document.createElement("p");
             testDescription.classList.add("test-instructions");
-            testDescription.textContent = "The test consists of 10 groups of colored lights (2 to 4 lights per group) shown for three seconds. Observe the colors and their positions.";
+            testDescription.textContent = "The test consists of 5 groups of colored lights (2 to 4 lights per group) shown for three seconds. Observe the colors and their positions.";
             const startPrompt = document.createElement("p");
             startPrompt.textContent = "Click Start Test to begin.";
              const messageArea = document.createElement("div");
@@ -281,7 +281,7 @@
 
             const testProgress = document.createElement("p");
             testProgress.classList.add("test-progress");
-            testProgress.innerHTML = 'Group <span id="current-group">0</span> of <span id="total-groups">10</span>';
+            testProgress.innerHTML = 'Group <span id="current-group">0</span> of <span id="total-groups">5</span>';
             const currentGroupSpan = testProgress.querySelector('#current-group');
             const totalGroupsSpan = testProgress.querySelector('#total-groups');
             const testControls = document.createElement("div");
@@ -326,7 +326,7 @@
                 }
                 return groups;
             }
-            const totalGroups = 10;
+            const totalGroups = 5;
             const minLightsPerGroup = 2;
             const maxLightsPerGroup = 4;
             const testGroups = generateTestGroups(totalGroups, minLightsPerGroup, maxLightsPerGroup);
@@ -350,7 +350,7 @@
             function handleDynamicColorButtonClick(event) {
                 const clickedButton = event.target;
                 const selectedColor = clickedButton.dataset.color;
-                const lightIndex = parseInt(clickedButton.dataset.lightIndex, 10);
+                const lightIndex = parseInt(clickedButton.dataset.lightIndex, 5);
                 const parentInputGroup = clickedButton.parentElement;
                 parentInputGroup.querySelectorAll('.color-button').forEach(btn => {
                     btn.classList.remove('is-selected');
