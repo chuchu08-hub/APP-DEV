@@ -456,7 +456,7 @@
             <div class="slide active" data-eye="left">
                 <img src="images/cover-left-eye.png" alt="Illustration: cover your left eye" class="hero">
                 <h1>Eyes ready?</h1>
-                <p>Cover your **right** eye.</p>
+                <p>Cover your right eye.</p>
             </div>
 
             <div class="slide" data-eye="left">
@@ -535,6 +535,16 @@
             <button class="test-button" id="nextTestShapeButton">Next Shape</button>
         </div>
 
+        <div id="resultsSection" class="section">
+            <h1>Eye Acuity Test Results</h1>
+            <div id="leftEyeResult" class="message-box"></div>
+            <div id="rightEyeResult" class="message-box"></div>
+            <div id="overallResult" class="message-box"></div>
+            <p>Please note: This is a basic test and should not replace a professional eye examination. If you have
+                concerns about your vision, consult an eye care specialist.</p>
+            <button id="restartTest" class="action-button primary-button">Restart Test</button>
+        </div>
+
     </div>
 
     <script>
@@ -542,16 +552,20 @@
         const instructionSectionLeft = document.getElementById('instructionSectionLeft');
         const instructionSectionRight = document.getElementById('instructionSectionRight');
         const testContent = document.getElementById('testContent');
+        const resultsSection = document.getElementById('resultsSection');
 
         const startLeftEyeTestBtn = document.getElementById('startLeftEyeTest');
         const startRightEyeTestBtn = document.getElementById('startRightEyeTest');
         const closeTestBtn = document.getElementById('closeTestBtn');
         const testEyeTitle = document.getElementById('testEyeTitle');
+        const restartTestBtn = document.getElementById('restartTest');
 
         let currentEye = '';
         let currentInstructionIdx = 0;
         let leftEyeTested = false;
         let rightEyeTested = false;
+        let leftEyeScore = 0;
+        let rightEyeScore = 0;
 
         const landoltCElement = document.getElementById('landoltC');
         const selectionRingElement = document.getElementById('selectionRing');
@@ -727,8 +741,10 @@
 
             if (currentEye === 'left') {
                 leftEyeTested = true;
+                leftEyeScore = score;
             } else {
                 rightEyeTested = true;
+                rightEyeScore = score;
             }
 
             landoltCElement.className = 'landolt-c';
@@ -737,8 +753,7 @@
             landoltCElement.style.borderWidth = '0px';
 
             if (leftEyeTested && rightEyeTested) {
-                nextTestShapeButton.textContent = 'Restart Test';
-                nextTestShapeButton.style.display = 'inline-block';
+                showResults();
             } else {
                 const nextEye = currentEye === 'left' ? 'Right' : 'Left';
                 nextTestShapeButton.textContent = `Test ${nextEye} Eye`;
@@ -746,12 +761,38 @@
             }
         }
 
+        function showResults() {
+            document.getElementById('leftEyeResult').textContent = `Left Eye Score: ${leftEyeScore} out of ${maxAttempts}`;
+            document.getElementById('leftEyeResult').className = 'message-box ' + (leftEyeScore > maxAttempts / 2 ? 'correct' : 'incorrect');
+
+            document.getElementById('rightEyeResult').textContent = `Right Eye Score: ${rightEyeScore} out of ${maxAttempts}`;
+            document.getElementById('rightEyeResult').className = 'message-box ' + (rightEyeScore > maxAttempts / 2 ? 'correct' : 'incorrect');
+
+            const overallResultBox = document.getElementById('overallResult');
+            let overallMessage = '';
+            if (leftEyeScore >= maxAttempts * 0.8 && rightEyeScore >= maxAttempts * 0.8) {
+                overallMessage = "Your visual acuity in both eyes seems to be excellent! You're seeing very clearly.";
+                overallResultBox.className = 'message-box correct';
+            } else if (leftEyeScore >= maxAttempts * 0.6 && rightEyeScore >= maxAttempts * 0.6) {
+                overallMessage = "Your visual acuity in both eyes seems good. You're performing well, but a slight improvement might be possible.";
+                overallResultBox.className = 'message-box correct';
+            } else if (leftEyeScore >= maxAttempts * 0.4 || rightEyeScore >= maxAttempts * 0.4) {
+                overallMessage = "Your visual acuity in one or both eyes appears fair. Consider consulting an eye care professional for a more thorough check-up.";
+                overallResultBox.className = 'message-box incorrect';
+            } else {
+                overallMessage = "Your visual acuity in both eyes appears to be low. It's highly recommended to consult an eye care professional for a comprehensive examination.";
+                overallResultBox.className = 'message-box incorrect';
+            }
+            overallResultBox.innerHTML = overallMessage;
+
+
+            showSection('resultsSection');
+        }
+
         function handleNextTestShapeButtonClick() {
             if (attempts >= maxAttempts) {
                 if (leftEyeTested && rightEyeTested) {
-                    leftEyeTested = false;
-                    rightEyeTested = false;
-                    showSection('mainMenuSection');
+                    showResults(); 
                 } else {
                     if (currentEye === 'left') {
                         showSection('instructionSectionRight');
@@ -778,9 +819,21 @@
 
         closeTestBtn.addEventListener('click', () => {
             showSection('mainMenuSection');
+            leftEyeTested = false;
+            rightEyeTested = false;
+            leftEyeScore = 0;
+            rightEyeScore = 0;
         });
 
         nextTestShapeButton.addEventListener('click', handleNextTestShapeButtonClick);
+
+        restartTestBtn.addEventListener('click', () => {
+            leftEyeTested = false;
+            rightEyeTested = false;
+            leftEyeScore = 0;
+            rightEyeScore = 0;
+            showSection('mainMenuSection');
+        });
 
         showSection('mainMenuSection');
     </script>
