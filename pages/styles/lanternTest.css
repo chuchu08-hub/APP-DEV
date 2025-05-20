@@ -111,7 +111,7 @@ header nav ul li a:hover {
 }
 
 h2 {
-    color: #551691; /* Deep purple */
+    color: #551691; 
     font-size: 3rem;
     font-style: italic;
 }
@@ -161,8 +161,8 @@ h2 {
 }
 
 .test-card {
-    text-decoration: none; /* Removes underline */
-    color: inherit; /* Keeps text color unchanged */
+    text-decoration: none; 
+    color: inherit; 
     display: block;
     background-color: white;
     border-radius: 8px;
@@ -174,7 +174,6 @@ h2 {
 
 .test-card:hover {
     transform: scale(1.05); /* Slight zoom effect */
-}
 .test-card h3 {
     font-size: 1.5rem;
     color: #555;
@@ -194,7 +193,7 @@ h2 {
     color: white;
     padding: 60px 0;
     text-align: center;
-    margin-top: 40px; /* Adjust as needed for more spacing */
+    margin-top: 40px; 
     
 }
 
@@ -251,7 +250,7 @@ footer .container {
 }
 
 .tests-section h2 {
-    color: #551691; /* Deep purple */
+    color: #551691; 
     font-size: 3rem;
     font-style: italic;
 }
@@ -343,4 +342,5 @@ footer .container {
             height: 300px;
         }
     }
+}
 }

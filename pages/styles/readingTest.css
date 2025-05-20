@@ -1,0 +1,475 @@
+/*body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  .test-box {
+    background-color: #e0f0ff;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    position: relative;
+  }
+
+  .font-size {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  .test-text {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .buttons button {
+    font-size: 20px;
+    margin: 0 10px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .buttons button:first-child {
+    background-color: #4caf50;
+    color: white;
+  }
+
+  .buttons button:last-child {
+    background-color: #f44336;
+    color: white;
+  }
+
+  h2 {
+    margin-top: 0;
+  }
+
+  .instruction {
+    font-size: 14px;
+    color: #555;
+    margin-top: -10px;
+  }
+
+  .result {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .note {
+    font-size: 13px;
+    color: #777;
+  }
+    */
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f9f9f9;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+  }
+  
+  html {
+      height: 100%;
+  }
+  
+  .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+  }
+  
+  header {
+      background: linear-gradient(180deg, #6a1b9a 0%, #4a148c 100%);
+      color: white;
+      padding: 20px 0;
+  }
+  
+  header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  
+  header .logo img {
+      width: 60px;
+      height: auto;
+  }
+  
+  header nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+  }
+  
+  header nav ul li {
+      margin-left: 20px;
+  }
+  
+  header nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: color 0.3s ease;
+  }
+  
+  header nav ul li a:hover {
+      color: #f0f0f0;
+  }
+  
+  /* Hero section (not directly used in this HTML, but kept for context) */
+  .hero {
+      background: linear-gradient(135deg, #8e24aa 0%, #5c6bc0 100%);
+      color: white;
+      padding: 80px 0;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+  }
+  
+  .hero .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  
+  .hero-text {
+      flex: 1;
+      padding-right: 40px;
+  }
+  
+  .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      line-height: 1.2;
+      font-weight: bold;
+  }
+  
+  .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      line-height: 1.8;
+      opacity: 0.8;
+  }
+  
+  .hero-image {
+      flex: 1;
+      text-align: center;
+  }
+  
+  .hero-image img {
+      max-width: 80%;
+      height: auto;
+  }
+  
+  .arrow-navigation {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 20px;
+  }
+  
+  .arrow-navigation button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+  }
+  
+  .arrow-navigation button:hover {
+      opacity: 1;
+  }
+  
+  /* Tests section (not directly used in this HTML, but kept for context) */
+  .tests-section {
+      padding: 60px 0;
+      text-align: center;
+      background-color: #f9f9f9;
+  }
+  
+  .tests-section h2 {
+      font-size: 2.2rem;
+      color: #333;
+      margin-bottom: 40px;
+      font-weight: bold;
+  }
+  
+  .tests-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 20px;
+  }
+  
+  .test-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      text-align: center;
+  }
+  
+  .test-card h3 {
+      font-size: 1.5rem;
+      color: #555;
+      margin-bottom: 15px;
+      font-weight: bold;
+  }
+  
+  .test-card img {
+      max-width: 60%;
+      height: auto;
+      margin-bottom: 20px;
+      opacity: 0.8;
+  }
+  
+  /* CTA banner (not directly used in this HTML, but kept for context) */
+  .cta-banner {
+      background: linear-gradient(90deg, #673ab7 0%, #3f51b5 100%);
+      color: white;
+      padding: 60px 0;
+      text-align: center;
+  }
+  
+  .cta-banner p {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 0;
+      line-height: 1.4;
+  }
+  
+  footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px 0;
+      font-size: 0.8rem;
+      margin-top: auto;
+  }
+  
+  footer nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+  }
+  
+  footer nav ul li {
+      margin-left: 15px;
+  }
+  
+  footer nav ul li a {
+      text-decoration: none;
+      color: #eee;
+      transition: color 0.3s ease;
+  }
+  
+  footer nav ul li a:hover {
+      color: #fff;
+  }
+  
+  .copyright {
+      opacity: 0.7;
+      padding-right: 0px;
+      margin-left: 400px;
+      text-align: left;
+  }
+  
+  footer .container {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 10px 20px;
+  }
+  
+  p {
+      font-size: 1.5rem;
+  }
+  
+  h1 {
+      font-size: 3rem;
+      color: #551691;
+      font-style: italic;
+  }
+  
+  /* Specific styles for the reading test */
+  .test-box {
+      background-color: #e0f0ff;
+      padding: 20px;
+      margin: 20px auto;
+      width: 80%;
+      max-width: 500px;
+      border-radius: 10px;
+      position: relative;
+      text-align: center; /* Center content within the box */
+  }
+  
+  .font-size {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 14px; /* Adjust font size for the diopter label */
+  }
+  
+  .test-text {
+      font-size: 18px; /* Default text size, will be overwritten by JS for test */
+      margin-bottom: 20px;
+      line-height: 1.5; /* Improve readability */
+  }
+  
+  .buttons button {
+      font-size: 20px;
+      margin: 0 10px;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+  }
+  
+  .buttons button:first-child {
+      background-color: #4caf50; /* Green */
+      color: white;
+  }
+  
+  .buttons button:last-child {
+      background-color: #f44336; /* Red */
+      color: white;
+  }
+  
+  .buttons button:hover {
+      opacity: 0.9;
+  }
+  
+  h2 {
+      margin-top: 0;
+      font-size: 2rem; /* Consistent heading size */
+      color: #333;
+  }
+  
+  .instruction {
+      font-size: 1rem; /* Adjust instruction font size */
+      color: #555;
+      margin-top: -10px;
+      margin-bottom: 20px; /* Space before the test box */
+  }
+  
+  .result {
+      font-size: 24px;
+      font-weight: bold;
+      color: #4a148c; /* EyeQ brand color for results */
+  }
+  
+  .note {
+      font-size: 0.9rem; 
+      color: #777;
+      margin-top: 15px;
+  }
+  
+  
+  @media (max-width: 768px) {
+      .hero .container {
+          flex-direction: column;
+          text-align: center;
+      }
+  
+      .hero-text {
+          padding-right: 0;
+          margin-bottom: 40px;
+      }
+  
+      .hero h1 {
+          font-size: 2.5rem;
+      }
+  
+      .hero-image img {
+          max-width: 100%;
+      }
+  
+      .tests-grid {
+          grid-template-columns: 1fr;
+      }
+  
+      .cta-banner p {
+          font-size: 1.6rem;
+          padding: 0 20px;
+      }
+  
+      header nav ul {
+          flex-direction: column;
+          align-items: flex-start;
+          margin-top: 10px;
+      }
+  
+      header nav ul li {
+          margin-left: 0;
+          margin-bottom: 10px;
+      }
+  
+      footer .container {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+      }
+  
+      footer nav ul {
+          margin-top: 10px;
+          flex-direction: column;
+          align-items: center;
+      }
+  
+      footer nav ul li {
+          margin-left: 0;
+          margin-bottom: 5px;
+      }
+  
+      .copyright {
+          margin-left: 0;
+          text-align: center;
+          padding-bottom: 10px;
+      }
+  
+
+      .test-box {
+          width: 95%;
+          margin: 20px auto;
+          padding: 15px;
+      }
+  
+      .buttons button {
+          font-size: 18px;
+          padding: 8px 15px;
+          margin: 0 5px;
+      }
+  
+      .test-text {
+          font-size: 16px;
+      }
+  }
