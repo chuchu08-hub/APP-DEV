@@ -8,211 +8,268 @@
     <link rel="icon" type="image/png" href="images/eye-q-logo.png">
     <link rel="stylesheet" href="styles/aboutStyle.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-</head>
-<style>
-    body {
-        font-family: 'Poppins', sans-serif;
-    }
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
 
-    .lantern-game-area,
-    .game-board,
-    .game-light,
-    .is-showing-sequence,
-    .lantern-display-area,
-    .answer-controls,
-    .light-pair,
-    .test-light {
-        display: none !important;
-    }
+        .lantern-game-area,
+        .game-board,
+        .game-light,
+        .is-showing-sequence,
+        .lantern-display-area,
+        .answer-controls,
+        .light-pair,
+        .test-light {
+            display: none !important;
+        }
 
-    .test-display-area {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 150px;
-        margin-bottom: 20px;
-    }
+        .test-display-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 150px;
+            margin-bottom: 20px;
+        }
 
-    .display-row {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 15px;
-        padding: 10px;
-        border-radius: 8px;
-    }
+        .display-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            border-radius: 8px;
+        }
 
-    .display-light {
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        border: 4px solid #555;
-        background-color: #ccc;
-        box-sizing: border-box;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.8em;
-        font-weight: bold;
-        color: #333;
-        text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
-    }
+        .display-light {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 4px solid #555;
+            background-color: #ccc;
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+        }
 
-    .display-light .light-number {
-        z-index: 1;
-    }
+        .display-light .light-number {
+            z-index: 1;
+        }
 
-    .display-light.is-red {
-        background-color: #ff0000;
-        border-color: #ff0000;
-        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-    }
+        .display-light.is-red {
+            background-color: #ff0000;
+            border-color: #ff0000;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
 
-    .display-light.is-green {
-        background-color: #00ff00;
-        border-color: #00ff00;
-        box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-    }
+        .display-light.is-green {
+            background-color: #00ff00;
+            border-color: #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
 
-    .display-light.is-yellow {
-        background-color: #ffff00;
-        border-color: #ffff00;
-        box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
-    }
+        .display-light.is-yellow {
+            background-color: #ffff00;
+            border-color: #ffff00;
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+        }
 
-    .display-light.is-off {
-        background-color: #ccc;
-        border-color: #555;
-        box-shadow: none;
-    }
+        .display-light.is-off {
+            background-color: #ccc;
+            border-color: #555;
+            box-shadow: none;
+        }
 
-    #dynamic-input-area {
-        text-align: center;
-        margin-top: 20px;
-        padding: 15px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background-color: #f9f9f9;
-    }
+        #dynamic-input-area {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
 
-    #dynamic-input-area .input-group {
-        margin-bottom: 15px;
-        font-size: 1.1em;
-    }
+        #dynamic-input-area .input-group {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
 
-    #dynamic-input-area .input-group span {
-        margin-right: 10px;
-        font-weight: bold;
-    }
+        #dynamic-input-area .input-group span {
+            margin-right: 10px;
+            font-weight: bold;
+        }
 
-    #dynamic-input-area .color-button {
-        padding: 8px 15px;
-        margin: 0 5px;
-        font-size: 0.9em;
-        cursor: pointer;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        background-color: #eee;
-        transition: background-color 0.1s ease, border-color 0.1s ease;
-    }
+        #dynamic-input-area .color-button {
+            padding: 8px 15px;
+            margin: 0 5px;
+            font-size: 0.9em;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #eee;
+            transition: background-color 0.1s ease, border-color 0.1s ease;
+        }
 
-    #dynamic-input-area .color-button.is-selected {
-        background-color: #a0d0ff;
-        border-color: #007bff;
-        font-weight: bold;
-    }
+        #dynamic-input-area .color-button.is-selected {
+            background-color: #a0d0ff;
+            border-color: #007bff;
+            font-weight: bold;
+        }
 
-    #dynamic-input-area .color-button.is-selected[data-color="red"] {
-        background-color: #ffcccc;
-        border-color: #ff0000;
-    }
+        #dynamic-input-area .color-button.is-selected[data-color="red"] {
+            background-color: #ffcccc;
+            border-color: #ff0000;
+        }
 
-    #dynamic-input-area .color-button.is-selected[data-color="green"] {
-        background-color: #ccffcc;
-        border-color: #00ff00;
-    }
+        #dynamic-input-area .color-button.is-selected[data-color="green"] {
+            background-color: #ccffcc;
+            border-color: #00ff00;
+        }
 
-    #dynamic-input-area .color-button.is-selected[data-color="yellow"] {
-        background-color: #ffffcc;
-        border-color: #ffff00;
-    }
+        #dynamic-input-area .color-button.is-selected[data-color="yellow"] {
+            background-color: #ffffcc;
+            border-color: #ffff00;
+        }
 
-    #dynamic-input-area .color-button.is-selected[data-color="invalid"] {
-        background-color: #eee;
-        border-color: #555;
-        font-weight: bold;
-    }
+        #dynamic-input-area .color-button.is-selected[data-color="invalid"] {
+            background-color: #eee;
+            border-color: #555;
+            font-weight: bold;
+        }
 
-    .test-controls {
-        text-align: center;
-        margin-top: 20px;
-    }
+        .test-controls {
+            text-align: center;
+            margin-top: 20px;
+        }
 
-    .test-button {
-        padding: 10px 20px;
-        font-size: 1.1em;
-        cursor: pointer;
-    }
+        .test-button {
+            padding: 10px 20px;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
 
-    .test-progress {
-        text-align: center;
-        font-size: 1.1em;
-        margin-top: 10px;
-    }
+        .test-progress {
+            text-align: center;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
 
-    .message-area {
-        text-align: center;
-        font-size: 1.2em;
-        min-height: 1.5em;
-        margin-bottom: 10px;
-    }
+        .message-area {
+            text-align: center;
+            font-size: 1.2em;
+            min-height: 1.5em;
+            margin-bottom: 10px;
+        }
 
-     .message-area ul {
-        list-style: none;
-        padding: 0;
-        margin-top: 10px;
-     }
+        .message-area ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
 
-     .message-area li {
-        margin-bottom: 5px;
-        font-size: 0.9em;
-     }
+        .message-area li {
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
 
 
-    .test-results {
-        text-align: center;
-        margin-top: 30px;
-    }
+        .test-results {
+            text-align: center;
+            margin-top: 30px;
+        }
 
-    .retake-button {
-        padding: 10px 20px;
-        font-size: 1em;
-        cursor: pointer;
-        margin-top: 15px;
-    }
+        .retake-button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 15px;
+        }
 
-    .test-results ul {
-        list-style: none;
-        padding: 0;
-        text-align: left;
-        margin-top: 20px;
-        max-width: 500px;
-        margin-left: auto;
-        margin-right: auto;
-    }
+        .test-results ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin-top: 20px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-    .test-results li {
-        margin-bottom: 8px;
-        padding-bottom: 8px;
-        border-bottom: 1px dashed #ccc;
-        font-size: 0.95em;
-    }
+        .test-results li:last-child {
+            border-bottom: none;
+        }
 
-    .test-results li:last-child {
-        border-bottom: none;
-    }
-</style>
+        .excellent-score {
+            color: green;
+            font-weight: bold;
+        }
+
+        .good-score {
+            color: darkgoldenrod;
+            font-weight: bold;
+        }
+
+        .moderate-score {
+            color: orange;
+            font-weight: bold;
+        }
+
+        .low-score {
+            color: red;
+            font-weight: bold;
+        }
+
+        .intro-container,
+        .test-wrapper,
+        .result-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .intro-container {
+            background-color: #e3f2fd;
+        }
+
+        .test-wrapper {
+            background-color: #f9f9f9;
+        }
+
+        .result-container {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .excellent-score-bg {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .good-score-bg {
+            background-color: #FFD700;
+            color: black;
+        }
+
+        .moderate-score-bg {
+            background-color: #FF8C00;
+            color: white;
+        }
+
+        .low-score-bg {
+            background-color: #FF0000;
+            color: white;
+        }
+    </style>
 
 <body>
 
@@ -254,29 +311,49 @@
             headerContainer.appendChild(nav);
             header.appendChild(headerContainer);
             body.appendChild(header);
+
+            var mainWrapper = document.createElement("div");
+            mainWrapper.classList.add("container");
             var main = document.createElement("main");
-            var mainContainer = document.createElement("div");
-            mainContainer.classList.add("container");
+
             var h1 = document.createElement("h1");
             h1.textContent = "Lantern Color Recall Test";
-            mainContainer.appendChild(h1);
-            const testDescription = document.createElement("p");
-            testDescription.classList.add("test-instructions");
-            testDescription.textContent = "The test consists of 5 groups of colored lights (2 to 4 lights per group) shown for three seconds. Observe the colors and their positions.";
-            const startPrompt = document.createElement("p");
-            startPrompt.textContent = "Click Start Test to begin.";
-             const messageArea = document.createElement("div");
+            main.appendChild(h1);
+
+            const introSection = document.createElement("section");
+            introSection.id = "intro-section";
+            introSection.classList.add("intro-container");
+            introSection.innerHTML = `
+                <h2>Instructions</h2>
+                <li>The test consists of 5 groups of colored lights (2 to 4 lights per group) shown for three seconds. Observe the colors and their positions.</li>
+                <li>Click Start Test to begin.</li>
+                <button id="start-test-btn" class="test-button">Start Test</button>
+            `;
+            main.appendChild(introSection);
+
+
+            const testSection = document.createElement("section");
+            testSection.id = "test-section";
+            testSection.classList.add("test-wrapper");
+            testSection.style.display = "none";
+            main.appendChild(testSection);
+
+            const messageArea = document.createElement("div");
             messageArea.classList.add("message-area");
             messageArea.textContent = "";
+            testSection.appendChild(messageArea);
+
             const testDisplayArea = document.createElement("div");
             testDisplayArea.classList.add("test-display-area");
             const displayRow = document.createElement("div");
             displayRow.classList.add("display-row");
             testDisplayArea.appendChild(displayRow);
+            testSection.appendChild(testDisplayArea);
 
             const dynamicInputArea = document.createElement("div");
             dynamicInputArea.id = "dynamic-input-area";
             dynamicInputArea.style.display = "none";
+            testSection.appendChild(dynamicInputArea);
 
 
             const testProgress = document.createElement("p");
@@ -284,6 +361,9 @@
             testProgress.innerHTML = 'Group <span id="current-group">0</span> of <span id="total-groups">5</span>';
             const currentGroupSpan = testProgress.querySelector('#current-group');
             const totalGroupsSpan = testProgress.querySelector('#total-groups');
+            testSection.appendChild(testProgress);
+
+
             const testControls = document.createElement("div");
             testControls.classList.add("test-controls");
             const actionButton = document.createElement("button");
@@ -291,27 +371,28 @@
             actionButton.classList.add("test-button");
             actionButton.textContent = "Start Test";
             testControls.appendChild(actionButton);
+            testSection.appendChild(testControls);
+
+
             const testResultsDiv = document.createElement("div");
             testResultsDiv.id = "test-results";
-            testResultsDiv.classList.add("test-results");
+            testResultsDiv.classList.add("result-container");
             testResultsDiv.style.display = "none";
             testResultsDiv.innerHTML = `
-                <h3>Test Complete!</h3>
+                <h2>Test Complete!</h2>
                 <p>Your score: <span id="final-score"></span> correct out of <span id="total-possible-score"></span>.</p>
+                <p id="test-feedback"></p>
                 <button onclick="location.reload()" class="retake-button">Retake Test</button>
             `;
             const finalScoreSpan = testResultsDiv.querySelector('#final-score');
             const totalPossibleScoreSpan = testResultsDiv.querySelector('#total-possible-score');
-            mainContainer.appendChild(testDescription);
-            mainContainer.appendChild(startPrompt);
-            mainContainer.appendChild(messageArea);
-            mainContainer.appendChild(testDisplayArea);
-            mainContainer.appendChild(dynamicInputArea);
-            mainContainer.appendChild(testProgress);
-            mainContainer.appendChild(testControls);
-            mainContainer.appendChild(testResultsDiv);
-            main.appendChild(mainContainer);
-            body.appendChild(main);
+            const testFeedbackP = testResultsDiv.querySelector('#test-feedback');
+            main.appendChild(testResultsDiv);
+
+
+            mainWrapper.appendChild(main);
+            body.appendChild(mainWrapper);
+
 
             function generateTestGroups(numGroups, minLights, maxLights) {
                 const colors = ['red', 'green', 'yellow'];
@@ -350,7 +431,7 @@
             function handleDynamicColorButtonClick(event) {
                 const clickedButton = event.target;
                 const selectedColor = clickedButton.dataset.color;
-                const lightIndex = parseInt(clickedButton.dataset.lightIndex, 5);
+                const lightIndex = parseInt(clickedButton.dataset.lightIndex, 10);
                 const parentInputGroup = clickedButton.parentElement;
                 parentInputGroup.querySelectorAll('.color-button').forEach(btn => {
                     btn.classList.remove('is-selected');
@@ -418,13 +499,26 @@
                 }, displayDuration);
             }
 
+            function getFeedback(scorePercentage) {
+                if (scorePercentage >= 90) {
+                    return { text: "Excellent! Your color recall is outstanding.", class: "excellent-score-bg" };
+                } else if (scorePercentage >= 70) {
+                    return { text: "Good job! You have solid color recall.", class: "good-score-bg" };
+                } else if (scorePercentage >= 50) {
+                    return { text: "You have moderate color recall. Practice might help improve it.", class: "moderate-score-bg" };
+                } else {
+                    return { text: "Your color recall might need some improvement. Consider practicing more.", class: "low-score-bg" };
+                }
+            }
+
+
             function handleActionButtonClick() {
                 if (isShowingGroup) {
                     return;
                 }
                 if (actionButton.textContent === 'Start Test') {
-                    testDescription.style.display = 'none';
-                    startPrompt.style.display = 'none';
+                    introSection.style.display = 'none';
+                    testSection.style.display = 'block';
                     displayGroup(currentGroupIndex);
                     currentGroupIndex++;
                 } else if (actionButton.textContent === 'Submit Group') {
@@ -449,17 +543,17 @@
                             light.style.border = '4px solid lightgreen';
                             light.style.boxShadow = '0 0 10px 5px rgba(0, 255, 0, 0.7)';
                         } else {
-                             incorrectAnswers.push({
-                                 group: currentGroupNumber,
-                                 lightIndex: index + 1,
-                                 actual: actualColors[index],
-                                 user: userInputColors[index]
-                             });
-                             currentGroupIncorrectAnswers.push({
-                                 lightIndex: index + 1,
-                                 actual: actualColors[index],
-                                 user: userInputColors[index]
-                             });
+                            incorrectAnswers.push({
+                                group: currentGroupNumber,
+                                lightIndex: index + 1,
+                                actual: actualColors[index],
+                                user: userInputColors[index]
+                            });
+                            currentGroupIncorrectAnswers.push({
+                                lightIndex: index + 1,
+                                actual: actualColors[index],
+                                user: userInputColors[index]
+                            });
 
                             light.style.border = '4px solid pink';
                             light.style.boxShadow = '0 0 10px 5px rgba(255, 0, 0, 0.7)';
@@ -472,12 +566,12 @@
                     messageArea.textContent = `Group ${currentGroupNumber} Score: ${groupScore}/${currentGroupActualColors.length}. Total Score: ${totalScore}.`;
 
                     if (currentGroupIncorrectAnswers.length > 0) {
-                         const errorsList = currentGroupIncorrectAnswers.map(error => {
-                             const userDisplay = (error.user === null) ? 'None' : `${error.user}`;
-                             return `Light ${error.lightIndex}: You answered, "${userDisplay}", the answer is "${error.actual}"`;
-                         }).join('<br>');
+                        const errorsList = currentGroupIncorrectAnswers.map(error => {
+                            const userDisplay = (error.user === null) ? 'None' : `${error.user}`;
+                            return `Light ${error.lightIndex}: You answered, "${userDisplay}", the answer is "${error.actual}"`;
+                        }).join('<br>');
 
-                         messageArea.innerHTML += `<br>Incorrect<br>${errorsList}`;
+                        messageArea.innerHTML += `<br>Incorrect<br>${errorsList}`;
                     } else {
                         messageArea.innerHTML += `<br>All correct in this group!`;
                     }
@@ -501,14 +595,16 @@
             }
 
             function endTest() {
-                testDescription.style.display = 'none';
-                startPrompt.style.display = 'none';
+                introSection.style.display = 'none';
+                testSection.style.display = 'none';
                 messageArea.style.display = 'none';
                 testDisplayArea.style.display = 'none';
                 dynamicInputArea.style.display = 'none';
                 testProgress.style.display = 'none';
                 testControls.style.display = 'none';
+
                 testResultsDiv.style.display = 'block';
+
                 let totalPossibleScore = 0;
                 testGroups.forEach(group => {
                     totalPossibleScore += group.length;
@@ -516,24 +612,10 @@
                 if (finalScoreSpan) finalScoreSpan.textContent = totalScore;
                 if (totalPossibleScoreSpan) totalPossibleScoreSpan.textContent = totalPossibleScore;
 
-                 if (incorrectAnswers.length > 0) {
-                    const incorrectAnswersTitle = document.createElement('h4');
-                    incorrectAnswersTitle.textContent = 'Incorrect Answers (All Groups):';
-                    testResultsDiv.appendChild(incorrectAnswersTitle);
-
-                    const incorrectAnswersList = document.createElement('ul');
-                    incorrectAnswers.forEach(error => {
-                        const listItem = document.createElement('li');
-                        listItem.textContent = `Group ${error.group}, Light ${error.lightIndex}: It should be "${error.actual}"`;
-                        incorrectAnswersList.appendChild(listItem);
-                    });
-                    testResultsDiv.appendChild(incorrectAnswersList);
-                } else {
-                     const noErrorsMessage = document.createElement('p');
-                     noErrorsMessage.textContent = 'Great job! No incorrect answers.';
-                     testResultsDiv.appendChild(noErrorsMessage);
-                }
-
+                const scorePercentage = (totalScore / totalPossibleScore) * 100;
+                const feedback = getFeedback(scorePercentage);
+                testFeedbackP.textContent = `Overall: ${feedback.text}`;
+                testResultsDiv.classList.add(feedback.class);
 
                 resetLights();
                 testDisplayArea.style.display = 'none';
@@ -576,6 +658,15 @@
             footerContainer.appendChild(footerNav);
             footer.appendChild(footerContainer);
             body.appendChild(footer);
+
+            const startTestBtn = document.getElementById("start-test-btn");
+            if (startTestBtn) {
+                startTestBtn.addEventListener("click", function () {
+                    introSection.style.display = "none";
+                    testSection.style.display = "block";
+                    handleActionButtonClick();
+                });
+            }
         });
     </script>
 </body>
