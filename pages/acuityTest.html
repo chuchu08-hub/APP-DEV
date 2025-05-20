@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acuity Test - Right Eye</title>
+    <title>Eye Acuity Test</title>
     <style>
         :root {
             --bg: #eef3f9;
@@ -42,6 +42,16 @@
             overflow: hidden;
         }
 
+        .section {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .section.active {
+            display: flex;
+        }
+
         .slide {
             display: none;
             flex-direction: column;
@@ -59,13 +69,13 @@
             margin-bottom: 2.5rem;
         }
 
-        .slide h1 {
+        h1 {
             font-size: 1.8rem;
             font-weight: 600;
             color: var(--text);
         }
 
-        .slide p {
+        p {
             font-size: 1.2rem;
             color: var(--sub);
             margin: .6rem 0 2.5rem;
@@ -90,13 +100,13 @@
             opacity: 1;
         }
 
-        #instructionButtonContainer {
+        .button-container {
             display: flex;
             justify-content: center;
             gap: 1rem;
         }
 
-        .instruction-button {
+        .action-button {
             padding: .8rem 2rem;
             font-size: 1rem;
             font-weight: 600;
@@ -108,24 +118,23 @@
             color: var(--primary);
         }
 
-        .instruction-button:hover {
+        .action-button:hover {
             background: var(--primary);
             color: #fff;
         }
 
-        .start-test-btn {
+        .primary-button {
             background: var(--primary);
             color: white;
             border: 2px solid var(--primary);
         }
 
-        .start-test-btn:hover {
+        .primary-button:hover {
             background: #0056b3;
             border-color: #0056b3;
         }
 
         #testContent {
-            display: none;
             flex-direction: column;
             align-items: center;
             text-align: left;
@@ -333,14 +342,6 @@
             border: 1px solid #fca5a5;
         }
 
-        .test-buttons-container {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            width: 100%;
-        }
-
         .test-button {
             background-color: #2563eb;
             color: white;
@@ -350,22 +351,13 @@
             font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
+            margin-top: 1.5rem;
             transition: background-color 0.2s ease-in-out;
             display: none;
-            flex-grow: 1;
-            max-width: 48%;
         }
 
         .test-button:hover {
             background-color: #1d4ed8;
-        }
-
-        .test-button.secondary {
-            background-color: #64748b;
-        }
-
-        .test-button.secondary:hover {
-            background-color: #475569;
         }
 
         @media (max-width: 600px) {
@@ -374,12 +366,18 @@
                 margin: 1rem;
             }
 
-            .slide h1,
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 0.875rem;
+            }
+
             .test-header h1 {
                 font-size: 1.25rem;
             }
 
-            .slide p,
             .test-instructions {
                 font-size: 0.875rem;
             }
@@ -445,20 +443,29 @@
 <body>
 
     <div class="wrapper">
-        <div id="instructionSection">
-            <div class="slide active" id="s0">
-                <img src="images/cover-left-eye.png" alt="Illustration: cover your right eye" class="hero">
+        <div id="mainMenuSection" class="section active">
+            <h1>Choose Your Eye Test</h1>
+            <p>Select which eye you'd like to test first.</p>
+            <div class="button-container">
+                <button id="startLeftEyeTest" class="action-button primary-button">Test Left Eye</button>
+                <button id="startRightEyeTest" class="action-button primary-button">Test Right Eye</button>
+            </div>
+        </div>
+
+        <div id="instructionSectionLeft" class="section">
+            <div class="slide active" data-eye="left">
+                <img src="images/cover-left-eye.png" alt="Illustration: cover your left eye" class="hero">
                 <h1>Eyes ready?</h1>
-                <p>Cover your right eye.</p>
+                <p>Cover your **right** eye.</p>
             </div>
 
-            <div class="slide" id="s1">
+            <div class="slide" data-eye="left">
                 <img src="images/keep-away.png" alt="Illustration: keep device at arm's length" class="hero">
                 <h1>Keep away.</h1>
                 <p>Keep your device at arm's length during the check.</p>
             </div>
 
-            <div class="slide" id="s2">
+            <div class="slide" data-eye="left">
                 <img src="images/rings-diagram.png" alt="Illustration: rings diagram" class="hero">
                 <h1>Mark the spot.</h1>
                 <p>See the top ring? Mark the corresponding spot on the lower ring.</p>
@@ -468,18 +475,47 @@
                 <span class="active"></span><span></span><span></span>
             </div>
 
-            <div id="instructionButtonContainer">
-                <button id="nextInstructionBtn" class="instruction-button">Next step</button>
-                <button id="startTestBtn" class="instruction-button start-test-btn" style="display:none;">I'm
+            <div class="button-container">
+                <button id="nextInstructionBtnLeft" class="action-button">Next step</button>
+                <button id="startLandoltTestLeft" class="action-button primary-button" style="display:none;">I'm
                     ready</button>
             </div>
         </div>
 
-        <div id="testContent" style="display: none;">
+        <div id="instructionSectionRight" class="section">
+            <div class="slide active" data-eye="right">
+                <img src="images/cover-left-eye.png" alt="Illustration: cover your right eye" class="hero">
+                <h1>Eyes ready?</h1>
+                <p>Cover your left eye.</p>
+            </div>
+
+            <div class="slide" data-eye="right">
+                <img src="images/keep-away.png" alt="Illustration: keep device at arm's length" class="hero">
+                <h1>Keep away.</h1>
+                <p>Keep your device at arm's length during the check.</p>
+            </div>
+
+            <div class="slide" data-eye="right">
+                <img src="images/rings-diagram.png" alt="Illustration: rings diagram" class="hero">
+                <h1>Mark the spot.</h1>
+                <p>See the top ring? Mark the corresponding spot on the lower ring.</p>
+            </div>
+
+            <div class="dots">
+                <span class="active"></span><span></span><span></span>
+            </div>
+
+            <div class="button-container">
+                <button id="nextInstructionBtnRight" class="action-button">Next step</button>
+                <button id="startLandoltTestRight" class="action-button primary-button" style="display:none;">I'm
+                    ready</button>
+            </div>
+        </div>
+
+        <div id="testContent" class="section">
             <header class="test-header">
-                <h1>Visual acuity</h1>
-                <button class="test-close-button" aria-label="Close test"
-                    onclick="alert('Test closed (functionality to be implemented).')">&times;</button>
+                <h1 id="testEyeTitle">Visual acuity - Eye</h1>
+                <button class="test-close-button" aria-label="Close test" id="closeTestBtn">&times;</button>
             </header>
 
             <div class="test-instructions">
@@ -496,61 +532,31 @@
             </div>
 
             <div class="message-box" id="messageBox"></div>
-
-            <div class="test-buttons-container">
-                <button class="test-button" id="nextTestShapeButton">Next Shape</button>
-                <button class="test-button secondary" id="viewResultsButton" style="display:none;">View Results</button>
-            </div>
+            <button class="test-button" id="nextTestShapeButton">Next Shape</button>
         </div>
 
     </div>
 
     <script>
-        const instructionSlides = [...document.querySelectorAll('.slide')];
-        const dots = [...document.querySelectorAll('.dots span')];
-        const nextInstructionBtn = document.getElementById('nextInstructionBtn');
-        const startTestBtn = document.getElementById('startTestBtn');
-        const instructionSection = document.getElementById('instructionSection');
+        const mainMenuSection = document.getElementById('mainMenuSection');
+        const instructionSectionLeft = document.getElementById('instructionSectionLeft');
+        const instructionSectionRight = document.getElementById('instructionSectionRight');
         const testContent = document.getElementById('testContent');
 
+        const startLeftEyeTestBtn = document.getElementById('startLeftEyeTest');
+        const startRightEyeTestBtn = document.getElementById('startRightEyeTest');
+        const closeTestBtn = document.getElementById('closeTestBtn');
+        const testEyeTitle = document.getElementById('testEyeTitle');
+
+        let currentEye = '';
         let currentInstructionIdx = 0;
-
-        function updateInstructionContent() {
-            instructionSlides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === currentInstructionIdx);
-            });
-
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentInstructionIdx);
-            });
-
-            if (currentInstructionIdx === instructionSlides.length - 1) {
-                nextInstructionBtn.style.display = 'none';
-                startTestBtn.style.display = 'inline-block';
-            } else {
-                nextInstructionBtn.style.display = 'inline-block';
-                startTestBtn.style.display = 'none';
-            }
-        }
-
-        nextInstructionBtn.addEventListener('click', () => {
-            currentInstructionIdx = Math.min(currentInstructionIdx + 1, instructionSlides.length - 1);
-            updateInstructionContent();
-        });
-
-        startTestBtn.addEventListener('click', () => {
-            instructionSection.style.display = 'none';
-            testContent.style.display = 'flex';
-            initTest();
-        });
-
-        updateInstructionContent();
+        let leftEyeTested = false;
+        let rightEyeTested = false;
 
         const landoltCElement = document.getElementById('landoltC');
         const selectionRingElement = document.getElementById('selectionRing');
         const messageBoxElement = document.getElementById('messageBox');
         const nextTestShapeButton = document.getElementById('nextTestShapeButton');
-        const viewResultsButton = document.getElementById('viewResultsButton');
 
         const orientations = [
             { class: 'gap-top', position: 1, name: 'Top' },
@@ -569,6 +575,54 @@
         let attempts = 0;
         const maxAttempts = 5;
 
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function setupInstructionFlow(eye) {
+            currentEye = eye;
+            currentInstructionIdx = 0;
+            const instructionSection = eye === 'left' ? instructionSectionLeft : instructionSectionRight;
+            const slides = [...instructionSection.querySelectorAll('.slide[data-eye="' + eye + '"]')];
+            const dots = [...instructionSection.querySelectorAll('.dots span')];
+            const nextBtn = instructionSection.querySelector(`#nextInstructionBtn${eye === 'left' ? 'Left' : 'Right'}`);
+            const startBtn = instructionSection.querySelector(`#startLandoltTest${eye === 'left' ? 'Left' : 'Right'}`);
+
+            function updateCurrentInstructionContent() {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === currentInstructionIdx);
+                });
+
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentInstructionIdx);
+                });
+
+                if (currentInstructionIdx === slides.length - 1) {
+                    nextBtn.style.display = 'none';
+                    startBtn.style.display = 'inline-block';
+                } else {
+                    nextBtn.style.display = 'inline-block';
+                    startBtn.style.display = 'none';
+                }
+            }
+
+            nextBtn.onclick = () => {
+                currentInstructionIdx = Math.min(currentInstructionIdx + 1, slides.length - 1);
+                updateCurrentInstructionContent();
+            };
+
+            startBtn.onclick = () => {
+                testEyeTitle.textContent = `Visual acuity - ${currentEye === 'left' ? 'Left Eye' : 'Right Eye'}`;
+                showSection('testContent');
+                initTest();
+            };
+
+            updateCurrentInstructionContent();
+        }
+
         function initTest() {
             attempts = 0;
             score = 0;
@@ -576,7 +630,6 @@
             messageBoxElement.textContent = '';
             messageBoxElement.className = 'message-box';
             nextTestShapeButton.style.display = 'none';
-            viewResultsButton.style.display = 'none';
             nextTestShapeButton.textContent = 'Next Shape';
             createSelectionRing();
             generateNewShape();
@@ -630,7 +683,6 @@
             messageBoxElement.textContent = '';
             messageBoxElement.className = 'message-box';
             nextTestShapeButton.style.display = 'none';
-            viewResultsButton.style.display = 'none';
             enableSelectionRing(true);
         }
 
@@ -664,10 +716,8 @@
         }
 
         function endTest() {
-            localStorage.setItem('rightEyeScore', score);
-            localStorage.setItem('rightEyeTestCompleted', 'true'); 
-
-            messageBoxElement.innerHTML = `Test Complete! <br>Your score: ${score} out of ${maxAttempts}.`;
+            const eyeTestedMessage = currentEye === 'left' ? 'Left' : 'Right';
+            messageBoxElement.innerHTML = `Test Complete for ${eyeTestedMessage} Eye! <br>Your score: ${score} out of ${maxAttempts}.`;
             messageBoxElement.className = 'message-box';
             if (score > maxAttempts / 2) {
                 messageBoxElement.classList.add('correct');
@@ -675,36 +725,64 @@
                 messageBoxElement.classList.add('incorrect');
             }
 
-            nextTestShapeButton.textContent = 'Continue to Next Eye';
-            nextTestShapeButton.style.display = 'inline-block';
-            viewResultsButton.style.display = 'inline-block';
+            if (currentEye === 'left') {
+                leftEyeTested = true;
+            } else {
+                rightEyeTested = true;
+            }
 
             landoltCElement.className = 'landolt-c';
             landoltCElement.style.width = '0px';
             landoltCElement.style.height = '0px';
             landoltCElement.style.borderWidth = '0px';
+
+            if (leftEyeTested && rightEyeTested) {
+                nextTestShapeButton.textContent = 'Restart Test';
+                nextTestShapeButton.style.display = 'inline-block';
+            } else {
+                const nextEye = currentEye === 'left' ? 'Right' : 'Left';
+                nextTestShapeButton.textContent = `Test ${nextEye} Eye`;
+                nextTestShapeButton.style.display = 'inline-block';
+            }
         }
 
         function handleNextTestShapeButtonClick() {
             if (attempts >= maxAttempts) {
-                const leftEyeTestCompleted = localStorage.getItem('leftEyeTestCompleted');
-
-                if (leftEyeTestCompleted === 'true') {
-                    window.location.href = 'acuityTestResults.html';
+                if (leftEyeTested && rightEyeTested) {
+                    leftEyeTested = false;
+                    rightEyeTested = false;
+                    showSection('mainMenuSection');
                 } else {
-                    window.location.href = 'acuityTestLeft.html';
+                    if (currentEye === 'left') {
+                        showSection('instructionSectionRight');
+                        setupInstructionFlow('right');
+                    } else {
+                        showSection('instructionSectionLeft');
+                        setupInstructionFlow('left');
+                    }
                 }
             } else {
                 generateNewShape();
             }
         }
 
-        function handleViewResultsButtonClick() {
-            window.location.href = 'acuityTestResults.html';
-        }
+        startLeftEyeTestBtn.addEventListener('click', () => {
+            showSection('instructionSectionLeft');
+            setupInstructionFlow('left');
+        });
+
+        startRightEyeTestBtn.addEventListener('click', () => {
+            showSection('instructionSectionRight');
+            setupInstructionFlow('right');
+        });
+
+        closeTestBtn.addEventListener('click', () => {
+            showSection('mainMenuSection');
+        });
 
         nextTestShapeButton.addEventListener('click', handleNextTestShapeButtonClick);
-        viewResultsButton.addEventListener('click', handleViewResultsButtonClick);
+
+        showSection('mainMenuSection');
     </script>
 </body>
 
