@@ -2,216 +2,463 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EyeQ - Jaeger Chart Test</title>
-  <link rel="icon" type="image/png" href="images/eye-q-logo.png">
-  <link rel="stylesheet" href="styles/aboutStyle.css">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EyeQ - Jaeger Chart Test</title>
+    <link rel="icon" type="image/png" href="images/eye-q-logo.png">
+    <link rel="stylesheet" href="styles/aboutStyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        header {
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #0056b3;
+        }
+
+        main {
+            padding: 40px 0;
+        }
+
+        main .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+
+        .test-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            background-color: #fff;
+        }
+
+        .test-title {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .instructions {
+            background-color: #d9edf7;
+            color: #31708f;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border: 1px solid #bce8f1;
+        }
+
+        .instructions strong {
+            color: #2b669a;
+        }
+
+        .instructions ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            padding: 0;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+        }
+
+        .chart {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            text-align: center;
+            background-color: #fdfdfd;
+        }
+
+        .chart div {
+            margin: 5px 0;
+            line-height: 1.2;
+        }
+
+        .select-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .button-group button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 5px;
+            background-color: #e9ecef;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            color: #333;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .button-group button:hover {
+            background-color: #dee2e6;
+            transform: translateY(-1px);
+        }
+
+        .button-group button:active {
+            transform: translateY(0);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-box {
+            background-color: #6c757d;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+            margin-bottom: 25px;
+        }
+
+        .result-box.success {
+            background-color: #28a745;
+        }
+
+        .interpretation-section {
+            background-color: #f8f9fa;
+            border: 1px solid #e2e6ea;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+
+        .interpretation-section h3 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .interpretation-section p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .interpretation-section ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+
+        .interpretation-section li {
+            margin-bottom: 5px;
+        }
+
+        .interpretation-section .important-note {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+
+        footer {
+            background-color: #343a40;
+            color: #f8f9fa;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        footer .copyright {
+            margin-bottom: 10px;
+        }
+
+        footer nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        footer nav ul li {
+            margin: 0 10px;
+        }
+
+        footer nav ul li a {
+            text-decoration: none;
+            color: #f8f9fa;
+            transition: color 0.3s ease;
+        }
+
+        footer nav ul li a:hover {
+            color: #007bff;
+        }
+    </style>
 </head>
 
 <body>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var body = document.body;
+
+            var header = document.createElement("header");
+            var headerContainer = document.createElement("div");
+            headerContainer.classList.add("container");
+
+            var logo = document.createElement("div");
+            logo.classList.add("logo");
+
+            var logoLink = document.createElement("a");
+            logoLink.href = "home1.html";
+
+            var logoImg = document.createElement("img");
+            logoImg.src = "images/eye-q-logo.png";
+            logoImg.alt = "EyeQ Logo";
+
+            logoLink.appendChild(logoImg);
+            logo.appendChild(logoLink);
+
+            var nav = document.createElement("nav");
+            var ul = document.createElement("ul");
+
+            var menuItems = ["About", "Eye Conditions", "Eye Tests", "FAQs", "Articles"];
+            var links = {
+                "About": "about.html",
+                "Eye Conditions": "eyeConditions.html",
+                "Eye Tests": "eyeTest.html",
+                "FAQs": "FAQS.html",
+                "Articles": "articles.html"
+            };
+
+            menuItems.forEach(function (item) {
+                var li = document.createElement("li");
+                var a = document.createElement("a");
+                a.href = links[item] || "#";
+                a.textContent = item;
+                li.appendChild(a);
+                ul.appendChild(li);
+            });
+
+            nav.appendChild(ul);
+            headerContainer.appendChild(logo);
+            headerContainer.appendChild(nav);
+            header.appendChild(headerContainer);
+            body.appendChild(header);
+
+            var main = document.createElement("main");
+            var mainContainer = document.createElement("div");
+            mainContainer.classList.add("container");
+
+            var h1 = document.createElement("h1");
+            h1.textContent = "Near Vision Test";
+            mainContainer.appendChild(h1);
+
+            main.appendChild(mainContainer);
+            body.appendChild(main);
+
+            const testContainer = document.createElement("div");
+            testContainer.classList.add("test-container");
+            document.body.appendChild(testContainer);
+
+            const title = document.createElement("h2");
+            title.classList.add("test-title");
+            title.textContent = "Near Vision Test (Jaeger Eye Chart)";
+            testContainer.appendChild(title);
+
+            const instructions = document.createElement("div");
+            instructions.classList.add("instructions");
+            instructions.innerHTML = `
+                <p><strong>To perform the Jaeger Near Vision Test:</strong></p>
+                <ol>
+                    <li><strong>Preparation:</strong>
+                        <ul>
+                            <li>Ensure the room lighting is adequate and even.</li>
+                            <li>Set your device's screen brightness to 100% for optimal contrast.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Positioning:</strong>
+                        <ul>
+                            <li>Hold the screen at a comfortable reading distance, approximately 14 inches (35 cm) away from your eyes. This is a standard reading distance.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Testing Each Eye:</strong>
+                        <ul>
+                            <li>Cover one eye completely with your hand or an opaque object without applying pressure to the eyelid.</li>
+                            <li>Read the text on the chart aloud, starting from the largest font size (Line 1) and moving downwards.</li>
+                            <li>Identify the smallest line of text you can read comfortably and accurately.</li>
+                            <li>Repeat the process for the other eye.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Recording Results:</strong>
+                        <ul>
+                            <li>Note the smallest line number you were able to read comfortably.</li>
+                            <li>Select the corresponding "Line" button below the chart to record your result.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Important:</strong> This online test is for screening purposes only and cannot replace a comprehensive eye examination by an eye care professional. If you have concerns about your vision, please consult an optometrist or ophthalmologist.</li>
+                </ol>
+            `;
+            testContainer.appendChild(instructions);
+
+            const chart = document.createElement("div");
+            chart.classList.add("chart");
+            testContainer.appendChild(chart);
+
+            const sampleText = "The quick brown fox jumps over the lazy dog.";
+            for (let i = 1; i <= 11; i++) {
+                const line = document.createElement("div");
+                line.textContent = `Line ${i}: ${sampleText}`;
+                line.style.fontSize = `${24 - i * 1.5}px`;
+                line.style.margin = "5px 0";
+                chart.appendChild(line);
+            }
+
+            const selectTitle = document.createElement("p");
+            selectTitle.classList.add("select-title");
+            selectTitle.textContent = "Select the lowest line you can read correctly with each eye:";
+            testContainer.appendChild(selectTitle);
+
+            const buttonGroup = document.createElement("div");
+            buttonGroup.classList.add("button-group");
+            testContainer.appendChild(buttonGroup);
+
+            const resultBox = document.createElement("div");
+            resultBox.classList.add("result-box");
+            resultBox.textContent = "Result: Please select a line.";
+            testContainer.appendChild(resultBox);
+
+            for (let i = 1; i <= 11; i++) {
+                const btn = document.createElement("button");
+                btn.textContent = `Line ${i}`;
+                btn.addEventListener("click", () => {
+                    resultBox.textContent = `Result: You can read Line ${i}`;
+                    resultBox.classList.add("success");
+                    resultBox.classList.remove("error");
+                });
+                buttonGroup.appendChild(btn);
+            }
+
+            const interpretationSection = document.createElement("div");
+            interpretationSection.classList.add("interpretation-section");
+            interpretationSection.innerHTML = `
+                <h3>Interpretation of Results</h3>
+                <p>The Jaeger eye chart assesses your near vision, which is your ability to see objects clearly at a close distance. The chart presents text in various sizes, with smaller line numbers (e.g., Line 1, Line 2) corresponding to smaller text and better near vision.</p>
+                <ul>
+                    <li><strong>Line 1 - Line 3:</strong> Indicates excellent to very good near vision. You can comfortably read very fine print, similar to newspaper or standard book text.</li>
+                    <li><strong>Line 4 - Line 6:</strong> Good near vision. You can read most common print sizes without significant difficulty.</li>
+                    <li><strong>Line 7 - Line 9:</strong> Moderate near vision. You may start to notice some blurriness with smaller print and might benefit from reading glasses or a stronger prescription.</li>
+                    <li><strong>Line 10 - Line 11:</strong> Poor near vision. You will likely struggle with most reading tasks and may require significant vision correction to read comfortably.</li>
+                </ul>
+                <p class="important-note">
+                    <strong>Disclaimer:</strong> This online Jaeger chart test is a self-assessment tool and should not be used as a substitute for a professional eye examination. Only a qualified eye care professional can accurately diagnose vision problems and provide appropriate treatment. If you have any concerns about your near vision or overall eye health, please schedule an appointment with an optometrist or ophthalmologist.
+                </p>
+            `;
+            testContainer.appendChild(interpretationSection);
 
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      var body = document.body;
+            var footer = document.createElement("footer");
+            var footerContainer = document.createElement("div");
+            footerContainer.classList.add("container");
 
+            var copyright = document.createElement("div");
+            copyright.classList.add("copyright");
+            copyright.textContent = "© EyeQ 2025 all rights reserved. |";
 
-      var header = document.createElement("header");
-      var headerContainer = document.createElement("div");
-      headerContainer.classList.add("container");
+            var footerNav = document.createElement("nav");
+            var footerUl = document.createElement("ul");
+            var footerItems = [
+                { text: "Privacy |", link: "privacy.html" },
+                { text: "Terms |", link: "terms.html" },
+                { text: "Contact", link: "contact.html" }
+            ];
 
-      var logo = document.createElement("div");
-      logo.classList.add("logo");
+            footerItems.forEach(function (item) {
+                var li = document.createElement("li");
+                var a = document.createElement("a");
+                a.href = item.link;
+                a.textContent = item.text;
+                li.appendChild(a);
+                footerUl.appendChild(li);
+            });
 
-      var logoLink = document.createElement("a");
-      logoLink.href = "home1.html";
-
-      var logoImg = document.createElement("img");
-      logoImg.src = "images/eye-q-logo.png";
-      logoImg.alt = "EyeQ Logo";
-
-      logoLink.appendChild(logoImg);
-      logo.appendChild(logoLink);
-
-
-      var nav = document.createElement("nav");
-      var ul = document.createElement("ul");
-
-      var menuItems = ["About", "Eye Conditions", "Eye Tests", "FAQs", "Articles"];
-      var links = {
-        "About": "about.html",
-        "Eye Conditions": "eyeConditions.html",
-        "Eye Tests": "eyeTest.html",
-        "FAQs": "FAQS.html",
-        "Articles": "articles.html"
-      };
-
-      menuItems.forEach(function (item) {
-        var li = document.createElement("li");
-        var a = document.createElement("a");
-        a.href = links[item] || "#";
-        a.textContent = item;
-        li.appendChild(a);
-        ul.appendChild(li);
-      });
-
-      nav.appendChild(ul);
-      headerContainer.appendChild(logo);
-      headerContainer.appendChild(nav);
-      header.appendChild(headerContainer);
-      body.appendChild(header);
-
-
-      var main = document.createElement("main");
-      var mainContainer = document.createElement("div");
-      mainContainer.classList.add("container");
-
-      var h1 = document.createElement("h1");
-      h1.textContent = "Near Vision Test";
-      mainContainer.appendChild(h1);
-
-
-      main.appendChild(mainContainer);
-      body.appendChild(main);
-
-
-      document.body.style.margin = "0";
-      document.body.style.fontFamily = "Arial, sans-serif";
-
-      
-      const container = document.createElement("div");
-      container.style.maxWidth = "600px";
-      container.style.margin = "20px auto";
-      container.style.padding = "20px";
-      container.style.boxShadow = "0 0 10px rgba(0,0,0,0.1)";
-      container.style.borderRadius = "10px";
-      container.style.backgroundColor = "#fdfdfd";
-      document.body.appendChild(container);
-
-      
-      const title = document.createElement("h2");
-      title.textContent = "Near Vision Test (Jaeger Eye Chart)";
-      title.style.textAlign = "center";
-      container.appendChild(title);
-
-     
-      const instructions = document.createElement("div");
-      instructions.style.backgroundColor = "#d9534f";
-      instructions.style.color = "#fff";
-      instructions.style.padding = "10px 15px";
-      instructions.style.borderRadius = "5px";
-      instructions.style.marginBottom = "20px";
-      instructions.innerHTML = `
-  <strong>Instructions:</strong>
-  <ul>
-    <li>Ensure proper room lighting and screen brightness to 100%.</li>
-    <li>Hold screen at reading distance (14 inches).</li>
-    <li>Read the smallest line the patient can comfortably see.</li>
-    <li>Test one eye at a time (cover the other eye).</li>
-  </ul>`;
-      container.appendChild(instructions);
-
-      
-      const chart = document.createElement("div");
-      chart.style.border = "1px solid #ccc";
-      chart.style.padding = "20px";
-      chart.style.marginBottom = "20px";
-      chart.style.borderRadius = "10px";
-      chart.style.textAlign = "center";
-      container.appendChild(chart);
-
-      
-      const sampleText = "The two boys fell asleep under a large tree.";
-      for (let i = 1; i <= 11; i++) {
-        const line = document.createElement("div");
-        line.textContent = `Line ${i}: ${sampleText}`;
-        line.style.fontSize = `${24 - i * 1.5}px`;
-        line.style.margin = "5px 0";
-        chart.appendChild(line);
-      }
-
-      
-      const selectTitle = document.createElement("p");
-      selectTitle.textContent = "Select lowest line that patient can read correctly:";
-      selectTitle.style.fontWeight = "bold";
-      container.appendChild(selectTitle);
-
-      
-      const buttonGroup = document.createElement("div");
-      buttonGroup.style.display = "flex";
-      buttonGroup.style.flexWrap = "wrap";
-      buttonGroup.style.gap = "10px";
-      buttonGroup.style.marginBottom = "20px";
-      container.appendChild(buttonGroup);
-
-     
-      const resultBox = document.createElement("div");
-      resultBox.style.backgroundColor = "#007bff";
-      resultBox.style.color = "#fff";
-      resultBox.style.padding = "15px";
-      resultBox.style.borderRadius = "5px";
-      resultBox.style.textAlign = "center";
-      resultBox.style.fontWeight = "bold";
-      resultBox.textContent = "Result: Please select a line.";
-      container.appendChild(resultBox);
-
-      
-      for (let i = 1; i <= 11; i++) {
-        const btn = document.createElement("button");
-        btn.textContent = `Line ${i}`;
-        btn.style.padding = "10px 15px";
-        btn.style.border = "none";
-        btn.style.borderRadius = "5px";
-        btn.style.backgroundColor = "#f0f0f0";
-        btn.style.cursor = "pointer";
-        btn.onmouseover = () => btn.style.backgroundColor = "#ddd";
-        btn.onmouseout = () => btn.style.backgroundColor = "#f0f0f0";
-
-        btn.addEventListener("click", () => {
-          resultBox.textContent = `Result: Patient can read Line ${i}`;
-          resultBox.style.backgroundColor = "#28a745"; 
+            footerNav.appendChild(footerUl);
+            footerContainer.appendChild(copyright);
+            footerContainer.appendChild(footerNav);
+            footer.appendChild(footerContainer);
+            body.appendChild(footer);
         });
-
-        buttonGroup.appendChild(btn);
-
-      }
-      var footer = document.createElement("footer");
-      var footerContainer = document.createElement("div");
-      footerContainer.classList.add("container");
-
-      var copyright = document.createElement("div");
-      copyright.classList.add("copyright");
-      copyright.textContent = "© EyeQ 2025 all rights reserved. |";
-
-      var footerNav = document.createElement("nav");
-      var footerUl = document.createElement("ul");
-      var footerItems = [
-        { text: "Privacy |", link: "privacy.html" },
-        { text: "Terms |", link: "terms.html" },
-        { text: "Contact", link: "contact.html" }
-      ];
-
-      footerItems.forEach(function (item) {
-        var li = document.createElement("li");
-        var a = document.createElement("a");
-        a.href = item.link;
-        a.textContent = item.text;
-        li.appendChild(a);
-        footerUl.appendChild(li);
-      });
-
-      footerNav.appendChild(footerUl);
-      footerContainer.appendChild(copyright);
-      footerContainer.appendChild(footerNav);
-      footer.appendChild(footerContainer);
-      body.appendChild(footer);
-    });
-
-
-  </script>
+    </script>
 
 </body>
 

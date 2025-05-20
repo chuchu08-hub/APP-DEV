@@ -168,14 +168,37 @@
             transform: scale(0.95);
         }
 
-        .segment[data-position="8"] { border-radius: 0.75rem 0 22px 0; }
-        .segment[data-position="1"] { border-radius: 0 0 22px 22px; }
-        .segment[data-position="2"] { border-radius: 0 0.75rem 0 22px; }
-        .segment[data-position="7"] { border-radius: 0 22px 22px 0; }
-        .segment[data-position="3"] { border-radius: 22px 0 0 22px; }
-        .segment[data-position="6"] { border-radius: 22px 0 0 0.75rem; }
-        .segment[data-position="5"] { border-radius: 22px 22px 0 0; }
-        .segment[data-position="4"] { border-radius: 0 22px 0.75rem 0; }
+        .segment[data-position="8"] {
+            border-radius: 0.75rem 0 22px 0;
+        }
+
+        .segment[data-position="1"] {
+            border-radius: 0 0 22px 22px;
+        }
+
+        .segment[data-position="2"] {
+            border-radius: 0 0.75rem 0 22px;
+        }
+
+        .segment[data-position="7"] {
+            border-radius: 0 22px 22px 0;
+        }
+
+        .segment[data-position="3"] {
+            border-radius: 22px 0 0 22px;
+        }
+
+        .segment[data-position="6"] {
+            border-radius: 22px 0 0 0.75rem;
+        }
+
+        .segment[data-position="5"] {
+            border-radius: 22px 22px 0 0;
+        }
+
+        .segment[data-position="4"] {
+            border-radius: 0 22px 0.75rem 0;
+        }
 
         .segment:not([data-position]) {
             background-color: transparent !important;
@@ -251,14 +274,37 @@
                 gap: 3px;
             }
 
-            .segment[data-position="8"] { border-radius: 0.6rem 0 17.6px 0; }
-            .segment[data-position="1"] { border-radius: 0 0 17.6px 17.6px; }
-            .segment[data-position="2"] { border-radius: 0 0.6rem 0 17.6px; }
-            .segment[data-position="7"] { border-radius: 0 17.6px 17.6px 0; }
-            .segment[data-position="3"] { border-radius: 17.6px 0 0 17.6px; }
-            .segment[data-position="6"] { border-radius: 17.6px 0 0 0.6rem; }
-            .segment[data-position="5"] { border-radius: 17.6px 17.6px 0 0; }
-            .segment[data-position="4"] { border-radius: 0 17.6px 0.6rem 0; }
+            .segment[data-position="8"] {
+                border-radius: 0.6rem 0 17.6px 0;
+            }
+
+            .segment[data-position="1"] {
+                border-radius: 0 0 17.6px 17.6px;
+            }
+
+            .segment[data-position="2"] {
+                border-radius: 0 0.6rem 0 17.6px;
+            }
+
+            .segment[data-position="7"] {
+                border-radius: 0 17.6px 17.6px 0;
+            }
+
+            .segment[data-position="3"] {
+                border-radius: 17.6px 0 0 17.6px;
+            }
+
+            .segment[data-position="6"] {
+                border-radius: 17.6px 0 0 0.6rem;
+            }
+
+            .segment[data-position="5"] {
+                border-radius: 17.6px 17.6px 0 0;
+            }
+
+            .segment[data-position="4"] {
+                border-radius: 0 17.6px 0.6rem 0;
+            }
         }
     </style>
 
@@ -309,7 +355,7 @@
         ];
 
         let currentOrientation;
-        let currentLandoltCSize = 50;
+        let currentLandoltCSize = 10;
         let score = 0;
         let attempts = 0;
         const maxAttempts = 5;
@@ -317,7 +363,7 @@
         function initTest() {
             attempts = 0;
             score = 0;
-            currentLandoltCSize = 50;
+            currentLandoltCSize =  25;
             messageBoxElement.textContent = '';
             messageBoxElement.className = 'message-box';
             nextButton.style.display = 'none';
@@ -356,6 +402,10 @@
                 return;
             }
 
+            if (attempts > 0) {
+                currentLandoltCSize = Math.max(10, currentLandoltCSize - 5);
+            }
+
             landoltCElement.className = 'landolt-c';
 
             const randomIndex = Math.floor(Math.random() * orientations.length);
@@ -381,11 +431,10 @@
                 messageBoxElement.textContent = 'Correct!';
                 messageBoxElement.className = 'message-box correct';
                 score++;
-                currentLandoltCSize = Math.max(10, currentLandoltCSize - 6);
             } else {
                 messageBoxElement.textContent = `Incorrect. The gap was at the ${currentOrientation.name}.`;
                 messageBoxElement.className = 'message-box incorrect';
-                currentLandoltCSize = Math.min(60, currentLandoltCSize + 4);
+                currentLandoltCSize = Math.min(60, currentLandoltCSize + 2);
             }
 
             if (attempts < maxAttempts) {
