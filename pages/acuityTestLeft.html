@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acuity Test - Right Eye</title>
+    <title>Acuity Test - Left Eye</title>
     <style>
         :root {
             --bg: #eef3f9;
@@ -447,9 +447,9 @@
     <div class="wrapper">
         <div id="instructionSection">
             <div class="slide active" id="s0">
-                <img src="images/cover-left-eye.png" alt="Illustration: cover your right eye" class="hero">
+                <img src="images/cover-left-eye.png" alt="Illustration: cover your left eye" class="hero">
                 <h1>Eyes ready?</h1>
-                <p>Cover your right eye.</p>
+                <p>Cover your left eye.</p>
             </div>
 
             <div class="slide" id="s1">
@@ -664,8 +664,8 @@
         }
 
         function endTest() {
-            localStorage.setItem('rightEyeScore', score);
-            localStorage.setItem('rightEyeTestCompleted', 'true'); 
+            localStorage.setItem('leftEyeScore', score);
+            localStorage.setItem('leftEyeTestCompleted', 'true'); 
 
             messageBoxElement.innerHTML = `Test Complete! <br>Your score: ${score} out of ${maxAttempts}.`;
             messageBoxElement.className = 'message-box';
@@ -675,7 +675,7 @@
                 messageBoxElement.classList.add('incorrect');
             }
 
-            nextTestShapeButton.textContent = 'Continue to Next Eye';
+            nextTestShapeButton.textContent = 'Go to Results';
             nextTestShapeButton.style.display = 'inline-block';
             viewResultsButton.style.display = 'inline-block';
 
@@ -687,13 +687,7 @@
 
         function handleNextTestShapeButtonClick() {
             if (attempts >= maxAttempts) {
-                const leftEyeTestCompleted = localStorage.getItem('leftEyeTestCompleted');
-
-                if (leftEyeTestCompleted === 'true') {
-                    window.location.href = 'acuityTestResults.html';
-                } else {
-                    window.location.href = 'acuityTestLeft.html';
-                }
+                window.location.href = 'acuityTestResults.html';
             } else {
                 generateNewShape();
             }
