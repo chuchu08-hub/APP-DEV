@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snellen Chart Vision Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    header {
+      background-color: #1e3a5f;
+      color: white;
+      padding: 15px 0;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .instructions {
+      background: #ffe5e5;
+      color: #a00;
+      padding: 15px;
+      border: 1px solid #a00;
+      margin-bottom: 20px;
+    }
+
+    .instructions ul {
+      margin: 5px 0 0 20px;
+    }
+
+    .main-content {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .snellen-chart {
+      font-family: 'Courier New', Courier, monospace;
+      flex: 1;
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .line {
+      margin: 5px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 100%;
+    }
+
+    .line span {
+      position: absolute;
+      right: 0;
+      color: #009999;
+      font-size: 1rem;
+      padding-right: 10px;
+    }
+
+    .selector-box {
+      min-width: 150px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background: #f8f8f8;
+      align-self: flex-start;
+    }
+
+    .line-button {
+      padding: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      border: 1px solid #aaa;
+      background-color: #fff;
+      transition: 0.2s;
+    }
+
+    .line-button:hover {
+      background-color: #d0eaff;
+    }
+
+    .result {
+      margin-top: 25px;
+      background: #d7f0ff;
+      padding: 15px;
+      border: 1px solid #00aaff;
+      text-align: left;
+      font-size: 1.1em;
+      color: #005577;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Distance Vision Test</h1>
+      <p>(Snellen Chart)</p>
+    </header>
+
+    <section class="instructions">
+      <h3>Instructions:</h3>
+      <ul>
+        <li>Place the screen 3 to 5 meters away from your eyes.</li>
+        <li>Cover one eye and read each line aloud.</li>
+        <li>Select the last line you can read correctly using the buttons on the right.</li>
+      </ul>
+    </section>
+
+    <div class="main-content">
+      <section class="snellen-chart" id="chart"></section>
+
+      <div class="selector-box" id="selector">
+        <!-- Buttons will be injected here -->
+      </div>
+    </div>
+
+    <section class="result" id="result">
+      <p id="resultText">Result: Please select the last line you could read clearly.</p>
+    </section>
+  </div>
+
+  <script>
+    const lines = [
+      "E",
+      "F P",
+      "T O Z",
+      "L P E D",
+      "P E C F D",
+      "E D F C Z P",
+      "F E L O P Z D",
+      "D E F P O T E C",
+      "L E F O D P C T",
+      "F D P L T C O",
+      "P E L O F D T"
+    ];
+
+    const chart = document.getElementById("chart");
+    const selector = document.getElementById("selector");
+    const resultText = document.getElementById("resultText");
+
+    lines.forEach((line, index) => {
+      // Chart Line
+      const lineDiv = document.createElement("div");
+      lineDiv.className = "line";
+      const size = 4 - index * 0.25;
+      lineDiv.style.fontSize = `${size}em`;
+      lineDiv.innerHTML = `${line.replace(/ /g, "&nbsp;&nbsp;&nbsp;&nbsp;")}<span>${index + 1}</span>`;
+      chart.appendChild(lineDiv);
+
+      // Selector Button
+      const button = document.createElement("button");
+      button.className = "line-button";
+      button.textContent = `Line ${index + 1}`;
+      button.onclick = () => {
+        resultText.textContent = `Result: You were able to read down to Line ${index + 1}.`;
+      };
+      selector.appendChild(button);
+    });
+  </script>
+</body>
+
+</html>

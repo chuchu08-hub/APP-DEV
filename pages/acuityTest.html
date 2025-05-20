@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Acuity Preparation Test</title>
+<style>
+:root {
+  --bg: #eef3f9;
+  --primary: #0066ff;
+  --text: #27364a;
+  --sub: #5c6b7d;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  text-align: center;
+}
+
+.wrapper {
+  max-width: 500px;
+  width: 100%;
+}
+
+.slide {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slide.active {
+  display: flex;
+}
+
+.hero {
+  width: 250px;
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 2.5rem;
+}
+
+h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+p {
+  font-size: 1.2rem;
+  color: var(--sub);
+  margin: .6rem 0 2.5rem;
+}
+
+/* --- Global Dots Styling --- */
+.dots {
+  display: flex;
+  gap: .4rem;
+  justify-content: center;
+  margin: 2rem 0 1.5rem;
+}
+
+.dots span {
+  width: .6rem;
+  height: .6rem;
+  border-radius: 50%;
+  background: var(--text);
+  opacity: .25;
+}
+
+.dots span.active {
+  opacity: 1;
+}
+
+/* --- Buttons --- */
+#buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+button {
+  padding: .8rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: .2s;
+  border: 2px solid var(--primary);
+  background: transparent;
+  color: var(--primary);
+}
+
+button:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.start-test-btn {
+  background: var(--primary);
+  color: white;
+  border: 2px solid var(--primary);
+}
+
+.start-test-btn:hover {
+  background: #0056b3;
+  border-color: #0056b3;
+}
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="slide active" id="s0">
+    <img src="images/cover-left-eye.png" alt="Illustration: cover your left eye" class="hero">
+    <h1>Eyes ready?</h1>
+    <p>Cover your left eye.</p>
+  </div>
+
+  <div class="slide" id="s1">
+    <img src="images/keep-away.png" alt="Illustration: keep device at arm's length" class="hero">
+    <h1>Keep away.</h1>
+    <p>Keep your device at arm's length during the check.</p>
+  </div>
+
+  <div class="slide" id="s2">
+    <img src="images/rings-diagram.png" alt="Illustration: rings diagram" class="hero">
+    <h1>Mark the spot.</h1>
+    <p>See the top ring? Mark the corresponding spot on the lower ring.</p>
+  </div>
+
+  <!-- Dots (placed above buttons) -->
+  <div class="dots">
+    <span class="active"></span><span></span><span></span>
+  </div>
+
+  <!-- Buttons -->
+  <div id="buttonContainer">
+    <button id="nextBtn">Next step</button>
+    <button id="startTestBtn" class="start-test-btn" style="display:none;">I'm ready</button>
+  </div>
+</div>
+
+<script>
+const slides = [...document.querySelectorAll('.slide')];
+const dots = [...document.querySelectorAll('.dots span')];
+const nextBtn = document.getElementById('nextBtn');
+const startTestBtn = document.getElementById('startTestBtn');
+
+let idx = 0;
+
+function updateContent() {
+  slides.forEach((slide, i) => {
+    slide.classList.toggle('active', i === idx);
+  });
+
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === idx);
+  });
+
+  if (idx === slides.length - 1) {
+    nextBtn.style.display = 'none';
+    startTestBtn.style.display = 'inline-block';
+  } else {
+    nextBtn.style.display = 'inline-block';
+    startTestBtn.style.display = 'none';
+  }
+}
+
+nextBtn.addEventListener('click', () => {
+  idx = Math.min(idx + 1, slides.length - 1);
+  updateContent();
+});
+
+startTestBtn.addEventListener('click', () => {
+  alert('Starting the test...');
+});
+
+updateContent();
+
+startTestBtn.addEventListener("click", function () {
+      window.location.href = "acuityTestLeft.html";
+});
+</script>
+
+</body>
+</html>

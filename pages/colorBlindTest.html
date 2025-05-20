@@ -1,199 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EyeQ - Color Blind Test</title>
-    <link rel="icon" type="image/png" href="images/eye-q-logo.png"> 
+    <link rel="icon" type="image/png" href="images/eye-q-logo.png">
     <link rel="stylesheet" href="styles/aboutStyle.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Open Sans', sans-serif;
         }
+
         .option-btn {
             padding: 10px 20px;
             font-size: 16px;
             margin: 5px;
             cursor: pointer;
         }
+
         .test-container {
             text-align: center;
             margin-top: 30px;
+            margin-bottom: 40px; 
         }
+
         img {
             max-width: 300px;
             margin-bottom: 20px;
         }
+
+        .test-wrapper {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.result-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.excellent {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.good {
+    background-color: #FFD700; /* Gold */
+    color: black;
+}
+
+.moderate {
+    background-color: #FF8C00; /* Orange */
+    color: white;
+}
+
+.low {
+    background-color: #FF0000; /* Red */
+    color: white;
+}
+
+.intro-container {
+    text-align: center;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #e3f2fd; /* Light blue background */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
     </style>
 </head>
+
 <body>
 
-<noscript>Please enable JavaScript to use this page.</noscript>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var body = document.body;
 
-        // Header
-        var header = document.createElement("header");
-        var headerContainer = document.createElement("div");
-        headerContainer.classList.add("container");
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            
+            var body = document.body;
+            var mainContainer = document.querySelector(".container");
 
-        var logo = document.createElement("div");
-        logo.classList.add("logo");
+            
+            // Header
+            var header = document.createElement("header");
+            var headerContainer = document.createElement("div");
+            headerContainer.classList.add("container");
 
-        var logoLink = document.createElement("a");
-        logoLink.href = "home1.html";
+            var logo = document.createElement("div");
+            logo.classList.add("logo");
 
-        var logoImg = document.createElement("img");
-        logoImg.src = "images/eye-q-logo.png";
-        logoImg.alt = "EyeQ Logo";
+            var logoLink = document.createElement("a");
+            logoLink.href = "home1.html";
 
-        logoLink.appendChild(logoImg);
-        logo.appendChild(logoLink);
+            var logoImg = document.createElement("img");
+            logoImg.src = "images/eye-q-logo.png";
+            logoImg.alt = "EyeQ Logo";
 
-        var nav = document.createElement("nav");
-        var ul = document.createElement("ul");
+            logoLink.appendChild(logoImg);
+            logo.appendChild(logoLink);
 
-        var menuItems = ["About", "Eye Conditions", "Eye Tests", "FAQs", "Articles"];
-        var links = {
-            "About": "about.html",
-            "Eye Conditions": "eyeConditions.html",
-            "Eye Tests": "eyeTest.html",
-            "FAQs": "FAQS.html",
-            "Articles": "articles.html"
-        };
+            var nav = document.createElement("nav");
+            var ul = document.createElement("ul");
 
-        menuItems.forEach(function(item) {
-            var li = document.createElement("li");
-            var a = document.createElement("a");
-            a.href = links[item] || "#";
-            a.textContent = item;
-            li.appendChild(a);
-            ul.appendChild(li);
-        });
+            var menuItems = ["About", "Eye Conditions", "Eye Tests", "FAQs", "Articles"];
+            var links = {
+                "About": "about.html",
+                "Eye Conditions": "eyeConditions.html",
+                "Eye Tests": "eyeTest.html",
+                "FAQs": "FAQS.html",
+                "Articles": "articles.html"
 
-        nav.appendChild(ul);
-        headerContainer.appendChild(logo);
-        headerContainer.appendChild(nav);
-        header.appendChild(headerContainer);
-        body.appendChild(header);
+            
+            };
 
-        
-        var main = document.createElement("main");
-        var mainContainer = document.createElement("div");
-        mainContainer.classList.add("container");
+            menuItems.forEach(function (item) {
+                var li = document.createElement("li");
+                var a = document.createElement("a");
+                a.href = links[item] || "#";
+                a.textContent = item;
+                li.appendChild(a);
+                ul.appendChild(li);
+            });
 
-        var h1 = document.createElement("h1");
-        h1.textContent = "Color Blindness Test";
-        mainContainer.appendChild(h1);
+            nav.appendChild(ul);
+            headerContainer.appendChild(logo);
+            headerContainer.appendChild(nav);
+            header.appendChild(headerContainer);
+            body.appendChild(header);
 
-        main.appendChild(mainContainer);
-        body.appendChild(main); // 
 
-        
-        const questions = [
-            { image: 'images/ishihara12.jpg', answer: '12', options: ['12', '8', '6', 'Nothing'] },
-            { image: 'images/ishihara8.jpg', answer: '8', options: ['8', '3', '5','Nothing'] },
-            { image: 'images/ishihara6.jpg', answer: '6', options: ['6', '2', '9','Nothing'] },
-            { image: 'images/ishihara29.jpg', answer: '29', options: ['29', '70', '45','Nothing'] },
-            { image: 'images/ishihara57.jpg', answer: '57', options: ['51', '31', '57','Nothing'] },
-            { image: 'images/ishihara5.jpg', answer: '5', options: ['3', '5', '8','Nothing'] },
-            { image: 'images/ishihara3.jpg', answer: '3', options: ['8', '13', '3','Nothing'] },
-            { image: 'images/ishihara15.jpg', answer: '15', options: ['15', '5', '16','Nothing'] },
-            { image: 'images/ishihara74.jpg', answer: '74', options: ['14', '74', '44','Nothing'] },
-            { image: 'images/ishiharaOther6.jpg', answer: '6', options: ['6', '2', '9','Nothing'] },
-            { image: 'images/ishihara97.jpg', answer: '97', options: ['97', '17', '27','Nothing'] },
-            { image: 'images/ishihara45.jpg', answer: '45', options: ['45', '74', '12','Nothing'] },
-            { image: 'images/ishiharaOther5.jpg', answer: '5', options: ['5', '3', '6','Nothing'] },
-            { image: 'images/ishihara7.jpg', answer: '7', options: ['7', '1', '4','Nothing'] },
-            { image: 'images/nothing1.jpg', answer: 'Nothing', options: ['29', '45', '74','Nothing'] },
-            { image: 'images/ishihara26.jpg', answer: '26', options: ['26', '62', '28','Nothing'] },
-            { image: 'images/ishihara42.jpg', answer: '42', options: ['48', '42', '12','Nothing'] },
-            { image: 'images/ishihara35.jpg', answer: '35', options: ['8', '53', '35','Nothing'] },
-            { image: 'images/ishihara96.jpg', answer: '96', options: ['69', '96', '86','Nothing'] },
-            { image: 'images/nothing2.jpg', answer: 'Nothing', options: ['12', '8', '6','Nothing'] },
-            { image: 'images/nothing3.jpg', answer: 'Nothing', options: ['5', '7', '97','Nothing'] },
-            { image: 'images/nothing4.jpg', answer: 'Nothing', options: ['29', '45', '74','Nothing'] }
-        ];
+            var main = document.createElement("main");
+            var mainContainer = document.createElement("div");
+            mainContainer.classList.add("container");
 
-        const selectedQuestions = questions.sort(() => 0.5 - Math.random()).slice(0, 15);
-        let current = 0;
-        let score = 0;
+            var h1 = document.createElement("h1");
+            h1.textContent = "Color Blindness Test";
+            mainContainer.appendChild(h1);
 
-        const testContainer = document.createElement("div");
-        testContainer.classList.add("test-container");
-        mainContainer.appendChild(testContainer);
 
-        function renderQuestion(container) {
-        if (current >= selectedQuestions.length) {
+            
+
+            main.appendChild(mainContainer);
+            body.appendChild(main); // 
+
+
+            
+
+            const questions = [
+                { image: 'images/ishihara12.jpg', answer: '12', options: ['12', '8', '6', 'Nothing'] },
+                { image: 'images/ishihara8.jpg', answer: '8', options: ['8', '3', '5', 'Nothing'] },
+                { image: 'images/ishihara6.jpg', answer: '6', options: ['6', '2', '9', 'Nothing'] },
+                { image: 'images/ishihara29.jpg', answer: '29', options: ['29', '70', '45', 'Nothing'] },
+                { image: 'images/ishihara57.jpg', answer: '57', options: ['51', '31', '57', 'Nothing'] },
+                { image: 'images/ishihara5.jpg', answer: '5', options: ['3', '5', '8', 'Nothing'] },
+                { image: 'images/ishihara3.jpg', answer: '3', options: ['8', '13', '3', 'Nothing'] },
+                { image: 'images/ishihara15.jpg', answer: '15', options: ['15', '5', '16', 'Nothing'] },
+                { image: 'images/ishihara74.jpg', answer: '74', options: ['14', '74', '44', 'Nothing'] },
+                { image: 'images/ishiharaOther6.jpg', answer: '6', options: ['6', '2', '9', 'Nothing'] },
+                { image: 'images/ishihara97.jpg', answer: '97', options: ['97', '17', '27', 'Nothing'] },
+                { image: 'images/ishihara45.jpg', answer: '45', options: ['45', '74', '12', 'Nothing'] },
+                { image: 'images/ishiharaOther5.jpg', answer: '5', options: ['5', '3', '6', 'Nothing'] },
+                { image: 'images/ishihara7.jpg', answer: '7', options: ['7', '1', '4', 'Nothing'] },
+                { image: 'images/nothing1.jpg', answer: 'Nothing', options: ['29', '45', '74', 'Nothing'] },
+                { image: 'images/ishihara26.jpg', answer: '26', options: ['26', '62', '28', 'Nothing'] },
+                { image: 'images/ishihara42.jpg', answer: '42', options: ['48', '42', '12', 'Nothing'] },
+                { image: 'images/ishihara35.jpg', answer: '35', options: ['8', '53', '35', 'Nothing'] },
+                { image: 'images/ishihara96.jpg', answer: '96', options: ['69', '96', '86', 'Nothing'] },
+                { image: 'images/nothing2.jpg', answer: 'Nothing', options: ['12', '8', '6', 'Nothing'] },
+                { image: 'images/nothing3.jpg', answer: 'Nothing', options: ['5', '7', '97', 'Nothing'] },
+                { image: 'images/nothing4.jpg', answer: 'Nothing', options: ['29', '45', '74', 'Nothing'] }
+            ];
+
+            const selectedQuestions = questions.sort(() => 0.5 - Math.random()).slice(0, 15);
+            let current = 0;
+            let score = 0;
+
+            const testContainer = document.createElement("div");
+            testContainer.classList.add("test-container");
+            mainContainer.appendChild(testContainer);
+function getFeedback(score) {
+    if (score >= 13) {
+        return { text: "Excellent! You likely have normal color vision.", class: "excellent" };
+    } else if (score >= 9) {
+        return { text: "You might have mild color vision deficiency. Consider consulting an eye specialist.", class: "good" };
+    } else if (score >= 5) {
+        return { text: "Signs of moderate color vision deficiency detected. Further testing recommended.", class: "moderate" };
+    } else {
+        return { text: "You may have significant color vision deficiency. A professional test could provide clarity.", class: "low" };
+    }
+}
+
+const testWrapper = document.createElement("div");
+testWrapper.classList.add("test-wrapper"); // New container
+testContainer.appendChild(testWrapper); // Nest the existing test inside
+
+function renderQuestion(container) {
+    if (current >= selectedQuestions.length) {
+        const feedback = getFeedback(score);
         container.innerHTML = `
-            <h2>Test Completed</h2>
-            <p>Your score: ${score}/15</p>
-            <button onclick="location.reload()">Retake Test</button>
-            `;
-            return;
-         }
+            <div class="result-container ${feedback.class}">
+                <h2>Test Completed</h2>
+                <p>Your score: ${score}/15</p>
+                <p><strong>Feedback:</strong> ${feedback.text}</p>
+                <button onclick="location.reload()">Retake Test</button>
+            </div>
+        `;
+        return;
+    }
 
-        const q = selectedQuestions[current];
-        const shuffled = q.options.filter(opt => opt !== "Nothing").sort(() => 0.5 - Math.random());
-        shuffled.push("Nothing"); 
+    const q = selectedQuestions[current];
+    const shuffled = q.options.filter(opt => opt !== "Nothing").sort(() => 0.5 - Math.random());
+    shuffled.push("Nothing");
 
-        container.innerHTML = `
-    <p><strong>Question ${current + 1} of ${selectedQuestions.length}</strong></p>
-    <img src="${q.image}" alt="Ishihara Plate">
-    <div>
-        ${shuffled.map(opt => `<button class="option-btn">${opt}</button>`).join("")}
-    </div>
-`;
+    
 
+    container.innerHTML = `
+        <div class="test-wrapper">
+            <p><strong>Question ${current + 1} of ${selectedQuestions.length}</strong></p>
+            <img src="${q.image}" alt="Ishihara Plate">
+            <div>
+                ${shuffled.map(opt => `<button class="option-btn">${opt}</button>`).join("")}
+            </div>
+        </div>
+    `;
 
-        container.querySelectorAll(".option-btn").forEach(btn => {
+    container.querySelectorAll(".option-btn").forEach(btn => {
         btn.addEventListener("click", () => {
             if (btn.textContent === q.answer) score++;
             current++;
             renderQuestion(container);
-          });
         });
-    }
-
-
-        renderQuestion(testContainer);
-
-        // Footer
-        var footer = document.createElement("footer");
-        var footerContainer = document.createElement("div");
-        footerContainer.classList.add("container");
-
-        var copyright = document.createElement("div");
-        copyright.classList.add("copyright");
-        copyright.textContent = "© EyeQ 2025 all rights reserved. |";
-
-        var footerNav = document.createElement("nav");
-        var footerUl = document.createElement("ul");
-        var footerItems = [
-            { text: "Privacy |", link: "privacy.html" },
-            { text: "Terms |", link: "terms.html" },
-            { text: "Contact", link: "contact.html" }
-        ];
-
-        footerItems.forEach(function(item) {
-            var li = document.createElement("li");
-            var a = document.createElement("a");
-            a.href = item.link;
-            a.textContent = item.text;
-            li.appendChild(a);
-            footerUl.appendChild(li);
-        });
-
-        footerNav.appendChild(footerUl);
-        footerContainer.appendChild(copyright);
-        footerContainer.appendChild(footerNav);
-        footer.appendChild(footerContainer);
-        body.appendChild(footer);
     });
-</script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const startBtn = document.getElementById("start-test-btn");
+    const intro = document.getElementById("intro-section");
+    const test = document.getElementById("test-section");
+
+    startBtn.addEventListener("click", function () {
+        intro.style.display = "none";
+        test.style.display = "block";
+
+        // If your test setup is inside a function like startLanternTest(), call it here
+        // Example:
+        // startLanternTest();
+    });
+});
+
+}
+
+
+
+
+            renderQuestion(testContainer);
+
+            // Footer
+            var footer = document.createElement("footer");
+            var footerContainer = document.createElement("div");
+            footerContainer.classList.add("container");
+
+            var copyright = document.createElement("div");
+            copyright.classList.add("copyright");
+            copyright.textContent = "© EyeQ 2025 all rights reserved. |";
+
+            var footerNav = document.createElement("nav");
+            var footerUl = document.createElement("ul");
+            var footerItems = [
+                { text: "Privacy |", link: "privacy.html" },
+                { text: "Terms |", link: "terms.html" },
+                { text: "Contact", link: "contact.html" }
+            ];
+
+            footerItems.forEach(function (item) {
+                var li = document.createElement("li");
+                var a = document.createElement("a");
+                a.href = item.link;
+                a.textContent = item.text;
+                li.appendChild(a);
+                footerUl.appendChild(li);
+            });
+
+            footerNav.appendChild(footerUl);
+            footerContainer.appendChild(copyright);
+            footerContainer.appendChild(footerNav);
+            footer.appendChild(footerContainer);
+            body.appendChild(footer);
+        });
+    </script>
 
 </body>
+
 </html>

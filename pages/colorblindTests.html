@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EyeQ - About Us</title>
+    <title>EyeQ - Color Blindess Tests</title>
     <link rel="icon" type="image/png" href="images/eye-q-logo.png">
-    <link rel="stylesheet" href="styles/aboutStyle.css">
+    <link rel="stylesheet" href="styles/tests.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
@@ -67,18 +67,51 @@
             var mainContainer = document.createElement("div");
             mainContainer.classList.add("container");
 
-            var h1 = document.createElement("h1");
-            h1.textContent = "About us";
-            mainContainer.appendChild(h1);
 
-            var p1 = document.createElement("p");
-            p1.textContent = "At EyeQ, we offer online tests designed to help you assess whether you may have a vision deficiency. Our platform provides a set of interactive questions that can help you identify potential issues with your eyesight.";
-            mainContainer.appendChild(p1);
+            // Tests Section
+            const testsSection = document.createElement("section");
+            testsSection.classList.add("tests-section");
 
-            var p2 = document.createElement("p");
-            p2.textContent = "Please note, the results from the test are not a diagnosis, but a preliminary tool to help you determine if you should seek professional eye care. We recommend following up with an optometrist or healthcare provider for a full evaluation.";
-            mainContainer.appendChild(p2);
+            const testsContainer = document.createElement("div");
+            testsContainer.classList.add("container");
 
+            const h2 = document.createElement("h2");
+            h2.textContent = "Colorblind Tests";
+            testsContainer.appendChild(h2);
+
+            const testsGrid = document.createElement("div");
+            testsGrid.classList.add("tests-grid");
+
+            const testCards = [
+                { title: "Ishihara Test", img: "images/ishi.png", link: "colorBlindTest.html", desc: "Color vision assessment using plates with dotted patterns to identify red-green color blindness." },
+                { title: "Lantern Test", img: "images/lights.png", link: "lanternTest.html", desc: "Assesses color recognition in low-light conditions for occupational screening." },
+                
+            ];
+
+            testCards.forEach(test => {
+                const card = document.createElement("a");
+                card.href = test.link;
+                card.classList.add("test-card");
+
+                const cardTitle = document.createElement("h3");
+                cardTitle.textContent = test.title;
+                const cardImg = document.createElement("img");
+                cardImg.src = test.img;
+                cardImg.alt = test.title;
+                const cardDesc = document.createElement("p");
+                cardDesc.textContent = test.desc;
+
+                card.appendChild(cardTitle);
+                card.appendChild(cardImg);
+                card.appendChild(cardDesc);
+                testsGrid.appendChild(card);
+            });
+
+            testsContainer.appendChild(testsGrid);
+            testsSection.appendChild(testsContainer);
+            body.appendChild(testsSection);
+
+            
             main.appendChild(mainContainer);
             body.appendChild(main);
 

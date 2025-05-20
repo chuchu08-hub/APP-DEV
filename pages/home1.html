@@ -1,224 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EyeQ - Home</title>
-    <link rel="icon" type="image/png" href="images/eye-q-logo.png"> 
+    <link rel="icon" type="image/png" href="images/eye-q-logo.png">
     <link rel="stylesheet" href="styles/home1Style.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const body = document.body;
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const body = document.body;
 
-    // Header
-    const header = document.createElement("header");
-    const headerContainer = document.createElement("div");
-    headerContainer.classList.add("container");
+            // Header
+            const header = document.createElement("header");
+            const headerContainer = document.createElement("div");
+            headerContainer.classList.add("container");
 
-    const logo = document.createElement("div");
-    logo.classList.add("logo");
-    const logoLink = document.createElement("a");
-    logoLink.href = "home1.html";
-    const logoImg = document.createElement("img");
-    logoImg.src = "images/eye-q-logo.png";
-    logoImg.alt = "EyeQ Logo";
-    logoLink.appendChild(logoImg);
-    logo.appendChild(logoLink);
+            const logo = document.createElement("div");
+            logo.classList.add("logo");
+            const logoLink = document.createElement("a");
+            logoLink.href = "home1.html";
+            const logoImg = document.createElement("img");
+            logoImg.src = "images/eye-q-logo.png";
+            logoImg.alt = "EyeQ Logo";
+            logoLink.appendChild(logoImg);
+            logo.appendChild(logoLink);
 
-    const nav = document.createElement("nav");
-    const ul = document.createElement("ul");
-    const menuItems = [
-        { text: "About", link: "about.html" },
-        { text: "Eye Conditions", link: "eyeConditions.html" },
-        { text: "Eye Tests", link: "eyeTest.html" },
-        { text: "FAQs", link: "FAQS.html" },
-        { text: "Articles", link: "articles.html" }
-    ];
+            const nav = document.createElement("nav");
+            const ul = document.createElement("ul");
+            const menuItems = [
+                { text: "About", link: "about.html" },
+                { text: "Eye Conditions", link: "eyeConditions.html" },
+                { text: "Eye Tests", link: "eyeTest.html" },
+                { text: "FAQs", link: "FAQS.html" },
+                { text: "Articles", link: "articles.html" }
+            ];
 
-    menuItems.forEach(item => {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.href = item.link;
-        a.textContent = item.text;
-        li.appendChild(a);
-        ul.appendChild(li);
-    });
+            menuItems.forEach(item => {
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.href = item.link;
+                a.textContent = item.text;
+                li.appendChild(a);
+                ul.appendChild(li);
+            });
 
-    nav.appendChild(ul);
-    headerContainer.appendChild(logo);
-    headerContainer.appendChild(nav);
-    header.appendChild(headerContainer);
-    body.appendChild(header);
+            nav.appendChild(ul);
+            headerContainer.appendChild(logo);
+            headerContainer.appendChild(nav);
+            header.appendChild(headerContainer);
+            body.appendChild(header);
 
-  
+            const bannerContainer = document.createElement("div");
+            bannerContainer.classList.add("hero-banner");
+            const bannerImage = document.createElement("img");
 
+            const imageSources = [
 
+                "images/banner1.png",
 
+                "images/banner2.png",
 
-const bannerContainer = document.createElement("div");
-bannerContainer.classList.add("hero-banner");
+                "images/banner3.png"
 
+            ];
 
-const bannerImage = document.createElement("img");
+            let currentIndex = 0;
 
+            bannerImage.src = imageSources[currentIndex];
 
-const imageSources = [
-    "images/banner1.png", 
-    "images/banner2.png", 
-    "images/banner3.png" 
-];
+            bannerImage.alt = "Website Banner";
 
+            bannerContainer.appendChild(bannerImage);
 
-let currentIndex = 0;
+            body.appendChild(bannerContainer);
 
+            let slideshowInterval;
+            const intervalDuration = 2000;
+            function showNextSlide() {
+                currentIndex++;
+                if (currentIndex >= imageSources.length) {
 
-bannerImage.src = imageSources[currentIndex];
-bannerImage.alt = "Website Banner"; 
+                    currentIndex = 0;
 
-bannerContainer.appendChild(bannerImage);
+                }
+                bannerImage.src = imageSources[currentIndex];
 
+            }
+            function startSlideshow() {
 
+                clearInterval(slideshowInterval);
 
-body.appendChild(bannerContainer);
+                slideshowInterval = setInterval(showNextSlide, intervalDuration);
 
+            }
+            function pauseSlideshow() {
 
+                clearInterval(slideshowInterval);
 
-let slideshowInterval; 
-const intervalDuration = 2000; 
+            }
+            startSlideshow();
+            bannerContainer.addEventListener("mouseenter", () => {
 
+                pauseSlideshow();
 
-function showNextSlide() {
-    currentIndex++;
+            });
 
-    if (currentIndex >= imageSources.length) {
-        currentIndex = 0;
-    }
-  
-    bannerImage.src = imageSources[currentIndex];
-}
+            bannerContainer.addEventListener("mouseleave", () => {
+                startSlideshow();
 
+            });
+            // Tests Section
+            const testsSection = document.createElement("section");
+            testsSection.classList.add("tests-section");
 
-function startSlideshow() {
-    
-    clearInterval(slideshowInterval);
-    slideshowInterval = setInterval(showNextSlide, intervalDuration);
-}
+            const testsContainer = document.createElement("div");
+            testsContainer.classList.add("container");
 
+            const h2 = document.createElement("h2");
+            h2.textContent = "Tests we offer:";
+            testsContainer.appendChild(h2);
 
-function pauseSlideshow() {
-    clearInterval(slideshowInterval);
-}
+            const testsGrid = document.createElement("div");
+            testsGrid.classList.add("tests-grid");
 
+            const testCards = [
+                { title: "Color Blind Test", img: "images/colorblindtest.jpg", link: "colorBlindTests.html", desc: "Quickly assess your ability to perceive different colors." },
+                { title: "Distance Vision Test", img: "images/distancevision.jpg", link: "distanceVisionTests.html", desc: "Check your sharpness of vision for far-away objects." },
+                { title: "Near Vision Test", img: "images/nearvision.jpg", link: "nearVisionTests.html", desc: "Evaluate your ability to see clearly up close." }
+            ];
 
-startSlideshow();
+            testCards.forEach(test => {
+                const card = document.createElement("a");
+                card.href = test.link;
+                card.classList.add("test-card");
 
+                const cardTitle = document.createElement("h3");
+                cardTitle.textContent = test.title;
+                const cardImg = document.createElement("img");
+                cardImg.src = test.img;
+                cardImg.alt = test.title;
+                const cardDesc = document.createElement("p");
+                cardDesc.textContent = test.desc;
 
+                card.appendChild(cardTitle);
+                card.appendChild(cardImg);
+                card.appendChild(cardDesc);
+                testsGrid.appendChild(card);
+            });
 
+            testsContainer.appendChild(testsGrid);
+            testsSection.appendChild(testsContainer);
+            body.appendChild(testsSection);
 
-bannerContainer.addEventListener("mouseenter", () => {
-    pauseSlideshow(); 
-});
+            // CTA Banner
+            const ctaBanner = document.createElement("section");
+            ctaBanner.classList.add("cta-banner");
 
+            const ctaContainer = document.createElement("div");
+            ctaContainer.classList.add("container");
 
-bannerContainer.addEventListener("mouseleave", () => {
-    startSlideshow(); 
-});
+            const ctaText = document.createElement("p");
+            ctaText.textContent = "To see is to believe—start with clearer vision today.";
 
-    // Tests Section
-    const testsSection = document.createElement("section");
-    testsSection.classList.add("tests-section");
+            ctaContainer.appendChild(ctaText);
+            ctaBanner.appendChild(ctaContainer);
+            body.appendChild(ctaBanner);
 
-    const testsContainer = document.createElement("div");
-    testsContainer.classList.add("container");
+            // Footer
+            const footer = document.createElement("footer");
+            const footerContainer = document.createElement("div");
+            footerContainer.classList.add("container");
 
-    const h2 = document.createElement("h2");
-    h2.textContent = "Tests we offer:";
-    testsContainer.appendChild(h2);
+            const copyright = document.createElement("div");
+            copyright.classList.add("copyright");
+            copyright.textContent = "© EyeQ 2025 all rights reserved. |";
 
-    const testsGrid = document.createElement("div");
-    testsGrid.classList.add("tests-grid");
+            const footerNav = document.createElement("nav");
+            const footerUl = document.createElement("ul");
 
-    const testCards = [
-        { title: "Color Blind Test", img: "images/colorblindtest.jpg", link: "colorBlindTest.html", desc: "Quickly assess your ability to perceive different colors." },
-        { title: "Distance Vision Test", img: "images/distancevision.jpg", link: "distanceVisionTest.html", desc: "Check your sharpness of vision for far-away objects." },
-        { title: "Near Vision Test", img: "images/nearvision.jpg", link: "nearVisionTest.html", desc: "Evaluate your ability to see clearly up close." }
-    ];
+            const footerItems = [
+                { text: "Privacy |", link: "privacy.html" },
+                { text: "Terms |", link: "terms.html" },
+                { text: "Contact", link: "contact.html" }
+            ];
 
-    testCards.forEach(test => {
-        const card = document.createElement("a");
-        card.href = test.link;
-        card.classList.add("test-card");
+            footerItems.forEach(item => {
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.href = item.link;
+                a.textContent = item.text;
+                li.appendChild(a);
+                footerUl.appendChild(li);
+            });
 
-        const cardTitle = document.createElement("h3");
-        cardTitle.textContent = test.title;
-        const cardImg = document.createElement("img");
-        cardImg.src = test.img;
-        cardImg.alt = test.title;
-        const cardDesc = document.createElement("p");
-        cardDesc.textContent = test.desc;
-
-        card.appendChild(cardTitle);
-        card.appendChild(cardImg);
-        card.appendChild(cardDesc);
-        testsGrid.appendChild(card);
-    });
-
-    testsContainer.appendChild(testsGrid);
-    testsSection.appendChild(testsContainer);
-    body.appendChild(testsSection);
-
-    // CTA Banner
-    const ctaBanner = document.createElement("section");
-    ctaBanner.classList.add("cta-banner");
-
-    const ctaContainer = document.createElement("div");
-    ctaContainer.classList.add("container");
-
-    const ctaText = document.createElement("p");
-    ctaText.textContent = "To see is to believe—start with clearer vision today.";
-
-    ctaContainer.appendChild(ctaText);
-    ctaBanner.appendChild(ctaContainer);
-    body.appendChild(ctaBanner);
-
-    // Footer
-    const footer = document.createElement("footer");
-    const footerContainer = document.createElement("div");
-    footerContainer.classList.add("container");
-
-    const copyright = document.createElement("div");
-    copyright.classList.add("copyright");
-    copyright.textContent = "© EyeQ 2025 all rights reserved. |";
-
-    const footerNav = document.createElement("nav");
-    const footerUl = document.createElement("ul");
-
-    const footerItems = [
-        { text: "Privacy |", link: "privacy.html" },
-        { text: "Terms |", link: "terms.html" },
-        { text: "Contact", link: "contact.html" }
-    ];
-
-    footerItems.forEach(item => {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.href = item.link;
-        a.textContent = item.text;
-        li.appendChild(a);
-        footerUl.appendChild(li);
-    });
-
-    footerNav.appendChild(footerUl);
-    footerContainer.appendChild(copyright);
-    footerContainer.appendChild(footerNav);
-    footer.appendChild(footerContainer);
-    body.appendChild(footer);
-});
-</script>
+            footerNav.appendChild(footerUl);
+            footerContainer.appendChild(copyright);
+            footerContainer.appendChild(footerNav);
+            footer.appendChild(footerContainer);
+            body.appendChild(footer);
+        });
+    </script>
 
 </body>
+
 </html>

@@ -1,40 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EyeQ - FAQs</title>
-    <link rel="icon" type="image/png" href="images/eye-q-logo.png"> 
+    <link rel="icon" type="image/png" href="images/eye-q-logo.png">
     <link rel="stylesheet" href="styles/FAQsStyle.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Open Sans', sans-serif;
         }
+
         .faq-item h2 {
             cursor: pointer;
             position: relative;
         }
+
         .faq-item h2::after {
             content: '+';
             position: absolute;
             right: 0;
             font-weight: bold;
         }
+
         .faq-item.open h2::after {
             content: '−';
         }
+
         .faq-item p {
             display: none;
             margin-top: 0.5em;
             color: #333;
         }
+
         .faq-item.open p {
             display: block;
         }
-        
     </style>
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -43,7 +49,7 @@
                     <img src="images/eye-q-logo.png" alt="EyeQ Logo">
                 </a>
             </div>
-            
+
             <nav>
                 <ul>
                     <li><a href="about.html">About</a></li>
@@ -59,46 +65,56 @@
     <main>
         <div class="container">
             <h1>FAQs (Frequently Asked Questions)</h1>
-            <p>Welcome to EyeQ. Have a question? Check out our FAQ section for helpful answers! By using our app, you're agreeing to the terms mentioned here, so feel free to read through to make sure you're all set.</p>
+            <p>Welcome to EyeQ. Have a question? Check out our FAQ section for helpful answers! By using our app, you're
+                agreeing to the terms mentioned here, so feel free to read through to make sure you're all set.</p>
 
             <div class="faq-item">
                 <h2>1. Who can use this eye test?</h2>
-                <p>By accessing or using EyeQ, you agree to these Terms and our Privacy Policy. If you do not agree, please do not use the app.</p>
+                <p>By accessing or using EyeQ, you agree to these Terms and our Privacy Policy. If you do not agree,
+                    please do not use the app.</p>
             </div>
 
             <div class="faq-item">
                 <h2>2. How accurate are the results?</h2>
-                <p>The results from EyeQ can provide a general idea of your eye health, but they are not a substitute for a professional eye exam. For a complete diagnosis, it's best to visit an eye care provider.</p>
+                <p>The results from EyeQ can provide a general idea of your eye health, but they are not a substitute
+                    for a professional eye exam. For a complete diagnosis, it's best to visit an eye care provider.</p>
             </div>
 
             <div class="faq-item">
                 <h2>3. Is this test suitable for people with existing eye conditions?</h2>
-                <p>While our eye test can detect common vision issues such as near-sightedness, far-sightedness, and colorblindness, individuals with more complex conditions should seek advice from an optometrist or ophthalmologist.</p>
+                <p>While our eye test can detect common vision issues such as near-sightedness, far-sightedness, and
+                    colorblindness, individuals with more complex conditions should seek advice from an optometrist or
+                    ophthalmologist.</p>
             </div>
 
             <div class="faq-item">
                 <h2>4. Do I need any special equipment to take the test?</h2>
-                <p>No special equipment is required. All you need is a device with a screen (phone, tablet, or computer) and a stable internet connection.</p>
+                <p>No special equipment is required. All you need is a device with a screen (phone, tablet, or computer)
+                    and a stable internet connection.</p>
             </div>
 
             <div class="faq-item">
                 <h2>5. Can children or people over 65 use the app?</h2>
-                <p>Currently, the app is designed for users between the ages of 18 and 45. If you're under 18 or over 65, please consult a healthcare professional for more personalized eyecare.</p>
+                <p>Currently, the app is designed for users between the ages of 18 and 45. If you're under 18 or over
+                    65, please consult a healthcare professional for more personalized eyecare.</p>
             </div>
 
             <div class="faq-item">
                 <h2>6. How often should I take this test?</h2>
-                <p>We recommend taking the test every 6-12 months to monitor your eye health. However, if you notice any significant changes in your vision, please consult an eye care professional immediately.</p>
+                <p>We recommend taking the test every 6-12 months to monitor your eye health. However, if you notice any
+                    significant changes in your vision, please consult an eye care professional immediately.</p>
             </div>
 
             <div class="faq-item">
                 <h2>7. What should I do if I have difficulty completing the test?</h2>
-                <p>If you have trouble reading the test or experience discomfort during it, stop immediately and consult an eye care provider for further guidance.</p>
+                <p>If you have trouble reading the test or experience discomfort during it, stop immediately and consult
+                    an eye care provider for further guidance.</p>
             </div>
 
             <div class="faq-item">
                 <h2>8. Are the test results private?</h2>
-                <p>Yes, your privacy is important to us. All your test results are kept confidential and are not shared with third parties without your consent.</p>
+                <p>Yes, your privacy is important to us. All your test results are kept confidential and are not shared
+                    with third parties without your consent.</p>
             </div>
         </div>
 
@@ -120,7 +136,7 @@
     </footer>
 
     <script>
-        
+
         document.querySelectorAll('.faq-item h2').forEach(header => {
             header.addEventListener('click', () => {
                 header.parentElement.classList.toggle('open');
@@ -128,4 +144,5 @@
         });
     </script>
 </body>
+
 </html>
