@@ -2,11 +2,15 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EyeQ - Color Blind Test</title>
+
     <link rel="icon" type="image/png" href="images/eye-q-logo.png">
+
     <link rel="stylesheet" href="styles/aboutStyle.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -23,7 +27,7 @@
         .test-container {
             text-align: center;
             margin-top: 30px;
-            margin-bottom: 40px; 
+            margin-bottom: 40px;
         }
 
         img {
@@ -32,73 +36,70 @@
         }
 
         .test-wrapper {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-.result-container {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
 
-.excellent {
-    background-color: #4CAF50; /* Green */
-    color: white;
-}
+        .result-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
 
-.good {
-    background-color: #FFD700; /* Gold */
-    color: black;
-}
+        .excellent {
+            background-color: #4CAF50;
+            color: white;
+        }
 
-.moderate {
-    background-color: #FF8C00; /* Orange */
-    color: white;
-}
+        .good {
+            background-color: #FFD700;
+            color: black;
+        }
 
-.low {
-    background-color: #FF0000; /* Red */
-    color: white;
-}
+        .moderate {
+            background-color: #FF8C00;
+            color: white;
+        }
 
-.intro-container {
-    text-align: center;
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    background-color: #e3f2fd; /* Light blue background */
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
+        .low {
+            background-color: #FF0000;
+            color: white;
+        }
 
+        .intro-container {
+            text-align: center;
+            max-width: 600px;
+            margin: auto;
+            padding: 30px;
+            background-color: #e3f2fd;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+        }
 
-
-
-
+        #test-section {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
-
-
-
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            
             var body = document.body;
-            var mainContainer = document.querySelector(".container");
+            var mainContainer = document.createElement("div");
+            mainContainer.classList.add("container");
+            body.appendChild(mainContainer);
 
-            
-            // Header
             var header = document.createElement("header");
             var headerContainer = document.createElement("div");
             headerContainer.classList.add("container");
@@ -126,8 +127,6 @@
                 "Eye Tests": "eyeTest.html",
                 "FAQs": "FAQS.html",
                 "Articles": "articles.html"
-
-            
             };
 
             menuItems.forEach(function (item) {
@@ -143,25 +142,38 @@
             headerContainer.appendChild(logo);
             headerContainer.appendChild(nav);
             header.appendChild(headerContainer);
-            body.appendChild(header);
-
+            body.prepend(header);
 
             var main = document.createElement("main");
-            var mainContainer = document.createElement("div");
-            mainContainer.classList.add("container");
+            main.appendChild(mainContainer);
+            body.appendChild(main);
 
             var h1 = document.createElement("h1");
             h1.textContent = "Color Blindness Test";
             mainContainer.appendChild(h1);
 
+            const introSection = document.createElement("section");
+            introSection.id = "intro-section";
+            introSection.classList.add("intro-container");
+            introSection.innerHTML = `
+                <h2>Instructions</h2>
+                <p>Welcome to the EyeQ Color Blind Test! This test uses Ishihara plates to help determine if you have a color vision deficiency.</p>
+                <p>Please read the following instructions carefully before you begin:</p>
+                <ul>
+                    <li>You will be shown a series of **15 plates**.</li>
+                    <li>For each plate, you need to identify the **number or pattern** you see.</li>
+                    <li>If you don't see any number or pattern, select the **"Nothing"** option.</li>
+                    <li>Try to complete the test in a well-lit environment.</li>
+                    <li>Answer honestly for the most accurate results.</li>
+                </ul>
+                <button id="start-test-btn">Start Test</button>
+            `;
+            mainContainer.appendChild(introSection);
 
-            
-
-            main.appendChild(mainContainer);
-            body.appendChild(main); // 
-
-
-            
+            const testSection = document.createElement("section");
+            testSection.id = "test-section";
+            testSection.classList.add("test-container");
+            mainContainer.appendChild(testSection);
 
             const questions = [
                 { image: 'images/ishihara12.jpg', answer: '12', options: ['12', '8', '6', 'Nothing'] },
@@ -192,86 +204,62 @@
             let current = 0;
             let score = 0;
 
-            const testContainer = document.createElement("div");
-            testContainer.classList.add("test-container");
-            mainContainer.appendChild(testContainer);
-function getFeedback(score) {
-    if (score >= 13) {
-        return { text: "Excellent! You likely have normal color vision.", class: "excellent" };
-    } else if (score >= 9) {
-        return { text: "You might have mild color vision deficiency. Consider consulting an eye specialist.", class: "good" };
-    } else if (score >= 5) {
-        return { text: "Signs of moderate color vision deficiency detected. Further testing recommended.", class: "moderate" };
-    } else {
-        return { text: "You may have significant color vision deficiency. A professional test could provide clarity.", class: "low" };
-    }
-}
+            function getFeedback(score) {
+                if (score >= 13) {
+                    return { text: "Excellent! You likely have normal color vision.", class: "excellent" };
+                } else if (score >= 9) {
+                    return { text: "You might have mild color vision deficiency. Consider consulting an eye specialist.", class: "good" };
+                } else if (score >= 5) {
+                    return { text: "Signs of moderate color vision deficiency detected. Further testing recommended.", class: "moderate" };
+                } else {
+                    return { text: "You may have significant color vision deficiency. A professional test could provide clarity.", class: "low" };
+                }
+            }
 
-const testWrapper = document.createElement("div");
-testWrapper.classList.add("test-wrapper"); // New container
-testContainer.appendChild(testWrapper); // Nest the existing test inside
+            function renderQuestion() {
+                if (current >= selectedQuestions.length) {
+                    const feedback = getFeedback(score);
+                    testSection.innerHTML = `
+                        <div class="result-container ${feedback.class}">
+                            <h2>Test Completed</h2>
+                            <p>Your score: ${score}/15</p>
+                            <p><strong>Feedback:</strong> ${feedback.text}</p>
+                            <button onclick="location.reload()">Retake Test</button>
+                        </div>
+                    `;
+                    return;
+                }
 
-function renderQuestion(container) {
-    if (current >= selectedQuestions.length) {
-        const feedback = getFeedback(score);
-        container.innerHTML = `
-            <div class="result-container ${feedback.class}">
-                <h2>Test Completed</h2>
-                <p>Your score: ${score}/15</p>
-                <p><strong>Feedback:</strong> ${feedback.text}</p>
-                <button onclick="location.reload()">Retake Test</button>
-            </div>
-        `;
-        return;
-    }
+                const q = selectedQuestions[current];
+                const shuffled = q.options.filter(opt => opt !== "Nothing").sort(() => 0.5 - Math.random());
+                shuffled.push("Nothing");
 
-    const q = selectedQuestions[current];
-    const shuffled = q.options.filter(opt => opt !== "Nothing").sort(() => 0.5 - Math.random());
-    shuffled.push("Nothing");
+                testSection.innerHTML = `
+                    <div class="test-wrapper">
+                        <p><strong>Question ${current + 1} of ${selectedQuestions.length}</strong></p>
+                        <img src="${q.image}" alt="Ishihara Plate">
+                        <div>
+                            ${shuffled.map(opt => `<button class="option-btn">${opt}</button>`).join("")}
+                        </div>
+                    </div>
+                `;
 
-    
+                testSection.querySelectorAll(".option-btn").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        if (btn.textContent === q.answer) score++;
+                        current++;
+                        renderQuestion();
+                    });
+                });
+            }
 
-    container.innerHTML = `
-        <div class="test-wrapper">
-            <p><strong>Question ${current + 1} of ${selectedQuestions.length}</strong></p>
-            <img src="${q.image}" alt="Ishihara Plate">
-            <div>
-                ${shuffled.map(opt => `<button class="option-btn">${opt}</button>`).join("")}
-            </div>
-        </div>
-    `;
+            const startBtn = document.getElementById("start-test-btn");
+            startBtn.addEventListener("click", function () {
+                introSection.style.display = "none";
+                testSection.style.display = "block";
+                renderQuestion();
+            });
 
-    container.querySelectorAll(".option-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-            if (btn.textContent === q.answer) score++;
-            current++;
-            renderQuestion(container);
-        });
-    });
-
-    document.addEventListener("DOMContentLoaded", function () {
-    const startBtn = document.getElementById("start-test-btn");
-    const intro = document.getElementById("intro-section");
-    const test = document.getElementById("test-section");
-
-    startBtn.addEventListener("click", function () {
-        intro.style.display = "none";
-        test.style.display = "block";
-
-        // If your test setup is inside a function like startLanternTest(), call it here
-        // Example:
-        // startLanternTest();
-    });
-});
-
-}
-
-
-
-
-            renderQuestion(testContainer);
-
-            // Footer
             var footer = document.createElement("footer");
             var footerContainer = document.createElement("div");
             footerContainer.classList.add("container");
@@ -304,7 +292,6 @@ function renderQuestion(container) {
             body.appendChild(footer);
         });
     </script>
-
 </body>
 
 </html>
