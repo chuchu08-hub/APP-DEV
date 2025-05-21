@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eye Acuity Test</title>
-   
+
     <link rel="stylesheet" href="styles/acuityStyle.css">
 </head>
 
@@ -188,7 +188,7 @@
         let currentLandoltCSize = 25;
         let score = 0;
         let attempts = 0;
-        const maxAttempts = 5;
+        const maxAttempts = 10;
 
         function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(section => {
@@ -241,7 +241,7 @@
         function initTest() {
             attempts = 0;
             score = 0;
-            currentLandoltCSize = 25;
+            currentLandoltCSize = 38;
             messageBoxElement.textContent = '';
             messageBoxElement.className = 'message-box';
             nextTestShapeButton.style.display = 'none';
@@ -363,21 +363,26 @@
         }
 
         function showResults() {
-            document.getElementById('leftEyeResult').textContent = `Left Eye Score: ${leftEyeScore} out of ${maxAttempts}`;
-            document.getElementById('leftEyeResult').className = 'message-box ' + (leftEyeScore > maxAttempts / 2 ? 'correct' : 'incorrect');
+            const leftEyePercentage = (leftEyeScore / maxAttempts) * 100;
+            const rightEyePercentage = (rightEyeScore / maxAttempts) * 100;
 
-            document.getElementById('rightEyeResult').textContent = `Right Eye Score: ${rightEyeScore} out of ${maxAttempts}`;
-            document.getElementById('rightEyeResult').className = 'message-box ' + (rightEyeScore > maxAttempts / 2 ? 'correct' : 'incorrect');
+            document.getElementById('leftEyeResult').textContent = `Left Eye Acuity: ${leftEyePercentage.toFixed(0)}%`;
+            document.getElementById('leftEyeResult').className = 'message-box ' + (leftEyePercentage >= 60 ? 'correct' : 'incorrect');
+
+            document.getElementById('rightEyeResult').textContent = `Right Eye Acuity: ${rightEyePercentage.toFixed(0)}%`;
+            document.getElementById('rightEyeResult').className = 'message-box ' + (rightEyePercentage >= 60 ? 'correct' : 'incorrect');
 
             const overallResultBox = document.getElementById('overallResult');
             let overallMessage = '';
-            if (leftEyeScore >= maxAttempts * 0.8 && rightEyeScore >= maxAttempts * 0.8) {
+            const averagePercentage = (leftEyePercentage + rightEyePercentage) / 2;
+
+            if (averagePercentage >= 80) {
                 overallMessage = "Your visual acuity in both eyes seems to be excellent! You're seeing very clearly.";
                 overallResultBox.className = 'message-box correct';
-            } else if (leftEyeScore >= maxAttempts * 0.6 && rightEyeScore >= maxAttempts * 0.6) {
+            } else if (averagePercentage >= 60) {
                 overallMessage = "Your visual acuity in both eyes seems good. You're performing well, but a slight improvement might be possible.";
                 overallResultBox.className = 'message-box correct';
-            } else if (leftEyeScore >= maxAttempts * 0.4 || rightEyeScore >= maxAttempts * 0.4) {
+            } else if (averagePercentage >= 40) {
                 overallMessage = "Your visual acuity in one or both eyes appears fair. Consider consulting an eye care professional for a more thorough check-up.";
                 overallResultBox.className = 'message-box incorrect';
             } else {
