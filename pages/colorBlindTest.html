@@ -92,21 +92,20 @@
             color: white;
         }
 
-        /* Styles for the buttons (Start Test and Retake Test) */
-        .action-button { /* New class for common button styles */
-            padding: 15px 30px; /* Make it bigger */
-            font-size: 20px; /* Larger font size */
-            background-color: #007bff; /* Blue color */
+        .action-button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #007bff;
             color: white;
             border: none;
-            border-radius: 8px; /* Slightly more rounded */
+            border-radius: 8px;
             cursor: pointer;
-            margin-top: 20px; /* Space from content above */
+            margin-top: 20px;
             transition: background-color 0.3s ease;
         }
 
         .action-button:hover {
-            background-color: #0056b3; /* Darker blue on hover */
+            background-color: #0056b3;
         }
 
 
@@ -253,12 +252,14 @@
 
             function renderQuestion() {
                 if (current >= selectedQuestions.length) {
+                    const totalQuestions = selectedQuestions.length;
+                    const percentage = ((score / totalQuestions) * 100).toFixed(0);
                     const feedback = getFeedback(score);
                     testSection.innerHTML = `
                         <div class="result-container">
                             <h2>Test Completed</h2>
                             <div class="score-feedback">
-                                <p><span class="score-highlight ${feedback.class}">Your score: ${score}/15</span></p>
+                                <p>You answered <span class="score-highlight ${feedback.class}">${score} out of ${totalQuestions} questions correctly (${percentage}%)</span></p>
                                 <p><strong>Feedback:</strong> ${feedback.text}</p>
                             </div>
                             <button class="action-button" onclick="location.reload()">Retake Test</button>

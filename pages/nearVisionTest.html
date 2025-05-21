@@ -81,6 +81,9 @@
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .test-title {
@@ -112,56 +115,78 @@
             margin-bottom: 8px;
         }
 
-        .chart {
-            border: 1px solid #ccc;
-            padding: 20px;
-            margin-bottom: 25px;
-            border-radius: 10px;
+        .chart-page {
+            width: 100%;
+            display: none;
             text-align: center;
-            background-color: #fdfdfd;
+            padding: 20px 0;
         }
 
-        .chart div {
-            margin: 5px 0;
+        .chart-page.active {
+            display: block;
+        }
+
+        .chart-line-label {
+            margin: 15px 0 5px 0;
             line-height: 1.2;
-        }
-
-        .select-title {
             font-weight: bold;
-            text-align: center;
-            margin-bottom: 15px;
-            color: #555;
+            font-size: 1.1rem;
+            color: #0056b3;
+        }
+        
+        .chart-sentence {
+            margin: 5px 0 15px 0;
+            line-height: 1.2;
+            font-weight: bold;
         }
 
-        .button-group {
+        .chart-page textarea {
+            width: 80%;
+            padding: 10px;
+            margin-top: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            resize: vertical;
+        }
+
+        .navigation-buttons {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
             justify-content: center;
-            margin-bottom: 25px;
+            gap: 20px;
+            margin-top: 30px;
         }
 
-        .button-group button {
-            padding: 10px 18px;
+        .navigation-buttons button {
+            padding: 10px 25px;
             border: none;
             border-radius: 5px;
-            background-color: #e9ecef;
+            background-color: #007bff;
+            color: #fff;
             cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-            color: #333;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .button-group button:hover {
-            background-color: #dee2e6;
+        .navigation-buttons button:hover {
+            background-color: #0056b3;
             transform: translateY(-1px);
         }
 
-        .button-group button:active {
+        .navigation-buttons button:active {
             transform: translateY(0);
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
         }
+        
+        .navigation-buttons button.secondary {
+            background-color: #6c757d;
+        }
+
+        .navigation-buttons button.secondary:hover {
+            background-color: #5a6268;
+        }
+
 
         .result-box {
             background-color: #6c757d;
@@ -172,11 +197,17 @@
             font-weight: bold;
             font-size: 1.1rem;
             transition: background-color 0.3s ease;
-            margin-bottom: 25px;
+            margin-top: 25px;
+            width: 100%;
+            box-sizing: border-box;
+            white-space: pre-wrap;
         }
 
         .result-box.success {
             background-color: #28a745;
+        }
+        .result-box.error {
+            background-color: #dc3545;
         }
 
         .interpretation-section {
@@ -185,6 +216,8 @@
             border-radius: 8px;
             padding: 20px;
             margin-top: 25px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .interpretation-section h3 {
@@ -355,15 +388,9 @@
                     <li><strong>Testing Each Eye:</strong>
                         <ul>
                             <li>Cover one eye completely with your hand or an opaque object without applying pressure to the eyelid.</li>
-                            <li>Read the text on the chart aloud, starting from the largest font size (Line 1) and moving downwards.</li>
-                            <li>Identify the smallest line of text you can read comfortably and accurately.</li>
-                            <li>Repeat the process for the other eye.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Recording Results:</strong>
-                        <ul>
-                            <li>Note the smallest line number you were able to read comfortably.</li>
-                            <li>Select the corresponding "Line" button below the chart to record your result.</li>
+                            <li>Read the text on the chart aloud. Then, <strong>type the sentence you read into the text field below.</strong></li>
+                            <li>Click "Submit Answer" if you believe you read it correctly, or "No, I can't read this" if you cannot.</li>
+                            <li>Repeat the process for the other eye after completing the first eye.</li>
                         </ul>
                     </li>
                     <li><strong>Important:</strong> This online test is for screening purposes only and cannot replace a comprehensive eye examination by an eye care professional. If you have concerns about your vision, please consult an optometrist or ophthalmologist.</li>
@@ -371,43 +398,156 @@
             `;
             testContainer.appendChild(instructions);
 
-            const chart = document.createElement("div");
-            chart.classList.add("chart");
-            testContainer.appendChild(chart);
+            const jaegerSentences = [
+                "Line 1: In a quiet forest, a tiny squirrel gathered nuts for winter.",
+                "Line 2: The old clock chimed softly, marking the passing of time.",
+                "Line 3: She painted a vibrant landscape, capturing the essence of spring.",
+                "Line 4: A gentle breeze rustled through the leaves of the ancient oak.",
+                "Line 5: He composed a beautiful melody, full of hope and tranquility.",
+                "Line 6: The children built a magnificent sandcastle by the shimmering sea.",
+                "Line 7: Sunlight filtered through the clouds, illuminating the valley.",
+                "Line 8: The mystery novel kept her engrossed until the very last page.",
+                "Line 9: Birds chirped sweetly from their nests high in the branches.",
+                "Line 10: Every small effort contributes to a greater positive outcome.",
+                "Line 11: True wisdom lies in understanding oneself and the world."
+            ];
 
-            const sampleText = "The quick brown fox jumps over the lazy dog.";
-            for (let i = 1; i <= 11; i++) {
-                const line = document.createElement("div");
-                line.textContent = `Line ${i}: ${sampleText}`;
-                line.style.fontSize = `${24 - i * 1.5}px`;
-                line.style.margin = "5px 0";
-                chart.appendChild(line);
-            }
+            const jaegerFontSizes = [
+                24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4
+            ];
 
-            const selectTitle = document.createElement("p");
-            selectTitle.classList.add("select-title");
-            selectTitle.textContent = "Select the lowest line you can read correctly with each eye:";
-            testContainer.appendChild(selectTitle);
+            let currentLineIndex = 0;
+            let currentEye = 'right';
+            let rightEyeResult = 0;
+            let leftEyeResult = 0;
 
-            const buttonGroup = document.createElement("div");
-            buttonGroup.classList.add("button-group");
-            testContainer.appendChild(buttonGroup);
+            const chartPage = document.createElement("div");
+            chartPage.classList.add("chart-page", "active");
+            testContainer.appendChild(chartPage);
+
+            const chartLineLabel = document.createElement("div");
+            chartLineLabel.classList.add("chart-line-label");
+            chartPage.appendChild(chartLineLabel);
+
+            const chartSentence = document.createElement("div");
+            chartSentence.classList.add("chart-sentence");
+            chartPage.appendChild(chartSentence);
+
+            const answerInput = document.createElement("textarea");
+            answerInput.placeholder = "Type the sentence you read here...";
+            answerInput.rows = 3;
+            chartPage.appendChild(answerInput);
+
+            const navigationButtons = document.createElement("div");
+            navigationButtons.classList.add("navigation-buttons");
+            testContainer.appendChild(navigationButtons);
+
+            const submitButton = document.createElement("button");
+            submitButton.textContent = "Submit Answer";
+            navigationButtons.appendChild(submitButton);
+
+            const cantReadButton = document.createElement("button");
+            cantReadButton.textContent = "No, I can't read this";
+            cantReadButton.classList.add("secondary");
+            navigationButtons.appendChild(cantReadButton);
 
             const resultBox = document.createElement("div");
             resultBox.classList.add("result-box");
-            resultBox.textContent = "Result: Please select a line.";
+            resultBox.textContent = "Please cover your left eye and try to read Line 1.";
             testContainer.appendChild(resultBox);
 
-            for (let i = 1; i <= 11; i++) {
-                const btn = document.createElement("button");
-                btn.textContent = `Line ${i}`;
-                btn.addEventListener("click", () => {
-                    resultBox.textContent = `Result: You can read Line ${i}`;
+            const jaegerPercentages = {
+                1: 100, 2: 95, 3: 90, 4: 85, 5: 80,
+                6: 75, 7: 70, 8: 60, 9: 50, 10: 40,
+                11: 30
+            };
+
+            function updateChart() {
+                answerInput.value = '';
+                answerInput.focus();
+
+                if (currentLineIndex < jaegerSentences.length) {
+                    const sentenceWithLabel = jaegerSentences[currentLineIndex];
+                    const labelMatch = sentenceWithLabel.match(/^(Line \d+):?\s*(.*)$/);
+                    let label = `Line ${currentLineIndex + 1} (${currentEye} eye):`;
+                    let sentence = sentenceWithLabel;
+
+                    if (labelMatch && labelMatch[2]) {
+                        label = `${labelMatch[1]} (${currentEye} eye):`;
+                        sentence = labelMatch[2].trim();
+                    } else {
+                        sentence = jaegerSentences[currentLineIndex];
+                    }
+
+                    chartLineLabel.textContent = label;
+                    chartSentence.textContent = sentence;
+                    chartSentence.style.fontSize = `${jaegerFontSizes[currentLineIndex]}px`;
+                    resultBox.textContent = `Reading Line ${currentLineIndex + 1} with your ${currentEye} eye.`;
+                    resultBox.classList.remove("success", "error");
+                    navigationButtons.style.display = 'flex';
+                } else {
+                    if (currentEye === 'right') {
+                        rightEyeResult = jaegerSentences.length;
+                        resultBox.textContent = `Right eye test completed. You read all lines! Now, please cover your right eye and try to read Line 1 with your left eye.`;
+                        currentEye = 'left';
+                        currentLineIndex = 0;
+                        setTimeout(updateChart, 1000);
+                    } else {
+                        leftEyeResult = jaegerSentences.length;
+                        displayFinalResults();
+                    }
+                }
+            }
+
+            function displayFinalResults() {
+                navigationButtons.style.display = 'none';
+                chartLineLabel.style.display = 'none';
+                chartSentence.style.display = 'none';
+                answerInput.style.display = 'none';
+
+                const rightEyePercentage = jaegerPercentages[rightEyeResult] || 0;
+                const leftEyePercentage = jaegerPercentages[leftEyeResult] || 0;
+
+                resultBox.textContent = `Test Complete!\n\nRight Eye: Smallest line read: Line ${rightEyeResult} (approx. ${rightEyePercentage}% of ideal near vision)\nLeft Eye: Smallest line read: Line ${leftEyeResult} (approx. ${leftEyePercentage}% of ideal near vision)\n\nRemember, this is a self-assessment. Please consult an eye care professional for a comprehensive examination.`;
+                resultBox.classList.add("success");
+                resultBox.classList.remove("error");
+            }
+
+            submitButton.addEventListener("click", () => {
+                const userAnswer = answerInput.value.trim().toLowerCase();
+                const correctSentenceWithLabel = jaegerSentences[currentLineIndex];
+                const correctSentenceMatch = correctSentenceWithLabel.match(/^(Line \d+):?\s*(.*)$/);
+                const correctSentence = correctSentenceMatch && correctSentenceMatch[2] ? correctSentenceMatch[2].trim().toLowerCase() : correctSentenceWithLabel.trim().toLowerCase();
+
+
+                if (userAnswer === correctSentence) {
+                    resultBox.textContent = `Correct! Advancing to the next line.`;
                     resultBox.classList.add("success");
                     resultBox.classList.remove("error");
-                });
-                buttonGroup.appendChild(btn);
-            }
+                    currentLineIndex++;
+                    setTimeout(updateChart, 1000);
+                } else {
+                    resultBox.textContent = `Incorrect. Please check your spelling or try again. If you truly cannot read it, click "No, I can't read this".`;
+                    resultBox.classList.add("error");
+                    resultBox.classList.remove("success");
+                }
+            });
+
+            cantReadButton.addEventListener("click", () => {
+                if (currentEye === 'right') {
+                    rightEyeResult = currentLineIndex + 1;
+                    resultBox.textContent = `Right eye test completed. Smallest line read: Line ${currentLineIndex + 1}. Now, please cover your right eye and try to read Line 1 with your left eye.`;
+                    currentEye = 'left';
+                    currentLineIndex = 0;
+                    setTimeout(updateChart, 1000);
+                } else {
+                    leftEyeResult = currentLineIndex + 1;
+                    displayFinalResults();
+                }
+            });
+
+            updateChart();
+
 
             const interpretationSection = document.createElement("div");
             interpretationSection.classList.add("interpretation-section");
