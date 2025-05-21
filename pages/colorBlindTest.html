@@ -92,20 +92,28 @@
             color: white;
         }
 
+        /* Styles for the buttons (Start Test and Retake Test) */
         .action-button {
+            /* New class for common button styles */
             padding: 15px 30px;
+            /* Make it bigger */
             font-size: 20px;
+            /* Larger font size */
             background-color: #007bff;
+            /* Blue color */
             color: white;
             border: none;
             border-radius: 8px;
+            /* Slightly more rounded */
             cursor: pointer;
             margin-top: 20px;
+            /* Space from content above */
             transition: background-color 0.3s ease;
         }
 
         .action-button:hover {
             background-color: #0056b3;
+            /* Darker blue on hover */
         }
 
 
@@ -237,6 +245,7 @@
             const selectedQuestions = questions.sort(() => 0.5 - Math.random()).slice(0, 15);
             let current = 0;
             let score = 0;
+            const totalQuestions = selectedQuestions.length; // Get the total number of questions
 
             function getFeedback(score) {
                 if (score >= 13) {
@@ -251,15 +260,14 @@
             }
 
             function renderQuestion() {
-                if (current >= selectedQuestions.length) {
-                    const totalQuestions = selectedQuestions.length;
-                    const percentage = ((score / totalQuestions) * 100).toFixed(0);
+                if (current >= totalQuestions) { // Use totalQuestions here
                     const feedback = getFeedback(score);
+                    const percentage = (score / totalQuestions) * 100; // Calculate percentage
                     testSection.innerHTML = `
                         <div class="result-container">
                             <h2>Test Completed</h2>
                             <div class="score-feedback">
-                                <p>You answered <span class="score-highlight ${feedback.class}">${score} out of ${totalQuestions} questions correctly (${percentage}%)</span></p>
+                                <p><span class="score-highlight ${feedback.class}">Your score: ${score}/${totalQuestions} (${percentage.toFixed(2)}%)</span></p>
                                 <p><strong>Feedback:</strong> ${feedback.text}</p>
                             </div>
                             <button class="action-button" onclick="location.reload()">Retake Test</button>
@@ -274,7 +282,7 @@
 
                 testSection.innerHTML = `
                     <div class="test-wrapper">
-                        <p><strong>Question ${current + 1} of ${selectedQuestions.length}</strong></p>
+                        <p><strong>Question ${current + 1} of ${totalQuestions}</strong></p>
                         <img src="${q.image}" alt="Ishihara Plate">
                         <div>
                             ${shuffled.map(opt => `<button class="option-btn">${opt}</button>`).join("")}

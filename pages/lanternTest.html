@@ -261,7 +261,7 @@
             font-size: 1em;
             cursor: pointer;
             margin-top: 15px;
-            background-color:blue;
+            background-color: blue;
             color: white;
             border: none;
             border-radius: 5px;
@@ -290,16 +290,19 @@
         .score-highlight {
             padding: 4px 8px;
             border-radius: 5px;
-            display: inline-block; /* Changed to inline-block to wrap content better */
+            display: inline-block;
+            /* Changed to inline-block to wrap content better */
             margin-bottom: 10px;
         }
 
         .score-line-highlight {
             padding: 4px 8px;
             border-radius: 5px;
-            display: block; /* Make it a block to highlight the whole line */
+            display: block;
+            /* Make it a block to highlight the whole line */
             margin-bottom: 10px;
-            text-align: center; /* Center the text within the highlighted block */
+            text-align: center;
+            /* Center the text within the highlighted block */
         }
 
         .score-line-highlight.excellent-score-bg {
@@ -505,11 +508,12 @@
             testResultsDiv.innerHTML = `
                 <h2>Test Complete!</h2>
                 <p id="final-score-sentence">Your score: <span id="final-score"></span> correct out of <span id="total-possible-score"></span>.</p>
-                <p id="test-feedback"></p>
+                <p id="percentage-score"></p> <p id="test-feedback"></p>
                 <button onclick="location.reload()" class="retake-button">Retake Test</button>
             `;
             const finalScoreSpan = testResultsDiv.querySelector('#final-score');
             const totalPossibleScoreSpan = testResultsDiv.querySelector('#total-possible-score');
+            const percentageScoreP = testResultsDiv.querySelector('#percentage-score'); // Get the new element
             const testFeedbackP = testResultsDiv.querySelector('#test-feedback');
             const finalScoreSentenceP = testResultsDiv.querySelector('#final-score-sentence'); // Get the new element
             main.appendChild(testResultsDiv);
@@ -738,9 +742,11 @@
                 if (totalPossibleScoreSpan) totalPossibleScoreSpan.textContent = totalPossibleScore;
 
                 const scorePercentage = (totalScore / totalPossibleScore) * 100;
+                if (percentageScoreP) percentageScoreP.textContent = `Percentage Score: ${scorePercentage.toFixed(2)}%`; // Display percentage
+
                 const feedback = getFeedback(scorePercentage);
                 testFeedbackP.textContent = `Overall: ${feedback.text}`;
-                
+
                 // Apply the highlight class to the entire paragraph
                 if (finalScoreSentenceP) {
                     finalScoreSentenceP.classList.add('score-line-highlight', feedback.class);
