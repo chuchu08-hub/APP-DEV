@@ -133,7 +133,7 @@
             font-size: 1.1rem;
             color: #0056b3;
         }
-        
+
         .chart-sentence {
             margin: 5px 0 15px 0;
             line-height: 1.2;
@@ -148,6 +148,9 @@
             border-radius: 5px;
             font-size: 1rem;
             resize: vertical;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
         }
 
         .navigation-buttons {
@@ -178,7 +181,7 @@
             transform: translateY(0);
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
         }
-        
+
         .navigation-buttons button.secondary {
             background-color: #6c757d;
         }
@@ -186,7 +189,6 @@
         .navigation-buttons button.secondary:hover {
             background-color: #5a6268;
         }
-
 
         .result-box {
             background-color: #6c757d;
@@ -206,9 +208,29 @@
         .result-box.success {
             background-color: #28a745;
         }
+
         .result-box.error {
             background-color: #dc3545;
         }
+
+        /* New CSS for feedback colors */
+        .result-box.good-vision {
+            background-color: #28a745;
+            /* Green */
+        }
+
+        .result-box.moderate-vision {
+            background-color: #ffc107;
+            /* Yellow */
+            color: #343a40;
+            /* Darker text for yellow background */
+        }
+
+        .result-box.poor-vision {
+            background-color: #dc3545;
+            /* Red */
+        }
+
 
         .interpretation-section {
             background-color: #f8f9fa;
@@ -388,7 +410,7 @@
                     <li><strong>Testing Each Eye:</strong>
                         <ul>
                             <li>Cover one eye completely with your hand or an opaque object without applying pressure to the eyelid.</li>
-                            <li>Read the text on the chart aloud. Then, <strong>type the sentence you read into the text field below.</strong></li>
+                            <li>Read the text on the chart aloud. Then, **type the sentence you read into the text field below.**</li>
                             <li>Click "Submit Answer" if you believe you read it correctly, or "No, I can't read this" if you cannot.</li>
                             <li>Repeat the process for the other eye after completing the first eye.</li>
                         </ul>
@@ -399,17 +421,17 @@
             testContainer.appendChild(instructions);
 
             const jaegerSentences = [
-                "Line 1: In a quiet forest, a tiny squirrel gathered nuts for winter.",
-                "Line 2: The old clock chimed softly, marking the passing of time.",
-                "Line 3: She painted a vibrant landscape, capturing the essence of spring.",
-                "Line 4: A gentle breeze rustled through the leaves of the ancient oak.",
-                "Line 5: He composed a beautiful melody, full of hope and tranquility.",
-                "Line 6: The children built a magnificent sandcastle by the shimmering sea.",
-                "Line 7: Sunlight filtered through the clouds, illuminating the valley.",
-                "Line 8: The mystery novel kept her engrossed until the very last page.",
-                "Line 9: Birds chirped sweetly from their nests high in the branches.",
-                "Line 10: Every small effort contributes to a greater positive outcome.",
-                "Line 11: True wisdom lies in understanding oneself and the world."
+                "In a quiet forest, a tiny squirrel gathered nuts for winter.", // Line 1 (J1) - largest font
+                "The old clock chimed softly, marking the passing of time.", // Line 2 (J2)
+                "She painted a vibrant landscape, capturing the essence of spring.", // Line 3 (J3)
+                "A gentle breeze rustled through the leaves of the ancient oak.", // Line 4 (J4)
+                "He composed a beautiful melody, full of hope and tranquility.", // Line 5 (J5)
+                "The children built a magnificent sandcastle by the shimmering sea.", // Line 6 (J6)
+                "Sunlight filtered through the clouds, illuminating the valley.", // Line 7 (J7)
+                "The mystery novel kept her engrossed until the very last page.", // Line 8 (J8)
+                "Birds chirped sweetly from their nests high in the branches.", // Line 9 (J9)
+                "Every small effort contributes to a greater positive outcome.", // Line 10 (J10)
+                "True wisdom lies in understanding oneself and the world." // Line 11 (J11) - smallest font
             ];
 
             const jaegerFontSizes = [
@@ -417,9 +439,9 @@
             ];
 
             let currentLineIndex = 0;
-            let currentEye = 'right';
-            let rightEyeResult = 0;
-            let leftEyeResult = 0;
+            let currentEye = 'right'; // Start with right eye
+            let rightEyeResult = 0; // Stores the smallest line number read successfully for the right eye
+            let leftEyeResult = 0;  // Stores the smallest line number read successfully for the left eye
 
             const chartPage = document.createElement("div");
             chartPage.classList.add("chart-page", "active");
@@ -456,96 +478,212 @@
             resultBox.textContent = "Please cover your left eye and try to read Line 1.";
             testContainer.appendChild(resultBox);
 
-            const jaegerPercentages = {
-                1: 100, 2: 95, 3: 90, 4: 85, 5: 80,
-                6: 75, 7: 70, 8: 60, 9: 50, 10: 40,
-                11: 30
-            };
-
             function updateChart() {
                 answerInput.value = '';
                 answerInput.focus();
 
+                resultBox.classList.remove("success", "error", "good-vision", "moderate-vision", "poor-vision");
+                // Remove the restart button if it's there
+                const restartBtn = navigationButtons.querySelector('.primary');
+                if (restartBtn) restartBtn.remove();
+
+                // Show test elements
+                chartLineLabel.style.display = 'block';
+                chartSentence.style.display = 'block';
+                answerInput.style.display = 'block';
+                submitButton.style.display = 'block';
+                cantReadButton.style.display = 'block';
+
+
                 if (currentLineIndex < jaegerSentences.length) {
-                    const sentenceWithLabel = jaegerSentences[currentLineIndex];
-                    const labelMatch = sentenceWithLabel.match(/^(Line \d+):?\s*(.*)$/);
-                    let label = `Line ${currentLineIndex + 1} (${currentEye} eye):`;
-                    let sentence = sentenceWithLabel;
-
-                    if (labelMatch && labelMatch[2]) {
-                        label = `${labelMatch[1]} (${currentEye} eye):`;
-                        sentence = labelMatch[2].trim();
-                    } else {
-                        sentence = jaegerSentences[currentLineIndex];
-                    }
-
-                    chartLineLabel.textContent = label;
+                    const sentence = jaegerSentences[currentLineIndex];
+                    chartLineLabel.textContent = `Line ${currentLineIndex + 1}:`;
                     chartSentence.textContent = sentence;
                     chartSentence.style.fontSize = `${jaegerFontSizes[currentLineIndex]}px`;
-                    resultBox.textContent = `Reading Line ${currentLineIndex + 1} with your ${currentEye} eye.`;
-                    resultBox.classList.remove("success", "error");
+                    resultBox.textContent = `Reading Line ${currentLineIndex + 1}.`;
                     navigationButtons.style.display = 'flex';
                 } else {
+                    // This block will be hit if the user reads ALL lines for the current eye
                     if (currentEye === 'right') {
-                        rightEyeResult = jaegerSentences.length;
+                        rightEyeResult = jaegerSentences.length; // User successfully read all lines
                         resultBox.textContent = `Right eye test completed. You read all lines! Now, please cover your right eye and try to read Line 1 with your left eye.`;
+                        resultBox.classList.add("good-vision");
+                        resultBox.classList.remove("success", "error"); // Remove default classes
                         currentEye = 'left';
-                        currentLineIndex = 0;
-                        setTimeout(updateChart, 1000);
+                        currentLineIndex = 0; // Reset for the next eye
+                        // Do not call setTimeout(updateChart, ...) here. Let the user initiate the left eye test.
+                        // Instead, just set the initial state for the next eye.
+                        chartLineLabel.textContent = `Line ${currentLineIndex + 1}:`;
+                        chartSentence.textContent = jaegerSentences[currentLineIndex];
+                        chartSentence.style.fontSize = `${jaegerFontSizes[currentLineIndex]}px`;
+                        answerInput.value = ''; // Clear input for the new eye test
                     } else {
-                        leftEyeResult = jaegerSentences.length;
-                        displayFinalResults();
+                        leftEyeResult = jaegerSentences.length; // User successfully read all lines for left eye too
+                        displayFinalResults(); // Proceed to final results
                     }
                 }
             }
 
+            function getVisionFeedback(lineRead) {
+                let feedback = "";
+                let colorClass = "";
+                const totalLines = jaegerSentences.length;
+                const percentage = Math.round((lineRead / totalLines) * 100);
+
+                // Jaeger chart J-values are typically smaller for better vision.
+                // Our 'lineRead' is 1-indexed (1-11) for successfully read lines.
+                // Line 0 indicates unable to read the first line.
+
+                if (lineRead >= 9) { // Equivalent to reading J1, J2, J3 (best vision)
+                    feedback = `Excellent near vision! You can comfortably read very fine print (J1-J3 equivalent). (${percentage}% of lines read)`;
+                    colorClass = "good-vision";
+                } else if (lineRead >= 6 && lineRead < 9) { // Equivalent to reading J4, J5, J6
+                    feedback = `Good near vision. You can read most common print sizes without significant difficulty (J4-J6 equivalent). (${percentage}% of lines read)`;
+                    colorClass = "good-vision";
+                } else if (lineRead >= 3 && lineRead < 6) { // Equivalent to reading J7, J8, J9
+                    feedback = `Moderate near vision. You may start to notice some blurriness with smaller print and might benefit from reading glasses (J7-J9 equivalent). (${percentage}% of lines read)`;
+                    colorClass = "moderate-vision";
+                } else if (lineRead > 0 && lineRead < 3) { // Equivalent to reading J10, J11 (poorer vision)
+                    feedback = `Poor near vision. You will likely struggle with most reading tasks and may require significant vision correction (J10-J11 equivalent). Please consult an eye care professional. (${percentage}% of lines read)`;
+                    colorClass = "poor-vision";
+                } else if (lineRead === 0) { // If user couldn't read even the first line (largest text)
+                    feedback = `It seems you had difficulty reading even the largest text. It's highly recommended to consult an eye care professional. (${percentage}% of lines read)`;
+                    colorClass = "poor-vision";
+                }
+                return { feedback, colorClass, percentage }; // Return percentage as well
+            }
+
             function displayFinalResults() {
-                navigationButtons.style.display = 'none';
+                // Hide all active test elements
                 chartLineLabel.style.display = 'none';
                 chartSentence.style.display = 'none';
                 answerInput.style.display = 'none';
+                submitButton.style.display = 'none';
+                cantReadButton.style.display = 'none';
 
-                const rightEyePercentage = jaegerPercentages[rightEyeResult] || 0;
-                const leftEyePercentage = jaegerPercentages[leftEyeResult] || 0;
+                // Determine the Jaeger line number the user *successfully* read (0-indexed array, so add 1 for line number)
+                const rightEyeLineNum = rightEyeResult;
+                const leftEyeLineNum = leftEyeResult;
 
-                resultBox.textContent = `Test Complete!\n\nRight Eye: Smallest line read: Line ${rightEyeResult} (approx. ${rightEyePercentage}% of ideal near vision)\nLeft Eye: Smallest line read: Line ${leftEyeResult} (approx. ${leftEyePercentage}% of ideal near vision)\n\nRemember, this is a self-assessment. Please consult an eye care professional for a comprehensive examination.`;
-                resultBox.classList.add("success");
-                resultBox.classList.remove("error");
+                const rightEyeFeedback = getVisionFeedback(rightEyeLineNum);
+                const leftEyeFeedback = getVisionFeedback(leftEyeLineNum);
+
+                resultBox.textContent = `Test Complete!\n\n` +
+                    `Right Eye: Smallest line read: ${rightEyeLineNum === 0 ? 'N/A (could not read first line)' : 'Line ' + rightEyeLineNum} (${rightEyeFeedback.percentage}%)\n` +
+                    `Feedback: ${rightEyeFeedback.feedback}\n\n` +
+                    `Left Eye: Smallest line read: ${leftEyeLineNum === 0 ? 'N/A (could not read first line)' : 'Line ' + leftEyeLineNum} (${leftEyeFeedback.percentage}%)\n` +
+                    `Feedback: ${leftEyeFeedback.feedback}\n\n` +
+                    `Remember, this is a self-assessment. Please consult an eye care professional for a comprehensive examination.`;
+
+                // Determine overall color for the final result box based on the 'worse' eye
+                let finalColorClass = "";
+                if (rightEyeLineNum >= 6 && leftEyeLineNum >= 6 && rightEyeLineNum > 0 && leftEyeLineNum > 0) {
+                    finalColorClass = "good-vision";
+                } else if ((rightEyeLineNum >= 3 && rightEyeLineNum < 6) || (leftEyeLineNum >= 3 && leftEyeLineNum < 6)) {
+                    finalColorClass = "moderate-vision";
+                } else {
+                    finalColorClass = "poor-vision";
+                }
+                resultBox.classList.add(finalColorClass);
+                resultBox.classList.remove("success", "error"); // Remove any other state classes
+
+                // Add the restart button
+                const restartButton = document.createElement("button");
+                restartButton.textContent = "Restart Test";
+                restartButton.classList.add("primary");
+                navigationButtons.appendChild(restartButton);
+
+                restartButton.addEventListener("click", restartTest);
+                navigationButtons.style.display = 'flex'; // Ensure buttons container is visible for the new button
             }
+
+            function restartTest() {
+                // Reset test state
+                currentLineIndex = 0;
+                currentEye = 'right';
+                rightEyeResult = 0;
+                leftEyeResult = 0;
+
+                // Reset display styles
+                chartLineLabel.style.display = 'block';
+                chartSentence.style.display = 'block';
+                answerInput.style.display = 'block';
+                submitButton.style.display = 'block';
+                cantReadButton.style.display = 'block';
+
+                // Remove restart button
+                const restartBtn = navigationButtons.querySelector(".primary");
+                if (restartBtn) {
+                    restartBtn.remove();
+                }
+
+                // Reset result box
+                resultBox.classList.remove("success", "error", "good-vision", "moderate-vision", "poor-vision");
+                resultBox.textContent = "Please cover your left eye and try to read Line 1.";
+
+                // Start the test from the beginning
+                updateChart();
+            }
+
 
             submitButton.addEventListener("click", () => {
                 const userAnswer = answerInput.value.trim().toLowerCase();
-                const correctSentenceWithLabel = jaegerSentences[currentLineIndex];
-                const correctSentenceMatch = correctSentenceWithLabel.match(/^(Line \d+):?\s*(.*)$/);
-                const correctSentence = correctSentenceMatch && correctSentenceMatch[2] ? correctSentenceMatch[2].trim().toLowerCase() : correctSentenceWithLabel.trim().toLowerCase();
-
+                const correctSentence = jaegerSentences[currentLineIndex].trim().toLowerCase();
 
                 if (userAnswer === correctSentence) {
                     resultBox.textContent = `Correct! Advancing to the next line.`;
                     resultBox.classList.add("success");
-                    resultBox.classList.remove("error");
+                    resultBox.classList.remove("error", "good-vision", "moderate-vision", "poor-vision");
                     currentLineIndex++;
-                    setTimeout(updateChart, 1000);
+                    setTimeout(() => {
+                        if (currentLineIndex === jaegerSentences.length) {
+                            // User has successfully read the last line of the chart for the current eye
+                            if (currentEye === 'right') {
+                                rightEyeResult = jaegerSentences.length; // Set result to the last line number (e.g., 11)
+                                const { feedback, colorClass, percentage } = getVisionFeedback(rightEyeResult);
+                                resultBox.textContent = `Right eye test completed. You read all lines! (${percentage}%).\n\nNow, please cover your right eye and try to read Line 1 with your left eye.`;
+                                resultBox.classList.add("good-vision");
+                                resultBox.classList.remove("success", "error");
+                                currentEye = 'left';
+                                currentLineIndex = 0; // Reset for the next eye
+                                updateChart(); // Call updateChart immediately to show the first line for the left eye
+                            } else {
+                                leftEyeResult = jaegerSentences.length; // Set result to the last line number (e.g., 11)
+                                displayFinalResults(); // Proceed to final results
+                            }
+                        } else {
+                            updateChart(); // Continue to next line for the current eye
+                        }
+                    }, 1000);
                 } else {
                     resultBox.textContent = `Incorrect. Please check your spelling or try again. If you truly cannot read it, click "No, I can't read this".`;
                     resultBox.classList.add("error");
-                    resultBox.classList.remove("success");
+                    resultBox.classList.remove("success", "good-vision", "moderate-vision", "poor-vision");
                 }
             });
 
             cantReadButton.addEventListener("click", () => {
+                // Record the line *before* the current one as the last readable line.
+                // If currentLineIndex is 0, it means they couldn't even read the first line.
+                const lastReadableLine = currentLineIndex;
+
+                const { feedback, colorClass, percentage } = getVisionFeedback(lastReadableLine);
+
                 if (currentEye === 'right') {
-                    rightEyeResult = currentLineIndex + 1;
-                    resultBox.textContent = `Right eye test completed. Smallest line read: Line ${currentLineIndex + 1}. Now, please cover your right eye and try to read Line 1 with your left eye.`;
+                    rightEyeResult = lastReadableLine;
+                    resultBox.textContent = `Right eye test completed. Smallest line read: ${lastReadableLine === 0 ? 'N/A (could not read first line)' : 'Line ' + lastReadableLine} (${percentage}%).\nFeedback: ${feedback}\n\nNow, please cover your right eye and try to read Line 1 with your left eye.`;
+                    resultBox.classList.add(colorClass);
+                    resultBox.classList.remove("success", "error"); // Ensure other classes are removed
                     currentEye = 'left';
-                    currentLineIndex = 0;
-                    setTimeout(updateChart, 1000);
+                    currentLineIndex = 0; // Reset for the left eye
+                    updateChart(); // Call updateChart immediately to show the first line for the left eye
                 } else {
-                    leftEyeResult = currentLineIndex + 1;
-                    displayFinalResults();
+                    leftEyeResult = lastReadableLine;
+                    displayFinalResults(); // Proceed to final results
                 }
             });
 
+            // Initial call to start the test
             updateChart();
 
 
@@ -555,10 +693,10 @@
                 <h3>Interpretation of Results</h3>
                 <p>The Jaeger eye chart assesses your near vision, which is your ability to see objects clearly at a close distance. The chart presents text in various sizes, with smaller line numbers (e.g., Line 1, Line 2) corresponding to smaller text and better near vision.</p>
                 <ul>
-                    <li><strong>Line 1 - Line 3:</strong> Indicates excellent to very good near vision. You can comfortably read very fine print, similar to newspaper or standard book text.</li>
-                    <li><strong>Line 4 - Line 6:</strong> Good near vision. You can read most common print sizes without significant difficulty.</li>
-                    <li><strong>Line 7 - Line 9:</strong> Moderate near vision. You may start to notice some blurriness with smaller print and might benefit from reading glasses or a stronger prescription.</li>
-                    <li><strong>Line 10 - Line 11:</strong> Poor near vision. You will likely struggle with most reading tasks and may require significant vision correction to read comfortably.</li>
+                    <li><strong>Line 9 - Line 11 (82% - 100%):</strong> Indicates excellent to very good near vision. You can comfortably read very fine print, similar to newspaper or standard book text. (Equivalent to Jaeger J1 - J3).</li>
+                    <li><strong>Line 6 - Line 8 (55% - 73%):</strong> Good near vision. You can read most common print sizes without significant difficulty. (Equivalent to Jaeger J4 - J6).</li>
+                    <li><strong>Line 3 - Line 5 (27% - 45%):</strong> Moderate near vision. You may start to notice some blurriness with smaller print and might benefit from reading glasses or a stronger prescription. (Equivalent to Jaeger J7 - J9).</li>
+                    <li><strong>Line 1 - Line 2 (9% - 18% or unable to read first line):</strong> Poor near vision. You will likely struggle with most reading tasks and may require significant vision correction to read comfortably. (Equivalent to Jaeger J10 - J11).</li>
                 </ul>
                 <p class="important-note">
                     <strong>Disclaimer:</strong> This online Jaeger chart test is a self-assessment tool and should not be used as a substitute for a professional eye examination. Only a qualified eye care professional can accurately diagnose vision problems and provide appropriate treatment. If you have any concerns about your near vision or overall eye health, please schedule an appointment with an optometrist or ophthalmologist.
