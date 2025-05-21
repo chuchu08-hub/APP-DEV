@@ -4,64 +4,95 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EyeQ - Snellen Chart Test</title>
+  <title>EyeQ - Typing Test</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" type="image/png" href="images/eye-q-logo.png">
   <link rel="stylesheet" href="styles/aboutStyle.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Add some basic styling for the typing input and results */
+    .typing-line {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .typing-result {
+      margin-top: 0.5rem;
+      font-weight: bold;
+    }
+
+    /* Ensure the current line text dynamically adjusts its size */
+    #current-line-text {
+      transition: font-size 0.2s ease-in-out; /* Smooth transition for font size change */
+      min-height: 2.5rem; /* Prevent layout shift when text is empty */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body class="bg-gray-100 font-[Inter]">
 
   <header>
     <div class="container">
-        <div class="logo">
-            <a href="home1.html">
-                <img src="images/eye-q-logo.png" alt="EyeQ Logo">
-            </a>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="about.html">About</a></li>
-                <li><a href="eyeConditions.html">Eye Conditions</a></li>
-                <li><a href="eyeTest.html">Eye Tests</a></li>
-                <li><a href="FAQS.html">FAQs</a></li>
-                <li><a href="articles.html">Articles</a></li>
-            </ul>
-        </nav>
+      <div class="logo">
+        <a href="home1.html">
+          <img src="images/eye-q-logo.png" alt="EyeQ Logo">
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="eyeConditions.html">Eye Conditions</a></li>
+          <li><a href="eyeTest.html">Eye Tests</a></li>
+          <li><a href="FAQS.html">FAQs</a></li>
+          <li><a href="articles.html">Articles</a></li>
+        </ul>
+      </nav>
     </div>
-</header>
+  </header>
 
-  <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-semibold text-blue-600 text-center mb-4">Distance Vision Test (Snellen Chart)</h1>
+  <div class="container mx-auto p-4"><br>
+    <h1 class="text-2xl font-semibold text-blue-600 text-center mb-4">Snellen Chart - Typing Test</h1><br><br>
 
     <div class="flex flex-col md:flex-row items-start gap-12">
       <div class="flex-grow flex justify-center">
         <div
-          class="snellen-chart bg-white p-4 rounded-lg shadow-md border border-gray-200 w-[300px] h-[500px] overflow-y-auto overflow-x-hidden">
-          <div class="snellen-row text-[3.5rem]">E</div>
-          <div class="snellen-row text-[2.8rem]">F P</div>
-          <div class="snellen-row text-[2.2rem]">T O Z</div>
-          <div class="snellen-row text-[1.8rem]">L P E D</div>
-          <div class="snellen-row text-[1.6rem]">P E C F D</div>
-          <div class="snellen-row text-[1.4rem]">E D F C Z P</div>
-          <div class="snellen-row text-[1.2rem]">F E L O P Z D</div>
-          <div class="snellen-row text-[1.0rem]">D E F P O T E C</div>
-          <div class="snellen-row text-[0.9rem]">L E F O D P C T</div>
-          <div class="snellen-row text-[0.8rem]">F D P L T C E O</div>
-          <div class="snellen-row text-[0.7rem]">P E O L Z C F D T</div>
-        </div>
+  class="typing-chart bg-white p-2 rounded-lg shadow-md border border-gray-200 w-[200px] h-[350px] overflow-y-auto overflow-x-hidden">
+  <div class="typing-target text-[2.5rem]" data-line="1">E</div>
+  <div class="typing-target text-[2rem]" data-line="2">F P</div>
+  <div class="typing-target text-[1.6rem]" data-line="3">T O Z</div>
+  <div class="typing-target text-[1.3rem]" data-line="4">L P E D</div>
+  <div class="typing-target text-[1rem]" data-line="5">P E C F D</div>
+  <div class="typing-target text-[0.8rem]" data-line="6">E D F C Z P</div>
+  <div class="typing-target text-[0.7rem]" data-line="7">F E L O P Z D</div>
+  <div class="typing-target text-[0.6rem]" data-line="8">D E F P O T E C</div>
+  <div class="typing-target text-[0.5rem]" data-line="9">L E F O D P C T</div>
+  <div class="typing-target text-[0.4rem]" data-line="10">F D P L T C E O</div>
+  <div class="typing-target text-[0.35rem]" data-line="11">P E O L Z C F D T</div>
+</div>
       </div>
 
       <div class="w-full md:w-1/2 space-y-4">
         <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-          <h2 class="text-lg font-semibold text-gray-700 mb-2">Select Lowest Line</h2>
-          <div id="line-buttons" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-2"></div>
+          <h2 class="text-lg font-semibold text-gray-700 mb-2">Type the Line Below</h2>
+          <p id="current-line-text" class="text-gray-900"></p> <input type="text" id="typing-input" class="typing-line" placeholder="Start typing here..." autofocus />
+          <p id="line-result" class="typing-result text-blue-600"></p>
         </div>
 
         <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-          <h2 class="text-lg font-semibold text-gray-700 mb-2">Result</h2>
-          <p id="result-text" class="text-gray-900">Please fill out required fields.</p>
+          <h2 class="text-lg font-semibold text-gray-700 mb-2">Overall Results</h2>
+          <div id="overall-results" class="text-gray-900">
+            <p>Accuracy: <span id="overall-accuracy">0%</span></p>
+            <p>Lines Completed: <span id="lines-completed">0</span> / 11</p>
+          </div>
         </div>
       </div>
     </div>
@@ -69,43 +100,101 @@
 
   <footer>
     <div class="container">
-        <div class="copyright">
-            © EyeQ 2025 all rights reserved. |
-        </div>
-        <nav>
-            <ul>
-                <li><a href="privacy.html">Privacy |</a></li>
-                <li><a href="terms.html">Terms |</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
+      <div class="copyright">
+        © EyeQ 2025 all rights reserved. |
+      </div>
+      <nav>
+        <ul>
+          <li><a href="privacy.html">Privacy |</a></li>
+          <li><a href="terms.html">Terms |</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
     </div>
-</footer>
-
+  </footer>
 
   <script>
-    const buttonContainer = document.getElementById("line-buttons");
-    const resultText = document.getElementById("result-text");
+    const typingTargets = document.querySelectorAll(".typing-target");
+    const typingInput = document.getElementById("typing-input");
+    const currentLineText = document.getElementById("current-line-text");
+    const lineResult = document.getElementById("line-result");
+    const overallAccuracySpan = document.getElementById("overall-accuracy");
+    const linesCompletedSpan = document.getElementById("lines-completed");
 
-    for (let i = 1; i <= 11; i++) {
-      const btn = document.createElement("button");
-      btn.textContent = `Line ${i}`;
-      btn.className =
-        "bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold rounded-md p-2 transition duration-300 ease-in-out";
-      btn.dataset.line = i;
+    let currentLineIndex = 0;
+    let correctCharacters = 0;
+    let totalCharacters = 0;
+    let linesCompleted = 0;
 
-      btn.addEventListener("click", () => {
-        resultText.textContent = `You selected Line ${i} as the lowest you can read.`;
+    function displayCurrentLine() {
+      if (currentLineIndex < typingTargets.length) {
+        const targetElement = typingTargets[currentLineIndex];
+        const targetText = targetElement.textContent.trim();
+        const fontSizeClass = Array.from(targetElement.classList).find(cls => cls.startsWith('text-[')); // Find the Tailwind text size class
 
-        document.querySelectorAll("#line-buttons button").forEach((b) => {
-          b.classList.remove("bg-blue-200");
-        });
+        currentLineText.textContent = targetText; // Display the text directly
+        currentLineText.className = 'text-gray-900'; // Reset classes first
+        if (fontSizeClass) {
+            currentLineText.classList.add(fontSizeClass); // Apply the found font size class
+        }
 
-        btn.classList.add("bg-blue-200");
-      });
-
-      buttonContainer.appendChild(btn);
+        typingInput.value = ""; // Clear the input for the new line
+        typingInput.focus();
+        lineResult.textContent = ""; // Clear previous line result
+      } else {
+        currentLineText.textContent = "Typing test complete!";
+        currentLineText.className = 'text-gray-900 text-xl'; // Default size for completion message
+        typingInput.disabled = true; // Disable input when test is done
+      }
     }
+
+    function calculateAccuracy(typedText, targetText) {
+      let correctChars = 0;
+      const minLength = Math.min(typedText.length, targetText.length);
+
+      for (let i = 0; i < minLength; i++) {
+        if (typedText[i] === targetText[i]) {
+          correctChars++;
+        }
+      }
+
+      // If typed text is longer, penalize for extra characters
+      if (typedText.length > targetText.length) {
+        correctChars -= (typedText.length - targetText.length);
+      }
+
+      // Ensure accuracy doesn't go below 0
+      correctChars = Math.max(0, correctChars);
+
+      if (targetText.length === 0) return 100; // Avoid division by zero
+      return (correctChars / targetText.length) * 100;
+    }
+
+    typingInput.addEventListener("keyup", (event) => {
+      if (currentLineIndex >= typingTargets.length) return; // Test is finished
+
+      const targetText = typingTargets[currentLineIndex].textContent.trim();
+      const typedText = typingInput.value;
+
+      if (event.key === "Enter") {
+        const accuracy = calculateAccuracy(typedText, targetText);
+        lineResult.textContent = `Line ${currentLineIndex + 1} Score: ${accuracy.toFixed(2)}%`;
+
+        // Update overall stats
+        correctCharacters += Math.round(accuracy / 100 * targetText.length); // Add correct characters for this line
+        totalCharacters += targetText.length;
+        linesCompleted++;
+
+        overallAccuracySpan.textContent = `${((correctCharacters / totalCharacters) * 100 || 0).toFixed(2)}%`;
+        linesCompletedSpan.textContent = `${linesCompleted}`;
+
+        currentLineIndex++;
+        displayCurrentLine();
+      }
+    });
+
+    // Initial display
+    displayCurrentLine();
   </script>
 
 </body>
