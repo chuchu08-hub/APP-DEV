@@ -6,11 +6,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EyeQ - Lantern Test</title>
     <link rel="icon" type="image/png" href="images/eye-q-logo.png">
-    <link rel="stylesheet" href="styles/aboutStyle.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(180deg, #6a1b9a 0%, #4a148c 100%);
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #007bff;
+        }
+
+        main {
+            flex: 1;
+            padding: 40px 0;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 25px;
         }
 
         .lantern-game-area,
@@ -152,6 +216,15 @@
             padding: 10px 20px;
             font-size: 1.1em;
             cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .test-button:hover {
+            background-color: #0056b3;
         }
 
         .test-progress {
@@ -178,7 +251,6 @@
             font-size: 0.9em;
         }
 
-
         .test-results {
             text-align: center;
             margin-top: 30px;
@@ -189,6 +261,15 @@
             font-size: 1em;
             cursor: pointer;
             margin-top: 15px;
+            background-color:blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .retake-button:hover {
+            background-color: #5a6268;
         }
 
         .test-results ul {
@@ -205,25 +286,42 @@
             border-bottom: none;
         }
 
-        .excellent-score {
-            color: green;
-            font-weight: bold;
+        /* Adjusted score-highlight to apply to the entire paragraph if needed */
+        .score-highlight {
+            padding: 4px 8px;
+            border-radius: 5px;
+            display: inline-block; /* Changed to inline-block to wrap content better */
+            margin-bottom: 10px;
         }
 
-        .good-score {
-            color: darkgoldenrod;
-            font-weight: bold;
+        .score-line-highlight {
+            padding: 4px 8px;
+            border-radius: 5px;
+            display: block; /* Make it a block to highlight the whole line */
+            margin-bottom: 10px;
+            text-align: center; /* Center the text within the highlighted block */
         }
 
-        .moderate-score {
-            color: orange;
-            font-weight: bold;
+        .score-line-highlight.excellent-score-bg {
+            background-color: #4CAF50;
+            color: white;
         }
 
-        .low-score {
-            color: red;
-            font-weight: bold;
+        .score-line-highlight.good-score-bg {
+            background-color: #FFD700;
+            color: black;
         }
+
+        .score-line-highlight.moderate-score-bg {
+            background-color: #FF8C00;
+            color: white;
+        }
+
+        .score-line-highlight.low-score-bg {
+            background-color: #FF0000;
+            color: white;
+        }
+
 
         .intro-container,
         .test-wrapper,
@@ -250,26 +348,51 @@
             font-weight: bold;
         }
 
-        .excellent-score-bg {
-            background-color: #4CAF50;
+        footer {
+            background-color: #333;
             color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: auto;
         }
 
-        .good-score-bg {
-            background-color: #FFD700;
-            color: black;
+        footer .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
-        .moderate-score-bg {
-            background-color: #FF8C00;
-            color: white;
+        .copyright {
+            margin-right: 10px;
+            font-size: 0.9em;
         }
 
-        .low-score-bg {
-            background-color: #FF0000;
+        footer nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        footer nav ul li {
+            margin: 0 10px;
+            font-size: 0.9em;
+        }
+
+        footer nav ul li a {
             color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer nav ul li a:hover {
+            color: #007bff;
         }
     </style>
+</head>
 
 <body>
 
@@ -378,15 +501,17 @@
             testResultsDiv.id = "test-results";
             testResultsDiv.classList.add("result-container");
             testResultsDiv.style.display = "none";
+            // Modified: Wrap the score sentence in a new span with a specific ID for highlighting
             testResultsDiv.innerHTML = `
                 <h2>Test Complete!</h2>
-                <p>Your score: <span id="final-score"></span> correct out of <span id="total-possible-score"></span>.</p>
+                <p id="final-score-sentence">Your score: <span id="final-score"></span> correct out of <span id="total-possible-score"></span>.</p>
                 <p id="test-feedback"></p>
                 <button onclick="location.reload()" class="retake-button">Retake Test</button>
             `;
             const finalScoreSpan = testResultsDiv.querySelector('#final-score');
             const totalPossibleScoreSpan = testResultsDiv.querySelector('#total-possible-score');
             const testFeedbackP = testResultsDiv.querySelector('#test-feedback');
+            const finalScoreSentenceP = testResultsDiv.querySelector('#final-score-sentence'); // Get the new element
             main.appendChild(testResultsDiv);
 
 
@@ -412,7 +537,7 @@
             const maxLightsPerGroup = 4;
             const testGroups = generateTestGroups(totalGroups, minLightsPerGroup, maxLightsPerGroup);
             let currentGroupIndex = 0;
-            const displayDuration = 3000;
+            const displayDuration = 2000;
             let isShowingGroup = false;
             let isInputPhase = false;
             let userInputColors = [];
@@ -615,7 +740,11 @@
                 const scorePercentage = (totalScore / totalPossibleScore) * 100;
                 const feedback = getFeedback(scorePercentage);
                 testFeedbackP.textContent = `Overall: ${feedback.text}`;
-                testResultsDiv.classList.add(feedback.class);
+                
+                // Apply the highlight class to the entire paragraph
+                if (finalScoreSentenceP) {
+                    finalScoreSentenceP.classList.add('score-line-highlight', feedback.class);
+                }
 
                 resetLights();
                 testDisplayArea.style.display = 'none';
