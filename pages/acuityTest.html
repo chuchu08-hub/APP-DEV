@@ -185,7 +185,7 @@
         ];
 
         let currentOrientation;
-        let currentLandoltCSize = 25;
+        let currentLandoltCSize; 
         let score = 0;
         let attempts = 0;
         const maxAttempts = 10;
@@ -241,7 +241,7 @@
         function initTest() {
             attempts = 0;
             score = 0;
-            currentLandoltCSize = 38;
+            currentLandoltCSize = 20; 
             messageBoxElement.textContent = '';
             messageBoxElement.className = 'message-box';
             nextTestShapeButton.style.display = 'none';
@@ -280,9 +280,7 @@
                 return;
             }
 
-            if (attempts > 0) {
-                currentLandoltCSize = Math.max(10, currentLandoltCSize - 5);
-            }
+            currentLandoltCSize = Math.max(5, currentLandoltCSize - 2); 
 
             landoltCElement.className = 'landolt-c';
 
@@ -293,7 +291,8 @@
 
             landoltCElement.style.width = `${currentLandoltCSize}px`;
             landoltCElement.style.height = `${currentLandoltCSize}px`;
-            landoltCElement.style.borderWidth = `${Math.max(2, currentLandoltCSize / 6.25)}px`;
+            
+            landoltCElement.style.borderWidth = `${Math.max(1, currentLandoltCSize / 4)}px`; 
 
             messageBoxElement.textContent = '';
             messageBoxElement.className = 'message-box';
@@ -309,10 +308,11 @@
                 messageBoxElement.textContent = 'Correct!';
                 messageBoxElement.className = 'message-box correct';
                 score++;
+                
             } else {
                 messageBoxElement.textContent = `Incorrect. The gap was at the ${currentOrientation.name}.`;
                 messageBoxElement.className = 'message-box incorrect';
-                currentLandoltCSize = Math.min(60, currentLandoltCSize + 2);
+                currentLandoltCSize = Math.min(25, currentLandoltCSize + 3); 
             }
 
             if (attempts < maxAttempts) {
