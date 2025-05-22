@@ -407,12 +407,11 @@
                             <li>Hold the screen at a comfortable reading distance, approximately 14 inches (35 cm) away from your eyes. This is a standard reading distance.</li>
                         </ul>
                     </li>
-                    <li><strong>Testing Each Eye:</strong>
+                    <li><strong>Testing:</strong>
                         <ul>
-                            <li>Cover one eye completely with your hand or an opaque object without applying pressure to the eyelid.</li>
+                            <li>**Use both eyes open** for this test.</li>
                             <li>Read the text on the chart aloud. Then, **type the sentence you read into the text field below.**</li>
                             <li>Click "Submit Answer" if you believe you read it correctly, or "No, I can't read this" if you cannot.</li>
-                            <li>Repeat the process for the other eye after completing the first eye.</li>
                         </ul>
                     </li>
                     <li><strong>Important:</strong> This online test is for screening purposes only and cannot replace a comprehensive eye examination by an eye care professional. If you have concerns about your vision, please consult an optometrist or ophthalmologist.</li>
@@ -439,9 +438,7 @@
             ];
 
             let currentLineIndex = 0;
-            let currentEye = 'right'; // Start with right eye
-            let rightEyeResult = 0; // Stores the smallest line number read successfully for the right eye
-            let leftEyeResult = 0;  // Stores the smallest line number read successfully for the left eye
+            let finalResultLine = 0; // Stores the smallest line number read successfully
 
             const chartPage = document.createElement("div");
             chartPage.classList.add("chart-page", "active");
@@ -475,7 +472,7 @@
 
             const resultBox = document.createElement("div");
             resultBox.classList.add("result-box");
-            resultBox.textContent = "Please cover your left eye and try to read Line 1.";
+            resultBox.textContent = "Please read Line 1 with both eyes open.";
             testContainer.appendChild(resultBox);
 
             function updateChart() {
@@ -503,24 +500,9 @@
                     resultBox.textContent = `Reading Line ${currentLineIndex + 1}.`;
                     navigationButtons.style.display = 'flex';
                 } else {
-                    // This block will be hit if the user reads ALL lines for the current eye
-                    if (currentEye === 'right') {
-                        rightEyeResult = jaegerSentences.length; // User successfully read all lines
-                        resultBox.textContent = `Right eye test completed. You read all lines! Now, please cover your right eye and try to read Line 1 with your left eye.`;
-                        resultBox.classList.add("good-vision");
-                        resultBox.classList.remove("success", "error"); // Remove default classes
-                        currentEye = 'left';
-                        currentLineIndex = 0; // Reset for the next eye
-                        // Do not call setTimeout(updateChart, ...) here. Let the user initiate the left eye test.
-                        // Instead, just set the initial state for the next eye.
-                        chartLineLabel.textContent = `Line ${currentLineIndex + 1}:`;
-                        chartSentence.textContent = jaegerSentences[currentLineIndex];
-                        chartSentence.style.fontSize = `${jaegerFontSizes[currentLineIndex]}px`;
-                        answerInput.value = ''; // Clear input for the new eye test
-                    } else {
-                        leftEyeResult = jaegerSentences.length; // User successfully read all lines for left eye too
-                        displayFinalResults(); // Proceed to final results
-                    }
+                    // This block will be hit if the user reads ALL lines
+                    finalResultLine = jaegerSentences.length; // User successfully read all lines
+                    displayFinalResults();
                 }
             }
 
@@ -561,30 +543,14 @@
                 submitButton.style.display = 'none';
                 cantReadButton.style.display = 'none';
 
-                // Determine the Jaeger line number the user *successfully* read (0-indexed array, so add 1 for line number)
-                const rightEyeLineNum = rightEyeResult;
-                const leftEyeLineNum = leftEyeResult;
-
-                const rightEyeFeedback = getVisionFeedback(rightEyeLineNum);
-                const leftEyeFeedback = getVisionFeedback(leftEyeLineNum);
+                const { feedback, colorClass, percentage } = getVisionFeedback(finalResultLine);
 
                 resultBox.textContent = `Test Complete!\n\n` +
-                    `Right Eye: Smallest line read: ${rightEyeLineNum === 0 ? 'N/A (could not read first line)' : 'Line ' + rightEyeLineNum} (${rightEyeFeedback.percentage}%)\n` +
-                    `Feedback: ${rightEyeFeedback.feedback}\n\n` +
-                    `Left Eye: Smallest line read: ${leftEyeLineNum === 0 ? 'N/A (could not read first line)' : 'Line ' + leftEyeLineNum} (${leftEyeFeedback.percentage}%)\n` +
-                    `Feedback: ${leftEyeFeedback.feedback}\n\n` +
+                    `Smallest line you could read: ${finalResultLine === 0 ? 'N/A (could not read first line)' : 'Line ' + finalResultLine} (${percentage}% of lines read)\n` +
+                    `Feedback: ${feedback}\n\n` +
                     `Remember, this is a self-assessment. Please consult an eye care professional for a comprehensive examination.`;
 
-                // Determine overall color for the final result box based on the 'worse' eye
-                let finalColorClass = "";
-                if (rightEyeLineNum >= 6 && leftEyeLineNum >= 6 && rightEyeLineNum > 0 && leftEyeLineNum > 0) {
-                    finalColorClass = "good-vision";
-                } else if ((rightEyeLineNum >= 3 && rightEyeLineNum < 6) || (leftEyeLineNum >= 3 && leftEyeLineNum < 6)) {
-                    finalColorClass = "moderate-vision";
-                } else {
-                    finalColorClass = "poor-vision";
-                }
-                resultBox.classList.add(finalColorClass);
+                resultBox.classList.add(colorClass);
                 resultBox.classList.remove("success", "error"); // Remove any other state classes
 
                 // Add the restart button
@@ -600,9 +566,7 @@
             function restartTest() {
                 // Reset test state
                 currentLineIndex = 0;
-                currentEye = 'right';
-                rightEyeResult = 0;
-                leftEyeResult = 0;
+                finalResultLine = 0;
 
                 // Reset display styles
                 chartLineLabel.style.display = 'block';
@@ -619,7 +583,7 @@
 
                 // Reset result box
                 resultBox.classList.remove("success", "error", "good-vision", "moderate-vision", "poor-vision");
-                resultBox.textContent = "Please cover your left eye and try to read Line 1.";
+                resultBox.textContent = "Please read Line 1 with both eyes open.";
 
                 // Start the test from the beginning
                 updateChart();
@@ -636,24 +600,7 @@
                     resultBox.classList.remove("error", "good-vision", "moderate-vision", "poor-vision");
                     currentLineIndex++;
                     setTimeout(() => {
-                        if (currentLineIndex === jaegerSentences.length) {
-                            // User has successfully read the last line of the chart for the current eye
-                            if (currentEye === 'right') {
-                                rightEyeResult = jaegerSentences.length; // Set result to the last line number (e.g., 11)
-                                const { feedback, colorClass, percentage } = getVisionFeedback(rightEyeResult);
-                                resultBox.textContent = `Right eye test completed. You read all lines! (${percentage}%).\n\nNow, please cover your right eye and try to read Line 1 with your left eye.`;
-                                resultBox.classList.add("good-vision");
-                                resultBox.classList.remove("success", "error");
-                                currentEye = 'left';
-                                currentLineIndex = 0; // Reset for the next eye
-                                updateChart(); // Call updateChart immediately to show the first line for the left eye
-                            } else {
-                                leftEyeResult = jaegerSentences.length; // Set result to the last line number (e.g., 11)
-                                displayFinalResults(); // Proceed to final results
-                            }
-                        } else {
-                            updateChart(); // Continue to next line for the current eye
-                        }
+                        updateChart(); // Continue to next line
                     }, 1000);
                 } else {
                     resultBox.textContent = `Incorrect. Please check your spelling or try again. If you truly cannot read it, click "No, I can't read this".`;
@@ -665,22 +612,8 @@
             cantReadButton.addEventListener("click", () => {
                 // Record the line *before* the current one as the last readable line.
                 // If currentLineIndex is 0, it means they couldn't even read the first line.
-                const lastReadableLine = currentLineIndex;
-
-                const { feedback, colorClass, percentage } = getVisionFeedback(lastReadableLine);
-
-                if (currentEye === 'right') {
-                    rightEyeResult = lastReadableLine;
-                    resultBox.textContent = `Right eye test completed. Smallest line read: ${lastReadableLine === 0 ? 'N/A (could not read first line)' : 'Line ' + lastReadableLine} (${percentage}%).\nFeedback: ${feedback}\n\nNow, please cover your right eye and try to read Line 1 with your left eye.`;
-                    resultBox.classList.add(colorClass);
-                    resultBox.classList.remove("success", "error"); // Ensure other classes are removed
-                    currentEye = 'left';
-                    currentLineIndex = 0; // Reset for the left eye
-                    updateChart(); // Call updateChart immediately to show the first line for the left eye
-                } else {
-                    leftEyeResult = lastReadableLine;
-                    displayFinalResults(); // Proceed to final results
-                }
+                finalResultLine = currentLineIndex;
+                displayFinalResults(); // Directly show the final results
             });
 
             // Initial call to start the test
