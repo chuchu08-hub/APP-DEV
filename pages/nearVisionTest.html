@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EyeQ - Jaeger Chart Test</title>
+    <title>EyeQ - Near Vision Typing Test</title>
     <link rel="icon" type="image/png" href="images/eye-q-logo.png">
     <link rel="stylesheet" href="styles/aboutStyle.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -70,7 +70,7 @@
 
         h1 {
             text-align: center;
-            color: #007bff;
+            color: #44337A;
             margin-bottom: 30px;
         }
 
@@ -376,7 +376,7 @@
             mainContainer.classList.add("container");
 
             var h1 = document.createElement("h1");
-            h1.textContent = "Near Vision Test";
+            h1.textContent = "Jaeger Typing Test";
             mainContainer.appendChild(h1);
 
             main.appendChild(mainContainer);
@@ -386,15 +386,12 @@
             testContainer.classList.add("test-container");
             document.body.appendChild(testContainer);
 
-            const title = document.createElement("h2");
-            title.classList.add("test-title");
-            title.textContent = "Near Vision Test (Jaeger Eye Chart)";
-            testContainer.appendChild(title);
+            
 
             const instructions = document.createElement("div");
             instructions.classList.add("instructions");
             instructions.innerHTML = `
-                <p><strong>To perform the Jaeger Near Vision Test:</strong></p>
+                <p><strong>To perform the Near Vision Typing Test:</strong></p>
                 <ol>
                     <li><strong>Preparation:</strong>
                         <ul>
@@ -409,8 +406,8 @@
                     </li>
                     <li><strong>Testing:</strong>
                         <ul>
-                            <li>**Use both eyes open** for this test.</li>
-                            <li>Read the text on the chart aloud. Then, **type the sentence you read into the text field below.**</li>
+                            <li>Use both eyes open for this test.</li>
+                            <li>Read the text on the chart aloud. Then, type the sentence you read into the text field below.</li>
                             <li>Click "Submit Answer" if you believe you read it correctly, or "No, I can't read this" if you cannot.</li>
                         </ul>
                     </li>
@@ -624,7 +621,7 @@
             interpretationSection.classList.add("interpretation-section");
             interpretationSection.innerHTML = `
                 <h3>Interpretation of Results</h3>
-                <p>The Jaeger eye chart assesses your near vision, which is your ability to see objects clearly at a close distance. The chart presents text in various sizes, with smaller line numbers (e.g., Line 1, Line 2) corresponding to smaller text and better near vision.</p>
+                <p>The Jaeger typing test assesses your near vision, which is your ability to see objects clearly at a close distance. The chart presents text in various sizes, with smaller line numbers (e.g., Line 1, Line 2) corresponding to smaller text and better near vision.</p>
                 <ul>
                     <li><strong>Line 9 - Line 11 (82% - 100%):</strong> Indicates excellent to very good near vision. You can comfortably read very fine print, similar to newspaper or standard book text. (Equivalent to Jaeger J1 - J3).</li>
                     <li><strong>Line 6 - Line 8 (55% - 73%):</strong> Good near vision. You can read most common print sizes without significant difficulty. (Equivalent to Jaeger J4 - J6).</li>
@@ -632,7 +629,7 @@
                     <li><strong>Line 1 - Line 2 (9% - 18% or unable to read first line):</strong> Poor near vision. You will likely struggle with most reading tasks and may require significant vision correction to read comfortably. (Equivalent to Jaeger J10 - J11).</li>
                 </ul>
                 <p class="important-note">
-                    <strong>Disclaimer:</strong> This online Jaeger chart test is a self-assessment tool and should not be used as a substitute for a professional eye examination. Only a qualified eye care professional can accurately diagnose vision problems and provide appropriate treatment. If you have any concerns about your near vision or overall eye health, please schedule an appointment with an optometrist or ophthalmologist.
+                    <strong>Disclaimer:</strong> This online typing test is a self-assessment tool and should not be used as a substitute for a professional eye examination. Only a qualified eye care professional can accurately diagnose vision problems and provide appropriate treatment. If you have any concerns about your near vision or overall eye health, please schedule an appointment with an optometrist or ophthalmologist.
                 </p>
             `;
             testContainer.appendChild(interpretationSection);

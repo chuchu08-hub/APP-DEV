@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="styles/aboutStyle.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    /* Add some basic styling for the typing input and results */
     .typing-line {
       font-size: 1.5rem;
       margin-bottom: 1rem;
@@ -26,10 +25,9 @@
       font-weight: bold;
     }
 
-    /* Ensure the current line text dynamically adjusts its size */
     #current-line-text {
-      transition: font-size 0.2s ease-in-out; /* Smooth transition for font size change */
-      min-height: 2.5rem; /* Prevent layout shift when text is empty */
+      transition: font-size 0.2s ease-in-out;
+      min-height: 2.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -60,37 +58,32 @@
   </header>
 
   <div class="container mx-auto p-4"><br>
-    <h1 class="text-2xl font-semibold text-blue-600 text-center mb-4">Snellen Chart - Typing Test</h1><br><br>
+<h1 class="text-5xl font-semibold text-purple-900 text-center mb-4">Snellen Chart - Typing Test</h1><br>
+    <div class="flex flex-col md:flex-row items-start gap-4 justify-center">
 
-    <div class="flex flex-col md:flex-row items-start gap-12">
-      <div class="flex-grow flex justify-center">
-        <div
-  class="typing-chart bg-white p-2 rounded-lg shadow-md border border-gray-200 w-[200px] h-[350px] overflow-y-auto overflow-x-hidden">
-  <div class="typing-target text-[2.5rem]" data-line="1">E</div>
-  <div class="typing-target text-[2rem]" data-line="2">F P</div>
-  <div class="typing-target text-[1.6rem]" data-line="3">T O Z</div>
-  <div class="typing-target text-[1.3rem]" data-line="4">L P E D</div>
-  <div class="typing-target text-[1rem]" data-line="5">P E C F D</div>
-  <div class="typing-target text-[0.8rem]" data-line="6">E D F C Z P</div>
-  <div class="typing-target text-[0.7rem]" data-line="7">F E L O P Z D</div>
-  <div class="typing-target text-[0.6rem]" data-line="8">D E F P O T E C</div>
-  <div class="typing-target text-[0.5rem]" data-line="9">L E F O D P C T</div>
-  <div class="typing-target text-[0.4rem]" data-line="10">F D P L T C E O</div>
-  <div class="typing-target text-[0.35rem]" data-line="11">P E O L Z C F D T</div>
-</div>
+      <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 w-full md:w-1/3 lg:w-1/4">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">How to Use the Snellen Typing Test</h2>
+        <ol class="list-decimal list-inside space-y-2 text-gray-700">
+          <li>Read the line shown under "Type the Line Below."</li>
+          <li>Type the characters <strong>EXACTLY</strong> as they appear in the input box.</li>
+          <li>Press <strong>ENTER</strong> submit your line.</li>
+          <li>Your accuracy and progress will update.</li>
+          <li>Continue typing until all lines are complete.</li>
+        </ol>
       </div>
 
-      <div class="w-full md:w-1/2 space-y-4">
+      <div class="w-full md:w-1/2 lg:w-1/3 space-y-4">
         <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
           <h2 class="text-lg font-semibold text-gray-700 mb-2">Type the Line Below</h2>
-          <p id="current-line-text" class="text-gray-900"></p> <input type="text" id="typing-input" class="typing-line" placeholder="Start typing here..." autofocus />
+          <p id="current-line-text" class="text-gray-900"></p> <input type="text" id="typing-input"
+            class="typing-line" placeholder="Start typing here..." autofocus />
           <p id="line-result" class="typing-result text-blue-600"></p>
         </div>
 
         <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
           <h2 class="text-lg font-semibold text-gray-700 mb-2">Overall Results</h2>
           <div id="overall-results" class="text-gray-900">
-            <p>Accuracy: <span id="overall-accuracy">0%</span></p>
+            <p>Accuracy: <span id="overall-accuracy" class="font-bold">0%</span></p>
             <p>Lines Completed: <span id="lines-completed">0</span> / 11</p>
           </div>
         </div>
@@ -114,7 +107,20 @@
   </footer>
 
   <script>
-    const typingTargets = document.querySelectorAll(".typing-target");
+    const typingTargets = [
+      { textContent: "E", classList: ["text-[2.5rem]"] },
+      { textContent: "F P", classList: ["text-[2rem]"] },
+      { textContent: "T O Z", classList: ["text-[1.6rem]"] },
+      { textContent: "L P E D", classList: ["text-[1.3rem]"] },
+      { textContent: "P E C F D", classList: ["text-[1rem]"] },
+      { textContent: "E D F C Z P", classList: ["text-[0.8rem]"] },
+      { textContent: "F E L O P Z D", classList: ["text-[0.7rem]"] },
+      { textContent: "D E F P O T E C", classList: ["text-[0.6rem]"] },
+      { textContent: "L E F O D P C T", classList: ["text-[0.5rem]"] },
+      { textContent: "F D P L T C E O", classList: ["text-[0.4rem]"] },
+      { textContent: "P E O L Z C F D T", classList: ["text-[0.35rem]"] }
+    ];
+
     const typingInput = document.getElementById("typing-input");
     const currentLineText = document.getElementById("current-line-text");
     const lineResult = document.getElementById("line-result");
@@ -128,23 +134,23 @@
 
     function displayCurrentLine() {
       if (currentLineIndex < typingTargets.length) {
-        const targetElement = typingTargets[currentLineIndex];
-        const targetText = targetElement.textContent.trim();
-        const fontSizeClass = Array.from(targetElement.classList).find(cls => cls.startsWith('text-[')); // Find the Tailwind text size class
+        const targetLine = typingTargets[currentLineIndex];
+        const targetText = targetLine.textContent.trim();
+        const fontSizeClass = targetLine.classList.find(cls => cls.startsWith('text-['));
 
-        currentLineText.textContent = targetText; // Display the text directly
-        currentLineText.className = 'text-gray-900'; // Reset classes first
+        currentLineText.textContent = targetText;
+        currentLineText.className = 'text-gray-900';
         if (fontSizeClass) {
-            currentLineText.classList.add(fontSizeClass); // Apply the found font size class
+          currentLineText.classList.add(fontSizeClass);
         }
 
-        typingInput.value = ""; // Clear the input for the new line
+        typingInput.value = "";
         typingInput.focus();
-        lineResult.textContent = ""; // Clear previous line result
+        lineResult.textContent = "";
       } else {
         currentLineText.textContent = "Typing test complete!";
-        currentLineText.className = 'text-gray-900 text-xl'; // Default size for completion message
-        typingInput.disabled = true; // Disable input when test is done
+        currentLineText.className = 'text-gray-900 text-xl';
+        typingInput.disabled = true;
       }
     }
 
@@ -158,20 +164,38 @@
         }
       }
 
-      // If typed text is longer, penalize for extra characters
       if (typedText.length > targetText.length) {
         correctChars -= (typedText.length - targetText.length);
       }
 
-      // Ensure accuracy doesn't go below 0
       correctChars = Math.max(0, correctChars);
 
-      if (targetText.length === 0) return 100; // Avoid division by zero
+      if (targetText.length === 0) return 100;
       return (correctChars / targetText.length) * 100;
     }
 
+    function updateOverallAccuracyDisplay() {
+      const currentOverallAccuracy = (totalCharacters === 0) ? 0 : (correctCharacters / totalCharacters) * 100;
+      overallAccuracySpan.textContent = `${currentOverallAccuracy.toFixed(2)}%`;
+
+      overallAccuracySpan.classList.remove('text-green-600', 'text-lime-500', 'text-yellow-500', 'text-orange-500', 'text-red-600');
+
+      if (currentOverallAccuracy >= 90) {
+        overallAccuracySpan.classList.add('text-green-600');
+      } else if (currentOverallAccuracy >= 80) {
+        overallAccuracySpan.classList.add('text-lime-500');
+      } else if (currentOverallAccuracy >= 70) {
+        overallAccuracySpan.classList.add('text-yellow-500');
+      } else if (currentOverallAccuracy >= 50) {
+        overallAccuracySpan.classList.add('text-orange-500');
+      } else {
+        overallAccuracySpan.classList.add('text-red-600');
+      }
+    }
+
+
     typingInput.addEventListener("keyup", (event) => {
-      if (currentLineIndex >= typingTargets.length) return; // Test is finished
+      if (currentLineIndex >= typingTargets.length) return;
 
       const targetText = typingTargets[currentLineIndex].textContent.trim();
       const typedText = typingInput.value;
@@ -180,12 +204,11 @@
         const accuracy = calculateAccuracy(typedText, targetText);
         lineResult.textContent = `Line ${currentLineIndex + 1} Score: ${accuracy.toFixed(2)}%`;
 
-        // Update overall stats
-        correctCharacters += Math.round(accuracy / 100 * targetText.length); // Add correct characters for this line
+        correctCharacters += Math.round(accuracy / 100 * targetText.length);
         totalCharacters += targetText.length;
         linesCompleted++;
 
-        overallAccuracySpan.textContent = `${((correctCharacters / totalCharacters) * 100 || 0).toFixed(2)}%`;
+        updateOverallAccuracyDisplay();
         linesCompletedSpan.textContent = `${linesCompleted}`;
 
         currentLineIndex++;
@@ -193,8 +216,8 @@
       }
     });
 
-    // Initial display
     displayCurrentLine();
+    updateOverallAccuracyDisplay();
   </script>
 
 </body>
